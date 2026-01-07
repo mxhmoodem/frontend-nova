@@ -1,3 +1,5 @@
+![CI](https://github.com/your-username/market-trends/workflows/CI/badge.svg)
+
 # MarketTrends Dashboard - Project Structure
 
 ## Overview
@@ -355,4 +357,3 @@ const Analytics = () => {
   );
 };
 ```
-
