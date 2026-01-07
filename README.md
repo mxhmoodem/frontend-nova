@@ -1,4 +1,4 @@
-![CI](https://github.com/your-username/market-trends/workflows/CI/badge.svg)
+![CI](https://github.com/mxhmoodem/frontend-nova/workflows/CI/badge.svg)
 
 # MarketTrends Dashboard - Project Structure
 
