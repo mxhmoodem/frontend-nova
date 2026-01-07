@@ -1,115 +1,6 @@
 # Testing Setup Guide – Vitest
 
-## Overview
-
-This guide explains how to set up **testing** for a **React + TypeScript + Vite** application using **Vitest** and **React Testing Library**. It covers installation, configuration, examples, CI integration, and best practices.
-
----
-
-## 1. Install Testing Framework
-
-Vitest is recommended for **Vite + SWC** projects due to its speed and minimal configuration.
-
-```bash
-npm install -D vitest @vitest/ui @testing-library/react @testing-library/jest-dom @testing-library/user-event jsdom
-```
-
-### Package Descriptions
-
-* **vitest** – Fast unit test framework built for Vite
-* **@vitest/ui** – Visual UI for viewing test results
-* **@testing-library/react** – Utilities for testing React components
-* **@testing-library/jest-dom** – Custom DOM matchers
-* **@testing-library/user-event** – Simulate real user interactions
-* **jsdom** – DOM implementation for Node.js
-
----
-
-## 2. Configure Vitest
-
-Add the following to your `vite.config.ts`:
-
-```ts
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react-swc'
-
-export default defineConfig({
-  plugins: [react()],
-  test: {
-    globals: true,
-    environment: 'jsdom',
-    setupFiles: './src/test/setup.ts',
-    css: true,
-    coverage: {
-      provider: 'v8',
-      reporter: ['text', 'json', 'html'],
-      exclude: [
-        'node_modules/',
-        'src/test/',
-        '**/*.types.ts',
-        '**/*.config.ts',
-        '**/index.ts'
-      ]
-    }
-  }
-})
-```
-
-### Key Options
-
-* **globals** – Use `describe`, `it`, `expect` without imports
-* **environment** – Simulated browser environment
-* **setupFiles** – Global test setup
-* **coverage** – Code coverage configuration
-
----
-
-## 3. Test Setup File
-
-Create `src/test/setup.ts`:
-
-```ts
-import { expect, afterEach } from 'vitest'
-import { cleanup } from '@testing-library/react'
-import * as matchers from '@testing-library/jest-dom/matchers'
-
-expect.extend(matchers)
-
-afterEach(() => {
-  cleanup()
-})
-```
-
-This file:
-
-* Enables DOM-specific matchers like `toBeInTheDocument()`
-* Cleans up rendered components after each test
-
----
-
-## 4. NPM Scripts
-
-Add the following to `package.json`:
-
-```json
-{
-  "scripts": {
-    "dev": "vite",
-    "build": "tsc && vite build",
-    "lint": "eslint . --ext ts,tsx",
-    "type-check": "tsc --noEmit",
-    "test": "vitest",
-    "test:ui": "vitest --ui",
-    "test:coverage": "vitest --coverage",
-    "test:run": "vitest run",
-    "preview": "vite preview"
-  }
-}
-```
-
----
-
-## 5. Writing Tests
+## 1. Writing Tests
 
 ### Component Test Example
 
@@ -172,7 +63,7 @@ describe('useMarketData', () => {
 
 ---
 
-## 6. Running Tests
+## 2. Running Tests
 
 ```bash
 npm test            # Watch mode
@@ -183,7 +74,7 @@ npm run test:coverage
 
 ---
 
-## 7. GitHub Actions Integration
+## 3. GitHub Actions Integration
 
 ```yaml
 - run: npm run test:run -- --coverage
