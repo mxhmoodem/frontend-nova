@@ -1,7 +1,11 @@
 import { describe, it, expect } from 'vitest';
+import { render, screen } from '@testing-library/react';
+import App from './App';
 
 describe('App', () => {
-  it('should be implemented', () => {
-    expect(true).toBe(true);
+  it('renders without crashing', () => {
+    render(<App />);
+    // Landing page should render by default
+    expect(screen.getByText('Noval IQ')).toBeDefined();
   });
 });
