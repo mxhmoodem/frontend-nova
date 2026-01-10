@@ -1,13 +1,9 @@
 import { NavLink } from 'react-router-dom';
 import { ChevronLeft, ChevronRight, HelpCircle } from 'lucide-react';
 import { navigationItems } from '../../../constants/navigation';
+import { SidebarProps } from './Sidebar.types';
 import hsbcLogo from '../../../assets/icons/hsbc-logo.png';
 import './Sidebar.css';
-
-interface SidebarProps {
-  isCollapsed: boolean;
-  onToggle: () => void;
-}
 
 export default function Sidebar({ isCollapsed, onToggle }: SidebarProps) {
   return (

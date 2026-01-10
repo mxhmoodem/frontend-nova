@@ -5,3 +5,5 @@ describe('Header', () => {
     expect(true).toBe(true);
   });
 });
+
+// TODO: Implement tests for Header component once its functionality is finalised and other components are added

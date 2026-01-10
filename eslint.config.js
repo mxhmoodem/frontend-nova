@@ -20,7 +20,7 @@ export default tseslint.config(
       prettier,
     },
     rules: {
-      'prettier/prettier': 'error',
+      'prettier/prettier': ['error', { endOfLine: 'auto' }],
       ...prettierConfig.rules,
     },
   },
@@ -47,7 +47,7 @@ export default tseslint.config(
         'error',
         { varsIgnorePattern: '^[A-Z_]' },
       ],
-      'prettier/prettier': 'error',
+      'prettier/prettier': ['error', { endOfLine: 'auto' }],
       ...prettierConfig.rules,
     },
   }
