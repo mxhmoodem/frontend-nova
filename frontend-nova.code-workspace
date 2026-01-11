@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"name": "frontend-nova",
+			"path": "."
+		},
+		{
+			"name": "global-payments-content-hub",
+			"path": "../Downloads/global-payments-content-hub"
+		}
+	],
+	"settings": {}
+}

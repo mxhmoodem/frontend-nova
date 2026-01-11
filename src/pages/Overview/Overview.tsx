@@ -162,7 +162,8 @@ export default function Overview() {
               Get AI-powered insights
             </h2>
             <p className="text-muted-foreground max-w-lg">
-              Ask questions about UK regulations, market trends, and payment intelligence. Generate reports and get instant answers.
+              Ask questions about UK regulations, market trends, and payment
+              intelligence. Generate reports and get instant answers.
             </p>
           </div>
 

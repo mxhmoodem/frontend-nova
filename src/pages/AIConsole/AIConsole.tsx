@@ -81,7 +81,10 @@ export default function AIConsole() {
   };
 
   useEffect(() => {
-    if (messagesEndRef.current && typeof messagesEndRef.current.scrollIntoView === 'function') {
+    if (
+      messagesEndRef.current &&
+      typeof messagesEndRef.current.scrollIntoView === 'function'
+    ) {
       messagesEndRef.current.scrollIntoView({ behavior: 'smooth' });
     }
   }, [messages, isTyping]);
