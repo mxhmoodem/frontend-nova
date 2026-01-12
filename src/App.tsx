@@ -4,7 +4,10 @@ import {
   Route,
   Navigate,
 } from 'react-router-dom';
+import { AuthProvider } from './context/AuthContext/AuthContext';
+import { ProtectedRoute } from './components/layout/ProtectedRoute';
 import DashboardLayout from './components/layout/DashboardLayout';
+import { Login } from './pages/Auth';
 import Overview from './pages/Overview/Overview';
 import AIConsole from './pages/AIConsole/AIConsole';
 import MarketPulse from './pages/MarketPulse/MarketPulse';
@@ -16,26 +19,41 @@ import './App.css';
 
 function App() {
   return (
-    <Router>
-      <Routes>
-        <Route
-          path={ROUTES.ROOT}
-          element={<Navigate to={ROUTES.OVERVIEW} replace />}
-        />
+    <AuthProvider>
+      <Router>
+        <Routes>
+          {/* Public Routes */}
+          <Route path={ROUTES.LOGIN} element={<Login />} />
 
-        <Route path={ROUTES.APP_ROOT} element={<DashboardLayout />}>
-          <Route index element={<Navigate to={ROUTES.OVERVIEW} replace />} />
-          <Route path="overview" element={<Overview />} />
-          <Route path="ai-console" element={<AIConsole />} />
-          <Route path="market-pulse" element={<MarketPulse />} />
-          <Route path="regulatory-radar" element={<RegulatoryRadar />} />
-          <Route path="content-hub" element={<ContentHub />} />
-          <Route path="settings" element={<Settings />} />
-        </Route>
+          {/* Root redirect to overview */}
+          <Route
+            path={ROUTES.ROOT}
+            element={<Navigate to={ROUTES.OVERVIEW} replace />}
+          />
 
-        <Route path="*" element={<Navigate to={ROUTES.OVERVIEW} replace />} />
-      </Routes>
-    </Router>
+          {/* Protected Routes */}
+          <Route
+            path={ROUTES.APP_ROOT}
+            element={
+              <ProtectedRoute>
+                <DashboardLayout />
+              </ProtectedRoute>
+            }
+          >
+            <Route index element={<Navigate to={ROUTES.OVERVIEW} replace />} />
+            <Route path="overview" element={<Overview />} />
+            <Route path="ai-console" element={<AIConsole />} />
+            <Route path="market-pulse" element={<MarketPulse />} />
+            <Route path="regulatory-radar" element={<RegulatoryRadar />} />
+            <Route path="content-hub" element={<ContentHub />} />
+            <Route path="settings" element={<Settings />} />
+          </Route>
+
+          {/* Catch-all redirect to login */}
+          <Route path="*" element={<Navigate to={ROUTES.LOGIN} replace />} />
+        </Routes>
+      </Router>
+    </AuthProvider>
   );
 }
 

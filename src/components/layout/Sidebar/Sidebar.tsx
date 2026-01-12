@@ -1,11 +1,20 @@
-import { NavLink } from 'react-router-dom';
-import { ChevronLeft, ChevronRight, HelpCircle } from 'lucide-react';
+import { NavLink, useNavigate } from 'react-router-dom';
+import { ChevronLeft, ChevronRight, HelpCircle, LogOut } from 'lucide-react';
+import { useAuth } from '../../../hooks/useAuth';
+import { ROUTES } from '../../../constants/routes';
 import { navigationItems } from '../../../constants/navigation';
 import { SidebarProps } from './Sidebar.types';
 import hsbcLogo from '../../../assets/icons/hsbc-logo.png';
 import './Sidebar.css';
 
 export default function Sidebar({ isCollapsed, onToggle }: SidebarProps) {
+  const navigate = useNavigate();
+  const { logout } = useAuth();
+
+  const handleLogout = () => {
+    logout();
+    navigate(ROUTES.LOGIN);
+  };
   return (
     <aside className={`sidebar ${isCollapsed ? 'sidebar--collapsed' : ''}`}>
       {/* Sidebar Header */}
@@ -57,13 +66,25 @@ export default function Sidebar({ isCollapsed, onToggle }: SidebarProps) {
         </ul>
       </nav>
 
-      {/* Help Button */}
-      <button className="sidebar__help-button" aria-label="Help">
-        <span className="sidebar__nav-icon">
-          <HelpCircle size={20} />
-        </span>
-        {!isCollapsed && <span className="sidebar__nav-label">Help</span>}
-      </button>
+      {/* Bottom Actions */}
+      <div className="sidebar__bottom-actions">
+        <button className="sidebar__help-button" aria-label="Help">
+          <span className="sidebar__nav-icon">
+            <HelpCircle size={20} />
+          </span>
+          {!isCollapsed && <span className="sidebar__nav-label">Help</span>}
+        </button>
+        <button
+          className="sidebar__logout-button"
+          onClick={handleLogout}
+          aria-label="Logout"
+        >
+          <span className="sidebar__nav-icon">
+            <LogOut size={20} />
+          </span>
+          {!isCollapsed && <span className="sidebar__nav-label">Logout</span>}
+        </button>
+      </div>
     </aside>
   );
 }

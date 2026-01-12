@@ -1,3 +1,4 @@
+/* Sidebar Container */
 .sidebar {
   display: flex;
   flex-direction: column;
@@ -14,6 +15,7 @@
   width: 64px;
 }
 
+/* Toggle Button */
 .sidebar__toggle {
   background: transparent;
   border: none;
@@ -31,7 +33,7 @@
   transform: scale(1.1);
 }
 
-/* Header */
+/* Sidebar Header */
 .sidebar__header {
   display: flex;
   align-items: center;
@@ -187,10 +189,24 @@
   background: rgba(255, 255, 255, 0.3);
 }
 
-/* Help Button */
-.sidebar__help-button {
+/* Bottom actions (Help & Logout) */
+.sidebar__bottom-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-top: auto;
+}
+
+.sidebar--collapsed .sidebar__bottom-actions {
+  align-items: center;
+  justify-content: center;
+}
+
+.sidebar__help-button,
+.sidebar__logout-button {
   display: flex;
   align-items: center;
+  width: calc(100% - 1rem);
   padding: 0.75rem 1rem;
   color: var(--color-sidebar-text, #444444);
   background: transparent;
@@ -201,7 +217,10 @@
     background-color 0.2s ease,
     color 0.2s ease;
   border-radius: 0.5rem;
-  margin: 0.5rem;
+  margin: 0 0.5rem 0.5rem 0.5rem;
+}
+
+.sidebar__help-button {
   margin-top: auto;
 }
 
@@ -211,5 +230,22 @@
 }
 
 .sidebar__help-button:hover .sidebar__nav-icon {
+  color: #111111;
+}
+
+.sidebar--collapsed .sidebar__help-button,
+.sidebar--collapsed .sidebar__logout-button {
+  width: auto;
+  justify-content: center;
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
+}
+
+.sidebar__logout-button:hover {
+  background-color: #ededed;
+  color: #111111;
+}
+
+.sidebar__logout-button:hover .sidebar__nav-icon {
   color: #111111;
 }

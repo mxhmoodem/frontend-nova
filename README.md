@@ -1,7 +1,9 @@
 [![CI/CD Pipeline](https://github.com/mxhmoodem/frontend-nova/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/mxhmoodem/frontend-nova/actions/workflows/ci.yml)
+
 # MarketTrends Dashboard - Project Structure
 
 ## Overview
+
 This document explains the file structure and organization for the MarketTrends dashboard SBA (Single Board Application) built with React, TypeScript, and SWC.
 
 ## Project Structure
@@ -12,142 +14,194 @@ src/
 │   ├── common/
 │   │   ├── Button/
 │   │   │   ├── Button.tsx
+│   │   │   ├── Button.test.tsx
 │   │   │   ├── Button.types.ts
-│   │   │   └── Button.module.css
+│   │   │   └── Button.css
 │   │   ├── Card/
 │   │   │   ├── Card.tsx
+│   │   │   ├── Card.test.tsx
 │   │   │   ├── Card.types.ts
-│   │   │   └── Card.module.css
+│   │   │   └── Card.css
 │   │   ├── Input/
 │   │   │   ├── Input.tsx
+│   │   │   ├── Input.test.tsx
 │   │   │   ├── Input.types.ts
-│   │   │   └── Input.module.css
+│   │   │   └── Input.css
 │   │   ├── LoadingSpinner/
 │   │   │   ├── LoadingSpinner.tsx
-│   │   │   └── LoadingSpinner.module.css
+│   │   │   ├── LoadingSpinner.test.tsx
+│   │   │   └── LoadingSpinner.css
 │   │   └── index.ts (barrel exports)
 │   │
 │   ├── layout/
 │   │   ├── DashboardLayout/
 │   │   │   ├── DashboardLayout.tsx
+│   │   │   ├── DashboardLayout.test.tsx
 │   │   │   ├── DashboardLayout.types.ts
-│   │   │   └── DashboardLayout.module.css
-│   │   ├── Sidebar/
-│   │   │   ├── Sidebar.tsx
-│   │   │   ├── Sidebar.types.ts
-│   │   │   └── Sidebar.module.css
-│   │   ├── SidebarNav/
-│   │   │   ├── SidebarNav.tsx
-│   │   │   ├── SidebarNav.types.ts
-│   │   │   └── SidebarNav.module.css
+│   │   │   ├── DashboardLayout.css
+│   │   │   └── index.ts
 │   │   ├── Header/
 │   │   │   ├── Header.tsx
+│   │   │   ├── Header.test.tsx
 │   │   │   ├── Header.types.ts
-│   │   │   └── Header.module.css
-│   │   └── index.ts (barrel exports)
+│   │   │   ├── Header.css
+│   │   │   └── index.ts
+│   │   └── Sidebar/
+│   │       ├── Sidebar.tsx
+│   │       ├── Sidebar.test.tsx
+│   │       ├── Sidebar.types.ts
+│   │       ├── Sidebar.css
+│   │       └── index.ts
 │   │
 │   └── features/
 │       ├── analytics/
 │       │   ├── AnalyticsCard/
 │       │   │   ├── AnalyticsCard.tsx
+│       │   │   ├── AnalyticsCard.test.tsx
 │       │   │   ├── AnalyticsCard.types.ts
-│       │   │   └── AnalyticsCard.module.css
+│       │   │   └── AnalyticsCard.css
 │       │   ├── AnalyticsChart/
 │       │   │   ├── AnalyticsChart.tsx
+│       │   │   ├── AnalyticsChart.test.tsx
 │       │   │   ├── AnalyticsChart.types.ts
-│       │   │   └── AnalyticsChart.module.css
-│       │   └── index.ts
-│       ├── trends/
-│       │   ├── TrendsList/
-│       │   │   ├── TrendsList.tsx
-│       │   │   ├── TrendsList.types.ts
-│       │   │   └── TrendsList.module.css
-│       │   ├── TrendsFilter/
-│       │   │   ├── TrendsFilter.tsx
-│       │   │   ├── TrendsFilter.types.ts
-│       │   │   └── TrendsFilter.module.css
+│       │   │   └── AnalyticsChart.css
 │       │   └── index.ts
 │       ├── reports/
 │       │   ├── ReportTable/
 │       │   │   ├── ReportTable.tsx
+│       │   │   ├── ReportTable.test.tsx
 │       │   │   ├── ReportTable.types.ts
-│       │   │   └── ReportTable.module.css
+│       │   │   └── ReportTable.css
 │       │   └── index.ts
-│       └── settings/
-│           ├── SettingsForm/
-│           │   ├── SettingsForm.tsx
-│           │   ├── SettingsForm.types.ts
-│           │   └── SettingsForm.module.css
+│       ├── settings/
+│       │   ├── SettingsForm/
+│       │   │   ├── SettingsForm.tsx
+│       │   │   ├── SettingsForm.test.tsx
+│       │   │   ├── SettingsForm.types.ts
+│       │   │   └── SettingsForm.css
+│       │   └── index.ts
+│       └── trends/
+│           ├── TrendsFilter/
+│           │   ├── TrendsFilter.tsx
+│           │   ├── TrendsFilter.test.tsx
+│           │   ├── TrendsFilter.types.ts
+│           │   └── TrendsFilter.css
+│           ├── TrendsList/
+│           │   ├── TrendsList.tsx
+│           │   ├── TrendsList.test.tsx
+│           │   ├── TrendsList.types.ts
+│           │   └── TrendsList.css
 │           └── index.ts
 │
 ├── pages/
-│   ├── Dashboard.tsx
-│   ├── Dashboard.module.css
-│   ├── Analytics.tsx
-│   ├── Analytics.module.css
-│   ├── Trends.tsx
-│   ├── Trends.module.css
-│   ├── Reports.tsx
-│   ├── Reports.module.css
-│   ├── Settings.tsx
-│   └── Settings.module.css
+│   ├── AIConsole/
+│   │   ├── AIConsole.tsx
+│   │   ├── AIConsole.test.tsx
+│   │   └── AIConsole.css
+│   ├── ContentHub/
+│   │   ├── ContentHub.tsx
+│   │   ├── ContentHub.test.tsx
+│   │   └── ContentHub.css
+│   ├── MarketPulse/
+│   │   ├── MarketPulse.tsx
+│   │   ├── MarketPulse.test.tsx
+│   │   └── MarketPulse.css
+│   ├── Overview/
+│   │   ├── Overview.tsx
+│   │   ├── Overview.test.tsx
+│   │   └── Overview.css
+│   ├── RegulatoryRadar/
+│   │   ├── RegulatoryRadar.tsx
+│   │   ├── RegulatoryRadar.test.tsx
+│   │   └── RegulatoryRadar.css
+│   └── Settings/
+│       ├── Settings.tsx
+│       ├── Settings.test.tsx
+│       └── Settings.css
 │
 ├── hooks/
-│   ├── useMarketData.ts
-│   ├── useMarketData.types.ts
-│   ├── useSidebar.ts
-│   └── useSidebar.types.ts
+│   ├── useMarketData/
+│   │   ├── useMarketData.ts
+│   │   ├── useMarketData.test.ts
+│   │   └── useMarketData.types.ts
+│   └── useSidebar/
+│       ├── useSidebar.ts
+│       ├── useSidebar.test.ts
+│       └── useSidebar.types.ts
 │
 ├── context/
-│   ├── ThemeContext.tsx
-│   ├── ThemeContext.types.ts
-│   ├── AuthContext.tsx
-│   └── AuthContext.types.ts
+│   ├── AuthContext/
+│   │   ├── AuthContext.tsx
+│   │   ├── AuthContext.test.tsx
+│   │   └── AuthContext.types.ts
+│   └── ThemeContext/
+│       ├── ThemeContext.tsx
+│       ├── ThemeContext.test.tsx
+│       └── ThemeContext.types.ts
 │
 ├── services/
-│   ├── api.ts
-│   ├── api.types.ts
-│   ├── marketTrendsApi.ts
-│   └── marketTrendsApi.types.ts
+│   ├── api/
+│   │   ├── api.ts
+│   │   ├── api.test.ts
+│   │   └── api.types.ts
+│   └── marketTrendsApi/
+│       ├── marketTrendsApi.ts
+│       ├── marketTrendsApi.test.ts
+│       └── marketTrendsApi.types.ts
 │
 ├── types/
-│   ├── market.types.ts (shared across app: MarketTrend, TrendPeriod, etc.)
-│   └── dashboard.types.ts (shared across app: DashboardData, Metric, etc.)
+│   ├── dashboard.types.ts
+│   ├── market.types.ts
+│   └── routing.types.ts
 │
 ├── utils/
 │   ├── formatters.ts
+│   ├── formatters.test.ts
 │   └── formatters.types.ts
 │
 ├── constants/
 │   ├── navigation.ts
-│   └── navigation.types.ts
+│   ├── navigation.types.ts
+│   └── routes.ts
 │
-├── styles/ (NEW - Global styles)
-│   ├── globals.css (CSS reset, body, html styles)
-│   ├── variables.css (CSS custom properties: colors, spacing, etc.)
-│   ├── theme.css (light/dark theme definitions)
-│   └── utilities.css (utility classes: .flex, .grid, etc.)
+├── styles/
+│   ├── globals.css
+│   ├── theme.css
+│   ├── utilities.css
+│   └── variables.css
+│
+├── assets/
+│   ├── icons/
+│   └── images/
+│
+├── test/
+│   └── setup.ts
 │
 ├── App.tsx
-├── App.module.css
-└── main.tsx
+├── App.test.tsx
+├── App.css
+├── main.tsx
+├── index.css
+└── vite-env.d.ts
 ```
 
 ## Folder Descriptions
 
 ### **hooks/** - Custom React Hooks
+
 Reusable logic that uses React hooks (useState, useEffect, etc.)
 
 **useMarketData.ts** - Fetches and manages market data state
+
 ```typescript
 export const useMarketData = () => {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(false);
-  
+
   useEffect(() => {
     // Fetch market data
   }, []);
-  
+
   return { data, loading };
 };
 
@@ -156,6 +210,7 @@ const { data, loading } = useMarketData();
 ```
 
 **useSidebar.ts** - Manages sidebar open/close state
+
 ```typescript
 export const useSidebar = () => {
   const [isOpen, setIsOpen] = useState(true);
@@ -167,9 +222,11 @@ export const useSidebar = () => {
 ---
 
 ### **context/** - React Context (Global State)
+
 Shares state across the entire app without prop drilling
 
 **ThemeContext.tsx** - Dark/light mode throughout app
+
 ```typescript
 const ThemeContext = createContext();
 
@@ -187,17 +244,20 @@ const { theme, toggleTheme } = useContext(ThemeContext);
 ---
 
 ### **services/** - API Communication
+
 All external API calls live here
 
 **api.ts** - Base API configuration (axios instance, headers)
+
 ```typescript
 export const api = axios.create({
   baseURL: 'https://api.markettrends.com',
-  headers: { 'Content-Type': 'application/json' }
+  headers: { 'Content-Type': 'application/json' },
 });
 ```
 
 **marketTrendsApi.ts** - Specific API endpoints
+
 ```typescript
 export const getTrends = async () => {
   const response = await api.get('/trends');
@@ -212,9 +272,11 @@ export const getAnalytics = async (id: string) => {
 ---
 
 ### **types/** - TypeScript Definitions
+
 Shared types/interfaces used across the app
 
 **market.types.ts**
+
 ```typescript
 export interface MarketTrend {
   id: string;
@@ -228,6 +290,7 @@ export type TrendPeriod = '24h' | '7d' | '30d' | '1y';
 ```
 
 **dashboard.types.ts**
+
 ```typescript
 export interface DashboardData {
   metrics: Metric[];
@@ -244,14 +307,16 @@ export interface NavItem {
 ---
 
 ### **utils/** - Helper Functions
+
 Pure functions for data transformation, formatting, calculations
 
 **formatters.ts**
+
 ```typescript
 export const formatCurrency = (value: number): string => {
   return new Intl.NumberFormat('en-US', {
     style: 'currency',
-    currency: 'USD'
+    currency: 'USD',
   }).format(value);
 };
 
@@ -270,21 +335,23 @@ const price = formatCurrency(1234.56); // "$1,234.56"
 ---
 
 ### **constants/** - Static Configuration
+
 Values that never change at runtime
 
 **navigation.ts**
+
 ```typescript
 export const NAV_ITEMS = [
   { path: '/dashboard', label: 'Dashboard', icon: 'HomeIcon' },
   { path: '/analytics', label: 'Analytics', icon: 'ChartIcon' },
   { path: '/trends', label: 'Trends', icon: 'TrendingIcon' },
   { path: '/reports', label: 'Reports', icon: 'FileIcon' },
-  { path: '/settings', label: 'Settings', icon: 'SettingsIcon' }
+  { path: '/settings', label: 'Settings', icon: 'SettingsIcon' },
 ];
 
 export const API_ENDPOINTS = {
   TRENDS: '/api/trends',
-  ANALYTICS: '/api/analytics'
+  ANALYTICS: '/api/analytics',
 };
 
 export const CHART_COLORS = ['#3b82f6', '#ef4444', '#10b981'];
@@ -295,18 +362,21 @@ export const CHART_COLORS = ['#3b82f6', '#ef4444', '#10b981'];
 ## Components Structure
 
 ### **components/common/** - Reusable UI Components
+
 - Button/
 - Card/
 - Input/
 - LoadingSpinner/
 
 ### **components/layout/** - Layout Components
+
 - **DashboardLayout/** - Wraps all dashboard pages, includes sidebar
 - **Sidebar/** - Navigation sidebar component
 - **SidebarNav/** - Navigation items within sidebar
 - **Header/** - Top header bar
 
 Use barrel exports (index.ts) for cleaner imports:
+
 ```typescript
 // components/layout/index.ts
 export { DashboardLayout } from './DashboardLayout/DashboardLayout';
@@ -315,6 +385,7 @@ export { Header } from './Header/Header';
 ```
 
 ### **components/features/** - Feature-Specific Components
+
 - analytics/
 - trends/
 - reports/
@@ -346,7 +417,7 @@ import { MarketTrend } from '../types/market.types';
 
 const Analytics = () => {
   const { data, loading } = useMarketData(); // Hook
-  
+
   return (
     <div>
       {data?.map((trend: MarketTrend) => ( // Type

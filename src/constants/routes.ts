@@ -1,5 +1,6 @@
 export const ROUTES = {
   ROOT: '/',
+  LOGIN: '/login',
   APP_ROOT: '/app',
   OVERVIEW: '/app/overview',
   AI_CONSOLE: '/app/ai-console',

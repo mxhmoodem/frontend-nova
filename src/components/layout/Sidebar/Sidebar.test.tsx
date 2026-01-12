@@ -5,6 +5,7 @@ import userEvent from '@testing-library/user-event';
 import '@testing-library/jest-dom/vitest';
 import Sidebar from './Sidebar';
 import { navigationItems } from '../../../constants/navigation';
+import { AuthProvider } from '../../../context/AuthContext/AuthContext';
 
 const renderSidebar = (
   initialRoute?: string,
@@ -17,9 +18,11 @@ const renderSidebar = (
     user: userEvent.setup(),
     onToggle,
     ...render(
-      <MemoryRouter initialEntries={[route]}>
-        <Sidebar isCollapsed={isCollapsed} onToggle={onToggle} />
-      </MemoryRouter>
+      <AuthProvider>
+        <MemoryRouter initialEntries={[route]}>
+          <Sidebar isCollapsed={isCollapsed} onToggle={onToggle} />
+        </MemoryRouter>
+      </AuthProvider>
     ),
   };
 };
