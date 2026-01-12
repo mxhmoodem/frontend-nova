@@ -1,10 +1,10 @@
-import { useState } from 'react';
 import './Header.css';
 import { IoMdNotifications } from 'react-icons/io';
 import { IoMdMoon, IoMdSunny } from 'react-icons/io';
+import { useTheme } from '../../../hooks/useTheme';
 
 export default function Header() {
-  const [isDark, setIsDark] = useState(false);
+  const { theme, toggleTheme } = useTheme();
 
   return (
     <header className="header">
@@ -21,10 +21,10 @@ export default function Header() {
         {/* Theme toggle */}
         <button
           className="header__action"
-          onClick={() => setIsDark(!isDark)}
+          onClick={toggleTheme}
           aria-label="Toggle theme"
         >
-          {isDark ? <IoMdSunny size={24} /> : <IoMdMoon size={24} />}
+          {theme === 'dark' ? <IoMdSunny size={24} /> : <IoMdMoon size={24} />}
         </button>
 
         {/* User menu */}

@@ -58,6 +58,7 @@
 
   /* Header Specific */
   --color-header-bg: rgba(248, 250, 251, 0.8);
+  --color-header-icon: #111827;
 
   /* Shadows */
   --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
@@ -76,49 +77,53 @@
 
 /* Dark Mode */
 .dark {
-  --color-background: #030712;
-  --color-foreground: #f9fafb;
+  --color-background: #0f172a;
+  --color-foreground: #f1f5f9;
 
-  --color-card: #111827;
-  --color-card-foreground: #f9fafb;
+  --color-card: #1e293b;
+  --color-card-foreground: #f1f5f9;
 
-  --color-popover: #111827;
-  --color-popover-foreground: #f9fafb;
+  --color-popover: #1e293b;
+  --color-popover-foreground: #f1f5f9;
 
   /* Brand Primary stays the same */
   --color-primary: #db0011;
   --color-primary-foreground: #ffffff;
   --color-primary-hover: #ff0015;
 
-  --color-secondary: #1f2937;
-  --color-secondary-foreground: #f9fafb;
+  --color-secondary: #334155;
+  --color-secondary-foreground: #f1f5f9;
 
-  --color-muted: #1f2937;
-  --color-muted-foreground: #9ca3af;
+  --color-muted: #334155;
+  --color-muted-foreground: #cbd5e1;
 
-  --color-accent: #1f2937;
-  --color-accent-foreground: #f9fafb;
+  --color-accent: #334155;
+  --color-accent-foreground: #f1f5f9;
 
-  --color-border: #1f2937;
-  --color-input: #1f2937;
+  --color-destructive: #ef4444;
+  --color-destructive-foreground: #ffffff;
+
+  --color-border: #334155;
+  --color-input: #334155;
   --color-ring: #db0011;
 
   /* Sidebar Dark Mode */
-  --color-sidebar: #111827;
-  --color-sidebar-foreground: #f9fafb;
-  --color-sidebar-border: #1f2937;
-  --color-sidebar-hover: #1f2937;
-  --color-sidebar-active: rgba(219, 0, 17, 0.15);
+  --color-sidebar: #1e293b;
+  --color-sidebar-foreground: #f1f5f9;
+  --color-sidebar-border: #334155;
+  --color-sidebar-hover: #334155;
+  --color-sidebar-active: rgba(219, 0, 17, 0.2);
 
   /* Header Dark Mode */
-  --color-header-bg: rgba(3, 7, 18, 0.8);
+  --color-header-bg: #1e293b;
+  --color-header-icon: #f1f5f9;
 
   /* Dark shadows are more subtle */
-  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.5);
   --shadow-md:
-    0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
+    0 4px 6px -1px rgba(0, 0, 0, 0.4), 0 2px 4px -1px rgba(0, 0, 0, 0.3);
   --shadow-lg:
-    0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -2px rgba(0, 0, 0, 0.2);
+    0 10px 15px -3px rgba(0, 0, 0, 0.4), 0 4px 6px -2px rgba(0, 0, 0, 0.3);
   --shadow-xl:
-    0 20px 25px -5px rgba(0, 0, 0, 0.3), 0 10px 10px -5px rgba(0, 0, 0, 0.2);
+    0 20px 25px -5px rgba(0, 0, 0, 0.4), 0 10px 10px -5px rgba(0, 0, 0, 0.3);
 }
