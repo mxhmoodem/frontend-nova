@@ -1,0 +1,58 @@
+.avatar {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 8px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.avatar:hover {
+  background-color: var(--color-secondary);
+  color: var(--color-foreground);
+}
+
+.avatar__circle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 20%;
+  background: #e8e8e9;
+  border: 1px solid #d1d1d1;
+  flex-shrink: 0;
+}
+
+.avatar__initials {
+  font-size: 16px;
+  font-weight: 600;
+  color: #4a4a4a;
+}
+
+.avatar__info {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.avatar__name {
+  font-size: 12px;
+  font-weight: 600;
+  margin: 0;
+  color: var(--color-text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.avatar__role {
+  font-size: 10px;
+  margin: 0;
+  color: var(--color-text-secondary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: #8a8a8a;
+}

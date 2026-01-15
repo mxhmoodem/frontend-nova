@@ -2,9 +2,14 @@ import './Header.css';
 import { IoMdNotifications } from 'react-icons/io';
 import { IoMdMoon, IoMdSunny } from 'react-icons/io';
 import { useTheme } from '../../../hooks/useTheme';
+import { Avatar } from '../../../components/common';
+import { useAuth } from '../../../hooks/useAuth';
 
 export default function Header() {
   const { theme, toggleTheme } = useTheme();
+  const { user } = useAuth();
+
+  const userName = user?.name || 'Jane Smith';
 
   return (
     <header className="header">
@@ -28,12 +33,13 @@ export default function Header() {
         </button>
 
         {/* User menu */}
-        <div className="header__user">
-          <button className="header__user-button" aria-label="User menu">
-            <span className="header__user-avatar">U</span>
-            <span className="header__user-name">User</span>
-          </button>
-        </div>
+        <Avatar
+          name={userName}
+          role="Engineer"
+          onclick={() => {
+            // Implement in future
+          }}
+        />
       </div>
     </header>
   );
