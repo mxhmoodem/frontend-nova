@@ -15,14 +15,22 @@ export default function Login() {
     navigate(ROUTES.OVERVIEW);
   };
 
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    e.currentTarget.style.setProperty('--mouse-x', `${x}px`);
+    e.currentTarget.style.setProperty('--mouse-y', `${y}px`);
+  };
+
   return (
     <div className="login">
       {/* Left Panel - Informational */}
-      <div className="login__info-panel">
+      <div className="login__info-panel" onMouseMove={handleMouseMove}>
         <div className="login__info-content">
           <div className="login__brand">
             <div className="login__brand-accent"></div>
-            <h2 className="login__brand-title">Nova IQ</h2>
+            <h2 className="login__brand-title">Noval IQ</h2>
           </div>
 
           <h1 className="login__hero-title">
