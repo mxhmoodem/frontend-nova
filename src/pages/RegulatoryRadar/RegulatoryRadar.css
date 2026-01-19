@@ -1,1 +1,8 @@
-/* Regulatory Radar page styles */
+.regulatory-radar__heading {
+  font-size: 2rem;
+}
+
+.regulatory-radar__subheading {
+  font-size: 1rem;
+  color: #666;
+}

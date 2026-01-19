@@ -1,1 +1,8 @@
-/* Content Hub page styles */
+.content-hub__heading {
+  font-size: 2rem;
+}
+
+.content-hub__subheading {
+  font-size: 1rem;
+  color: #666;
+}

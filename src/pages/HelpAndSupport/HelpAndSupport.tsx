@@ -1,15 +1,15 @@
 import { InformationButton } from '../../components/common/InformationButton/InformationButton';
-import './Settings.css';
+import './HelpAndSupport.css';
 
-export default function Settings() {
+export default function HelpAndSupport() {
   return (
     <div>
-      <h2 className="settings__heading">
-        Settings
+      <h2 className="help-support__heading">
+        Help & Support
         <InformationButton tooltip="More information" ariaLabel="Information" />
       </h2>
-      <p className="settings__subheading">
-        Manage your application preferences and configurations
+      <p className="help-support__subheading">
+        Find answers and get assistance
       </p>
     </div>
   );
