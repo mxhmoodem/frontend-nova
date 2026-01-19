@@ -1,0 +1,45 @@
+.information-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 50%;
+  background-color: transparent;
+  cursor: pointer;
+  transition: var(--transition-colors), var(--transition-transform);
+  flex-shrink: 0;
+  margin-left: 0.5rem;
+  vertical-align: middle;
+  border: none;
+  outline: none;
+}
+
+.information-button:hover {
+  background-color: var(--color-primary);
+}
+
+.information-button:hover .information-button-icon {
+  color: var(--color-primary-foreground);
+}
+
+.information-button-icon {
+  width: 1.25rem;
+  height: 1.25rem;
+  color: var(--color-muted-foreground);
+  transition: color var(--transition-base);
+}
+
+.information-button:active {
+  transform: scale(0.95);
+}
+
+/* Dark mode support */
+
+.dark .information-button:hover {
+  background-color: var(--color-primary);
+}
+
+.dark .information-button:hover .information-button-icon {
+  color: var(--color-primary-foreground);
+}
