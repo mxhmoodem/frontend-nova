@@ -41,7 +41,8 @@ describe('Sidebar', () => {
 
       const links = screen.getAllByRole('link');
 
-      expect(links).toHaveLength(navigationItems.length);
+      // Expect navigationItems.length + 1 for the help link at bottom
+      expect(links).toHaveLength(navigationItems.length + 1);
     });
 
     it('each rendered link corresponds to a config entry with correct label and path', () => {
@@ -171,7 +172,8 @@ describe('Sidebar', () => {
 
       // Should render all links regardless of icon presence
       const links = screen.getAllByRole('link');
-      expect(links).toHaveLength(navigationItems.length);
+      // Expect navigationItems.length + 1 for the help link at bottom
+      expect(links).toHaveLength(navigationItems.length + 1);
     });
   });
 
