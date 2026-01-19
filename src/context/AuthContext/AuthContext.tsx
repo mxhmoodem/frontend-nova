@@ -43,8 +43,8 @@ export function AuthProvider({ children }: AuthProviderProps) {
   const login = () => {
     const mockUser: AuthUser = {
       id: '1',
-      email: 'user@example.com',
-      name: 'User',
+      email: 'janesmith@example.com',
+      name: 'Jane Smith',
     };
 
     setIsAuthenticated(true);

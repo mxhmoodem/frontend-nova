@@ -52,8 +52,8 @@ describe('AuthContext', () => {
     expect(result.current.isAuthenticated).toBe(true);
     expect(result.current.user).toEqual({
       id: '1',
-      email: 'user@example.com',
-      name: 'User',
+      email: 'janesmith@example.com',
+      name: 'Jane Smith',
     });
   });
 
@@ -71,8 +71,8 @@ describe('AuthContext', () => {
     expect(parsedAuth.isAuthenticated).toBe(true);
     expect(parsedAuth.user).toEqual({
       id: '1',
-      email: 'user@example.com',
-      name: 'User',
+      email: 'janesmith@example.com',
+      name: 'Jane Smith',
     });
   });
 

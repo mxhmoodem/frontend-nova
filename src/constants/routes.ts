@@ -8,6 +8,7 @@ export const ROUTES = {
   REGULATORY_RADAR: '/app/regulatory-radar',
   CONTENT_HUB: '/app/content-hub',
   SETTINGS: '/app/settings',
+  HELP_SUPPORT: '/app/help-support',
 } as const;
 
 export type RouteKey = keyof typeof ROUTES;

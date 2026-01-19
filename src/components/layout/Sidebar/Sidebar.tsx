@@ -68,12 +68,18 @@ export default function Sidebar({ isCollapsed, onToggle }: SidebarProps) {
 
       {/* Bottom Actions */}
       <div className="sidebar__bottom-actions">
-        <button className="sidebar__help-button" aria-label="Help">
+        <NavLink
+          to={ROUTES.HELP_SUPPORT}
+          className={({ isActive }) =>
+            `sidebar__help-link ${isActive ? 'sidebar__nav-link--active' : ''}`
+          }
+          aria-label="Help"
+        >
           <span className="sidebar__nav-icon">
             <HelpCircle size={20} />
           </span>
           {!isCollapsed && <span className="sidebar__nav-label">Help</span>}
-        </button>
+        </NavLink>
         <button
           className="sidebar__logout-button"
           onClick={handleLogout}
