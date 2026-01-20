@@ -1,0 +1,108 @@
+.search-input-wrapper {
+  width: 100%;
+}
+
+.search-input__label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--color-text-primary, #1f2937);
+}
+
+.search-input {
+  width: 100%;
+}
+
+.search-input__container {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1.25rem;
+  background: #f6f6fcab;
+  border: 1.5px solid #dbdbdb;
+  border-radius: 12px;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.search-input__container:focus-within {
+  outline: none;
+  border: 2px solid #d30303;
+  box-shadow: 0 0 0 1px rgba(204, 0, 0, 0.1);
+}
+
+.search-input__container--disabled {
+  background: var(--color-bg-disabled, #f3f4f6);
+  border-color: var(--color-border-disabled, #e5e7eb);
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.search-input__container--loading {
+  opacity: 0.7;
+}
+
+.search-input__leading-slot,
+.search-input__trailing-slot {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.search-input__field {
+  flex: 1;
+  min-width: 0;
+  border: none;
+  outline: none;
+  background: transparent;
+  font-size: 1.1rem;
+  line-height: 1.5;
+  color: #1f2937;
+}
+
+.search-input__field::placeholder {
+  color: #94a3b8;
+  font-weight: 400;
+}
+
+.search-input__field:disabled {
+  cursor: not-allowed;
+}
+
+.search-input__field:-webkit-autofill,
+.search-input__field:-webkit-autofill:hover,
+.search-input__field:-webkit-autofill:focus {
+  -webkit-box-shadow: 0 0 0 1000px var(--color-bg-input, #ffffff) inset;
+  -webkit-text-fill-color: var(--color-text-primary, #1f2937);
+}
+
+/* Size Variations */
+.search-input--sm .search-input__container {
+  padding: 0.4rem 0.75rem;
+  gap: 0.5rem;
+  border-radius: 8px;
+}
+.search-input--sm .search-input__field {
+  font-size: 0.875rem;
+}
+
+.search-input--md .search-input__container {
+  padding: 0.75rem 1.25rem;
+  gap: 0.75rem;
+  border-radius: 12px;
+}
+.search-input--md .search-input__field {
+  font-size: 1.1rem;
+}
+
+.search-input--lg .search-input__container {
+  padding: 1rem 1.5rem;
+  gap: 1rem;
+  border-radius: 16px;
+}
+.search-input--lg .search-input__field {
+  font-size: 1.25rem;
+}

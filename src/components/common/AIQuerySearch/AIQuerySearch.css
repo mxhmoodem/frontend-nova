@@ -1,24 +1,29 @@
-.ai-query-search {
+﻿.ai-query-search {
   width: 50%;
   max-width: 50%;
 }
 
-.ai-query-search__container {
+/* Target the inner container of SearchInput */
+.ai-query-search .search-input__container {
   display: flex;
   align-items: center;
   gap: 10px;
   padding: 10px 14px;
+
+  /* Override SearchInput defaults */
   background: transparent;
   border: 1px solid rgba(239, 83, 80, 0.3);
   box-shadow: 0 0 4px rgba(239, 83, 80, 0.1);
   border-radius: 20px;
+
   transition: all 0.3s ease;
   position: relative;
   overflow: visible;
   z-index: 1;
 }
 
-.ai-query-search__container::after {
+/* For glow, targeting the container */
+.ai-query-search .search-input__container::after {
   content: '';
   position: absolute;
   inset: 0;
@@ -28,7 +33,7 @@
   pointer-events: none;
 }
 
-.ai-query-search__container::before {
+.ai-query-search .search-input__container::before {
   content: '';
   position: absolute;
   inset: -15px;
@@ -46,30 +51,33 @@
   pointer-events: none;
 }
 
-.ai-query-search__container--focused {
+/* Focus state */
+.ai-query-search .search-input__container:focus-within {
   border-color: rgba(239, 83, 80, 0.6);
   box-shadow: 0 0 4px rgba(239, 83, 80, 0.2);
+  outline: none;
 }
 
-.ai-query-search__container--focused::before {
+.ai-query-search .search-input__container:focus-within::before {
   opacity: 0.9;
   filter: blur(25px);
-  background: linear-gradient(
+  /* background: linear-gradient(
     90deg,
     rgba(255, 107, 107, 0.3) 0%,
-    rgba(239, 83, 80, 0.4) 50%,
+    rgba(241, 42, 38, 0.4) 50%,
     rgba(255, 107, 107, 0.3) 100%
-  );
-  /* background: linear-gradient(
+  ); */
+  background: linear-gradient(
     90deg,
     rgba(255, 105, 180, 0.4) 0%,
     rgba(255, 69, 58, 0.5) 25%,
     rgba(255, 107, 107, 0.5) 50%,
     rgba(239, 83, 80, 0.5) 75%,
     rgba(244, 143, 177, 0.4) 100%
-  ); */
+  );
 }
 
+/* Icon left */
 .ai-query-search__icon-left {
   display: flex;
   align-items: center;
@@ -91,18 +99,15 @@
   color: #374151;
 }
 
-.ai-query-search__field {
-  flex: 1;
-  border: none;
-  outline: none;
-  background: transparent;
+/* Input field - Override SearchInput defaults */
+.ai-query-search .search-input__field {
   font-size: 14px;
   line-height: 1.4;
   color: #1f2937;
   font-family: inherit;
 }
 
-.ai-query-search__field::placeholder {
+.ai-query-search .search-input__field::placeholder {
   color: #9ca3af;
   font-weight: 400;
 }
@@ -112,6 +117,7 @@
   opacity: 0.6;
 }
 
+/* Submit button styling */
 .ai-query-search__submit-button {
   display: flex;
   align-items: center;
