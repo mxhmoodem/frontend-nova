@@ -29,12 +29,23 @@
   gap: 2rem;
 }
 
+.storybook__search-demo-item {
+  margin-bottom: 2.7rem;
+}
+
 .storybook__demo-item h4 {
   margin-top: 0;
-  margin-bottom: 0.75rem;
+  margin-bottom: 0.5rem;
   font-size: 0.875rem;
   text-transform: uppercase;
   letter-spacing: 0.025em;
+  color: var(--color-muted-foreground);
+}
+
+.storybook__description {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  font-size: 0.875rem;
   color: var(--color-muted-foreground);
 }
 
@@ -42,4 +53,18 @@
   display: flex;
   gap: 1rem;
   flex-wrap: wrap;
+}
+
+.storybook__demo-column {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  max-width: 600px;
+}
+
+/* Make AI searchbar longer */
+.ai-query-search {
+  min-width: 420px;
+  width: 100%;
+  max-width: 700px;
 }

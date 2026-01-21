@@ -3,8 +3,24 @@
   height: 100vh;
   width: 100vw;
   overflow: hidden;
-  background-color: var(--color-background);
+  background-color: #ffffff;
   position: relative;
+}
+
+.dashboard-layout::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('../../../assets/dashboard-pattern.svg');
+  background-repeat: no-repeat;
+  background-position: bottom right;
+  background-size: 100% auto;
+  transform-origin: bottom right;
+  pointer-events: none;
+  z-index: 0;
 }
 
 .dashboard-layout__main {
