@@ -1,6 +1,7 @@
 import React from 'react';
 import './Button.css';
 import { ButtonProps } from './Button.types';
+import Tooltip from '../Tooltip/Tooltip';
 
 export const Button: React.FC<ButtonProps> = ({
   text,
@@ -8,10 +9,11 @@ export const Button: React.FC<ButtonProps> = ({
   variant = 'primary',
   className = '',
   isLoading = false,
+  tooltip,
+  tooltipPosition = 'bottom',
   children,
   ...props
 }) => {
-  // Requirement: Tests should check if at least either icon or text has been passed in otherwise throw error
   if (!text && !icon && !children) {
     throw new Error(
       'Button component requires either "text" or "icon" prop to be defined.'
@@ -28,7 +30,7 @@ export const Button: React.FC<ButtonProps> = ({
     .filter(Boolean)
     .join(' ');
 
-  return (
+  const button = (
     <button
       className={rootClassNames}
       disabled={isLoading || props.disabled}
@@ -40,4 +42,14 @@ export const Button: React.FC<ButtonProps> = ({
       {!isLoading && children}
     </button>
   );
+
+  if (tooltip) {
+    return (
+      <Tooltip content={tooltip} position={tooltipPosition}>
+        {button}
+      </Tooltip>
+    );
+  }
+
+  return button;
 };

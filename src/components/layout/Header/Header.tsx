@@ -22,20 +22,28 @@ export default function Header() {
         <Button
           variant="ghost"
           className="header__action"
-          icon={<IoMdNotifications size={24} />}
           aria-label="Notifications"
-        />
+          tooltip="Notifications"
+          tooltipPosition="bottom"
+        >
+          <IoMdNotifications size={24} />
+        </Button>
 
         {/* Theme toggle */}
         <Button
           variant="ghost"
           className="header__action"
           onClick={toggleTheme}
-          icon={
-            theme === 'dark' ? <IoMdSunny size={24} /> : <IoMdMoon size={24} />
+          aria-label={
+            theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'
           }
-          aria-label="Toggle theme"
-        />
+          tooltip={
+            theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'
+          }
+          tooltipPosition="bottom"
+        >
+          {theme === 'dark' ? <IoMdSunny size={24} /> : <IoMdMoon size={24} />}
+        </Button>
 
         {/* User menu */}
         <Avatar
