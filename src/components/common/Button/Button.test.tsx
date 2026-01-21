@@ -25,17 +25,17 @@ describe('Button', () => {
 
   it('applies the correct variant class', () => {
     const { container } = render(<Button text="Delete" variant="danger" />);
-    expect(container.firstChild).toHaveClass('nova-button--danger');
+    expect(container.firstChild).toHaveClass('button--danger');
   });
 
   it('applies icon-only class when only icon is provided', () => {
     const { container } = render(<Button icon={<MockIcon />} />);
-    expect(container.firstChild).toHaveClass('nova-button--icon-only');
+    expect(container.firstChild).toHaveClass('button--icon-only');
   });
 
   it('does not apply icon-only class when text is present', () => {
     const { container } = render(<Button icon={<MockIcon />} text="Add" />);
-    expect(container.firstChild).not.toHaveClass('nova-button--icon-only');
+    expect(container.firstChild).not.toHaveClass('button--icon-only');
   });
 
   it('throws an error if neither text nor icon is provided', () => {
