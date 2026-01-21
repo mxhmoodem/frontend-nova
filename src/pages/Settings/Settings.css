@@ -1,8 +1,13 @@
 .settings__heading {
   font-size: 2rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
 }
 
 .settings__subheading {
   font-size: 1rem;
-  color: #666;
+  color: var(--color-muted-foreground);
+  margin-bottom: 2rem;
 }

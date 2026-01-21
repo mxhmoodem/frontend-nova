@@ -1,5 +1,11 @@
 import { NavLink, useNavigate } from 'react-router-dom';
-import { ChevronLeft, ChevronRight, HelpCircle, LogOut } from 'lucide-react';
+import {
+  ChevronLeft,
+  ChevronRight,
+  HelpCircle,
+  LogOut,
+  Layout,
+} from 'lucide-react';
 import { useAuth } from '../../../hooks/useAuth';
 import { ROUTES } from '../../../constants/routes';
 import { navigationItems } from '../../../constants/navigation';
@@ -68,6 +74,20 @@ export default function Sidebar({ isCollapsed, onToggle }: SidebarProps) {
 
       {/* Bottom Actions */}
       <div className="sidebar__bottom-actions">
+        <NavLink
+          to={ROUTES.STORYBOOK}
+          className={({ isActive }) =>
+            `sidebar__help-link ${isActive ? 'sidebar__nav-link--active' : ''}`
+          }
+          aria-label="Storybook"
+        >
+          <span className="sidebar__nav-icon">
+            <Layout size={20} />
+          </span>
+          {!isCollapsed && (
+            <span className="sidebar__nav-label">Storybook</span>
+          )}
+        </NavLink>
         <NavLink
           to={ROUTES.HELP_SUPPORT}
           className={({ isActive }) =>

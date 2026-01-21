@@ -1,0 +1,45 @@
+.storybook__heading {
+  font-size: 2rem;
+}
+
+.storybook__subheading {
+  font-size: 1rem;
+  color: var(--color-muted-foreground);
+  margin-bottom: 2rem;
+}
+
+.storybook__section {
+  background-color: var(--color-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+  margin-top: 2rem;
+}
+
+.storybook__section h3 {
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+  font-size: 1.25rem;
+  color: var(--color-foreground);
+}
+
+.storybook__demo-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.storybook__demo-item h4 {
+  margin-top: 0;
+  margin-bottom: 0.75rem;
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.025em;
+  color: var(--color-muted-foreground);
+}
+
+.storybook__demo-row {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}

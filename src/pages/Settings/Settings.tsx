@@ -3,7 +3,7 @@ import './Settings.css';
 
 export default function Settings() {
   return (
-    <div>
+    <div className="settings-container">
       <h2 className="settings__heading">
         Settings
         <InformationButton tooltip="More information" ariaLabel="Information" />

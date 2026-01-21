@@ -2,7 +2,7 @@ import './Header.css';
 import { IoMdNotifications } from 'react-icons/io';
 import { IoMdMoon, IoMdSunny } from 'react-icons/io';
 import { useTheme } from '../../../hooks/useTheme';
-import { Avatar } from '../../../components/common';
+import { Avatar, Button } from '../../../components/common';
 import { useAuth } from '../../../hooks/useAuth';
 
 export default function Header() {
@@ -19,18 +19,23 @@ export default function Header() {
 
       <div className="header__right">
         {/* Notifications */}
-        <button className="header__action" aria-label="Notifications">
-          <IoMdNotifications size={24} />
-        </button>
+        <Button
+          variant="ghost"
+          className="header__action"
+          icon={<IoMdNotifications size={24} />}
+          aria-label="Notifications"
+        />
 
         {/* Theme toggle */}
-        <button
+        <Button
+          variant="ghost"
           className="header__action"
           onClick={toggleTheme}
+          icon={
+            theme === 'dark' ? <IoMdSunny size={24} /> : <IoMdMoon size={24} />
+          }
           aria-label="Toggle theme"
-        >
-          {theme === 'dark' ? <IoMdSunny size={24} /> : <IoMdMoon size={24} />}
-        </button>
+        />
 
         {/* User menu */}
         <Avatar
