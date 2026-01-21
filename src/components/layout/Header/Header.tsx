@@ -23,6 +23,8 @@ export default function Header() {
           variant="ghost"
           className="header__action"
           aria-label="Notifications"
+          tooltip="Notifications"
+          tooltipPosition="bottom"
         >
           <IoMdNotifications size={24} />
         </Button>
@@ -35,6 +37,10 @@ export default function Header() {
           aria-label={
             theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'
           }
+          tooltip={
+            theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'
+          }
+          tooltipPosition="bottom"
         >
           {theme === 'dark' ? <IoMdSunny size={24} /> : <IoMdMoon size={24} />}
         </Button>

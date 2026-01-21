@@ -50,22 +50,25 @@ export default function Storybook() {
                 icon={<Paperclip size={16} />}
                 variant="secondary"
                 aria-label="Attach file"
-                title="Attach file"
+                tooltip="Attach file"
               />
               <Button
                 icon={<Sparkles size={16} />}
                 variant="primary"
                 aria-label="AI Action"
+                tooltip="AI Action"
               />
               <Button
                 icon={<RotateCcw size={16} />}
                 variant="ghost"
                 aria-label="Reset"
+                tooltip="Reset"
               />
               <Button
                 icon={<Trash2 size={16} />}
                 variant="danger"
                 aria-label="Delete"
+                tooltip="Delete"
               />
             </div>
           </div>

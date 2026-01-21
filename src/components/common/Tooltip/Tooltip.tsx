@@ -1,18 +1,17 @@
 import { useState, useRef, useEffect, useCallback } from 'react';
 import { createPortal } from 'react-dom';
 import './Tooltip.css';
-import type { TooltipProps, TooltipPosition } from './Tooltip.model';
-
-interface TooltipCoords {
-  top: number;
-  left: number;
-}
+import type {
+  TooltipProps,
+  TooltipPosition,
+  TooltipCoords,
+} from './Tooltip.model';
 
 export default function Tooltip({
   content,
   children,
   position = 'top',
-  delay = 200,
+  delay = 150,
   className = '',
 }: TooltipProps) {
   const [isVisible, setIsVisible] = useState(false);

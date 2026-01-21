@@ -7,3 +7,8 @@ export interface TooltipProps {
   delay?: number;
   className?: string;
 }
+
+export interface TooltipCoords {
+  top: number;
+  left: number;
+}

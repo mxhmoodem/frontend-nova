@@ -1,4 +1,5 @@
 import { ButtonHTMLAttributes, ReactNode } from 'react';
+import { TooltipPosition } from '../Tooltip/Tooltip.model';
 
 export type ButtonVariant = 'primary' | 'secondary' | 'danger' | 'ghost';
 
@@ -7,4 +8,6 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   icon?: ReactNode;
   variant?: ButtonVariant;
   isLoading?: boolean;
+  tooltip?: string;
+  tooltipPosition?: TooltipPosition;
 }

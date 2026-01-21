@@ -1,6 +1,5 @@
 .tooltip-wrapper {
-  display: block;
-  width: 100%;
+  display: inline-block;
 }
 
 .tooltip-content {
