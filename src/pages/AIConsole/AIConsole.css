@@ -1,8 +1,205 @@
 .ai-console__heading {
   font-size: 2rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
 .ai-console__subheading {
   font-size: 1rem;
   color: #666;
+  margin-top: 0.25rem;
+}
+
+/* Landing Layout */
+.ai-console-page {
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.ai-console-header {
+  padding: 0 0 1rem 0;
+  flex-shrink: 0;
+}
+
+.ai-console-landing {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  /* Shift up slightly to look centered visually with the footer present */
+  padding-bottom: 120px;
+}
+
+.ai-landing-text {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.ai-landing-greeting {
+  font-size: 3.5rem;
+  font-weight: 700;
+  margin: 0;
+  color: #333;
+  line-height: 1.2;
+}
+
+/* Sunset Gradient Text */
+.ai-landing-username {
+  background: linear-gradient(135deg, #ff9566 0%, #ff5e98 50%, #9b5de5 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.ai-landing-subtitle {
+  font-size: 2rem;
+  font-weight: 500;
+  color: #b0b0b0; /* Light grey prompt */
+  margin: 0.5rem 0 0;
+}
+
+/* Prompt Cards */
+.ai-prompt-cards {
+  display: flex;
+  flex-wrap: wrap; /* Ensure responsiveness */
+  gap: 1.5rem;
+  justify-content: center;
+  max-width: 1200px;
+  padding: 0 1rem;
+}
+
+.ai-prompt-card {
+  background: white;
+  border: 1px solid #f0f0f0;
+  border-radius: 16px;
+  padding: 1.5rem;
+  width: 280px;
+  text-align: left;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Subtle gradient glow/border on hover or by default */
+.ai-prompt-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 16px;
+  padding: 2px; /* Border width */
+  background: linear-gradient(135deg, #ff9566, #ff5e98, #9b5de5);
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0; /* Hidden by default, show on hover or make it subtle always */
+  transition: opacity 0.3s ease;
+}
+
+.ai-prompt-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.06);
+}
+
+.ai-prompt-card:hover::before {
+  opacity: 1;
+}
+
+.ai-prompt-card__icon-wrapper {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 149, 102, 0.1),
+    rgba(255, 94, 152, 0.1)
+  );
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1rem;
+  color: #ff5e98;
+}
+
+.ai-prompt-card__icon {
+  font-size: 1.25rem;
+}
+
+.ai-prompt-card__title {
+  font-size: 1rem;
+  font-weight: 600;
+  margin: 0 0 0.5rem;
+  color: #333;
+}
+
+.ai-prompt-card__desc {
+  font-size: 0.875rem;
+  color: #888;
+  margin: 0;
+  line-height: 1.4;
+}
+
+/* Search Footer */
+.ai-search-container {
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 700px;
+  padding: 0 1.5rem;
+}
+
+/* Customize the existing AIQuerySearch/SearchInput styles within this container */
+.ai-search-container .search-input__container {
+  border-radius: 50px; /* Pillow shape as common in AI inputs */
+  border: 1px solid #eee;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  padding: 0.5rem 1rem;
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+}
+
+.ai-search-container .search-input__container:focus-within {
+  border-color: transparent;
+  box-shadow:
+    0 0 0 2px #fff,
+    0 0 0 4px #ffc1cc,
+    0 8px 30px rgba(0, 0, 0, 0.1);
+  /* approximation of sunset glow */
+  background: white;
+}
+
+/* Remove default strict borders if present in original styles */
+.ai-search-container .search-input__field {
+  font-size: 1rem;
+}
+
+/* Ensure the leading icon/trailing buttons look integrated */
+.ai-search-container .ai-query-search__submit-button {
+  background: linear-gradient(135deg, #ff9566 0%, #ff5e98 100%);
+  color: white;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}
+.ai-search-container .ai-query-search__submit-button svg {
+  margin: 0;
 }
