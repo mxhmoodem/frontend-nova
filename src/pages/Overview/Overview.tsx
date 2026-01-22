@@ -3,11 +3,12 @@ import { useAuth } from '../../hooks/useAuth';
 import { useState } from 'react';
 import { SearchInput } from '../../components/common/SearchInput';
 import { FiSearch } from 'react-icons/fi';
+import { getFirstName } from '../../utils/formatters';
 import './Overview.css';
 
 export default function Overview() {
   const { user } = useAuth();
-  const userName = user?.name.trim().split(/\s+/)[0] || 'User';
+  const userName = user?.name ? getFirstName(user.name) : 'User';
   const [searchValue, setSearchValue] = useState('');
 
   return (

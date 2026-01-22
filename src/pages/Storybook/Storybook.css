@@ -68,3 +68,21 @@
   width: 100%;
   max-width: 700px;
 }
+
+/* Chat container */
+.storybook__chat-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  max-width: 900px;
+  background: #f8fafb;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 1.5rem;
+  min-height: 400px;
+}
+
+[data-theme='dark'] .storybook__chat-container {
+  background: #0f1419;
+  border-color: #374151;
+}

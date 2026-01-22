@@ -3,6 +3,7 @@ import { Button } from '../../components/common/Button/Button';
 import { SearchInput } from '../../components/common/SearchInput';
 import { AIQuerySearch } from '../../components/common/AIQuerySearch';
 import { LookupSearch } from '../../components/common/LookupSearch';
+import { ChatMessage } from '../../components/common/ChatMessage';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import {
   Sparkles,
@@ -189,6 +190,46 @@ export default function Storybook() {
               <AIQuerySearch
                 onAsk={handleAIAsk}
                 placeholder="Ask AI anything..."
+              />
+            </div>
+          </div>
+        </section>
+
+        <section className="storybook__section">
+          <h3>Chat Message Component</h3>
+          <p className="storybook__description">
+            Message bubbles for AI conversations. AI messages appear on the
+            left, user messages on the right.
+          </p>
+
+          <div className="storybook__demo-item">
+            <div className="storybook__chat-container">
+              <ChatMessage
+                role="ai"
+                content="Hello Jane. I've analyzed the latest regulatory updates from the EPC and UK Peacock. What would you like to explore today?"
+                timestamp="10:30 AM"
+              />
+              <ChatMessage
+                role="user"
+                content="Can you summarize the key changes in the EPC regulations?"
+                userName="Jane Smith"
+                timestamp="10:31 AM"
+              />
+              <ChatMessage
+                role="ai"
+                content="Certainly! The European Payments Council has introduced three major updates this quarter: 1) Enhanced security requirements for instant payments, 2) New data sharing protocols for cross-border transactions, and 3) Updated guidelines for digital wallet integration."
+                timestamp="10:31 AM"
+              />
+              <ChatMessage
+                role="user"
+                content="What are the implications for our compliance team?"
+                userName="Jane Smith"
+                timestamp="10:32 AM"
+              />
+              <ChatMessage
+                role="ai"
+                content="Your compliance team should focus on three key areas: First, reviewing and updating your instant payment security protocols by Q2. Second, implementing the new data sharing framework for cross-border operations. Third, ensuring your digital wallet solutions meet the new integration standards."
+                timestamp="10:32 AM"
               />
             </div>
           </div>
