@@ -1,17 +1,8 @@
 import './avatar.css';
 import { AvatarProps } from './avatar.model';
+import { getInitials } from '../../../utils/formatters';
 
 export default function Avatar({ name, role, onclick }: AvatarProps) {
-  const getInitials = (fullName: string) => {
-    return fullName
-      .trim()
-      .split(/\s+/)
-      .filter(Boolean)
-      .map((n) => n[0])
-      .join('')
-      .toUpperCase();
-  };
-
   return (
     <div className="avatar" onClick={onclick}>
       <div className="avatar__circle">
