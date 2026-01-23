@@ -212,7 +212,7 @@ export default function Storybook() {
               <ChatMessage
                 role="user"
                 content="Can you summarize the key changes in the EPC regulations?"
-                userName="Jane Smith"
+                userInitals="Jane Smith"
                 timestamp="10:31 AM"
               />
               <ChatMessage
@@ -223,7 +223,7 @@ export default function Storybook() {
               <ChatMessage
                 role="user"
                 content="What are the implications for our compliance team?"
-                userName="Jane Smith"
+                userInitals="Jane Smith"
                 timestamp="10:32 AM"
               />
               <ChatMessage
