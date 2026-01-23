@@ -1,0 +1,136 @@
+.lookup-search {
+  position: relative;
+  width: 100%;
+}
+
+.lookup-search__input {
+  width: 100%;
+}
+
+/* Results Container */
+.lookup-search__results {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  margin-top: 0.5rem;
+  background: var(--color-surface, #ffffff);
+  border: 1px solid var(--color-border, #e5e7eb);
+  border-radius: 0.5rem;
+  box-shadow:
+    0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  max-height: 320px;
+  overflow-y: auto;
+  z-index: 1000;
+}
+
+/* Individual Result Item */
+.lookup-search__result {
+  padding: 0.75rem 1rem;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+  border-bottom: 1px solid var(--color-border-light, #f3f4f6);
+}
+
+.lookup-search__result:last-child {
+  border-bottom: none;
+}
+
+.lookup-search__result:hover {
+  background-color: var(--color-hover, #f9fafb);
+}
+
+.lookup-search__result--active {
+  background-color: var(--color-primary-light, #dbeafe);
+}
+
+.lookup-search__result:active {
+  background-color: var(--color-active, #e5e7eb);
+}
+
+/* Result Content */
+.lookup-search__result-content {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.lookup-search__result-label {
+  font-size: 0.875rem;
+  color: var(--color-text-primary, #111827);
+  flex: 1;
+}
+
+/* Empty State */
+.lookup-search__empty {
+  padding: 2rem 1rem;
+  text-align: center;
+  color: var(--color-text-secondary, #6b7280);
+  font-size: 0.875rem;
+}
+
+/* Focus Styles for Accessibility */
+.lookup-search__result:focus {
+  outline: 2px solid var(--color-primary, #3b82f6);
+  outline-offset: -2px;
+}
+
+/* Scrollbar Styling */
+.lookup-search__results::-webkit-scrollbar {
+  width: 0.5rem;
+}
+
+.lookup-search__results::-webkit-scrollbar-track {
+  background: var(--color-surface, #ffffff);
+  border-radius: 0 0.5rem 0.5rem 0;
+}
+
+.lookup-search__results::-webkit-scrollbar-thumb {
+  background: var(--color-border, #d1d5db);
+  border-radius: 0.25rem;
+}
+
+.lookup-search__results::-webkit-scrollbar-thumb:hover {
+  background: var(--color-border-dark, #9ca3af);
+}
+
+/* Dark Mode Support */
+@media (prefers-color-scheme: dark) {
+  .lookup-search__results {
+    background: var(--color-surface-dark, #1f2937);
+    border-color: var(--color-border-dark, #374151);
+  }
+
+  .lookup-search__result {
+    border-bottom-color: var(--color-border-light-dark, #374151);
+  }
+
+  .lookup-search__result:hover {
+    background-color: var(--color-hover-dark, #374151);
+  }
+
+  .lookup-search__result--active {
+    background-color: var(--color-primary-dark, #1e40af);
+  }
+
+  .lookup-search__result-label {
+    color: var(--color-text-primary-dark, #f9fafb);
+  }
+
+  .lookup-search__empty {
+    color: var(--color-text-secondary-dark, #9ca3af);
+  }
+
+  .lookup-search__results::-webkit-scrollbar-track {
+    background: var(--color-surface-dark, #1f2937);
+  }
+
+  .lookup-search__results::-webkit-scrollbar-thumb {
+    background: var(--color-border-dark, #4b5563);
+  }
+
+  .lookup-search__results::-webkit-scrollbar-thumb:hover {
+    background: var(--color-border-darker, #6b7280);
+  }
+}

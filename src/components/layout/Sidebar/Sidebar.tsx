@@ -1,11 +1,18 @@
 import { NavLink, useNavigate } from 'react-router-dom';
-import { ChevronLeft, ChevronRight, HelpCircle, LogOut } from 'lucide-react';
+import {
+  ChevronLeft,
+  ChevronRight,
+  HelpCircle,
+  LogOut,
+  Layout,
+} from 'lucide-react';
 import { useAuth } from '../../../hooks/useAuth';
 import { ROUTES } from '../../../constants/routes';
 import { navigationItems } from '../../../constants/navigation';
 import { SidebarProps } from './Sidebar.types';
 import hsbcLogo from '../../../assets/icons/hsbc-logo.png';
 import './Sidebar.css';
+import Tooltip from '../../common/Tooltip/Tooltip';
 
 export default function Sidebar({ isCollapsed, onToggle }: SidebarProps) {
   const navigate = useNavigate();
@@ -29,6 +36,7 @@ export default function Sidebar({ isCollapsed, onToggle }: SidebarProps) {
           )}
           <h1 className="sidebar__title">{isCollapsed ? '' : 'Noval IQ'}</h1>
         </div>
+
         <button
           className="sidebar__toggle"
           onClick={onToggle}
@@ -43,23 +51,33 @@ export default function Sidebar({ isCollapsed, onToggle }: SidebarProps) {
         <ul className="sidebar__nav-list">
           {navigationItems.map((item) => {
             const Icon = item.icon;
+            const navLink = (
+              <NavLink
+                to={item.path}
+                className={({ isActive }) =>
+                  `sidebar__nav-link ${isActive ? 'sidebar__nav-link--active' : ''}`
+                }
+              >
+                {Icon && (
+                  <span className="sidebar__nav-icon">
+                    <Icon size={20} />
+                  </span>
+                )}
+                {!isCollapsed && (
+                  <span className="sidebar__nav-label">{item.label}</span>
+                )}
+              </NavLink>
+            );
+
             return (
               <li key={item.id} className="sidebar__nav-item">
-                <NavLink
-                  to={item.path}
-                  className={({ isActive }) =>
-                    `sidebar__nav-link ${isActive ? 'sidebar__nav-link--active' : ''}`
-                  }
-                >
-                  {Icon && (
-                    <span className="sidebar__nav-icon">
-                      <Icon size={20} />
-                    </span>
-                  )}
-                  {!isCollapsed && (
-                    <span className="sidebar__nav-label">{item.label}</span>
-                  )}
-                </NavLink>
+                {isCollapsed ? (
+                  <Tooltip content={item.label} position="right">
+                    {navLink}
+                  </Tooltip>
+                ) : (
+                  navLink
+                )}
               </li>
             );
           })}
@@ -68,22 +86,88 @@ export default function Sidebar({ isCollapsed, onToggle }: SidebarProps) {
 
       {/* Bottom Actions */}
       <div className="sidebar__bottom-actions">
-        <button className="sidebar__help-button" aria-label="Help">
-          <span className="sidebar__nav-icon">
-            <HelpCircle size={20} />
-          </span>
-          {!isCollapsed && <span className="sidebar__nav-label">Help</span>}
-        </button>
-        <button
-          className="sidebar__logout-button"
-          onClick={handleLogout}
-          aria-label="Logout"
-        >
-          <span className="sidebar__nav-icon">
-            <LogOut size={20} />
-          </span>
-          {!isCollapsed && <span className="sidebar__nav-label">Logout</span>}
-        </button>
+        {isCollapsed ? (
+          <Tooltip content="Storybook" position="right">
+            <NavLink
+              to={ROUTES.STORYBOOK}
+              className={({ isActive }) =>
+                `sidebar__help-link ${isActive ? 'sidebar__nav-link--active' : ''}`
+              }
+              aria-label="Storybook"
+            >
+              <span className="sidebar__nav-icon">
+                <Layout size={20} />
+              </span>
+            </NavLink>
+          </Tooltip>
+        ) : (
+          <NavLink
+            to={ROUTES.STORYBOOK}
+            className={({ isActive }) =>
+              `sidebar__help-link ${isActive ? 'sidebar__nav-link--active' : ''}`
+            }
+            aria-label="Storybook"
+          >
+            <span className="sidebar__nav-icon">
+              <Layout size={20} />
+            </span>
+            {!isCollapsed && (
+              <span className="sidebar__nav-label">Storybook</span>
+            )}
+          </NavLink>
+        )}
+        {isCollapsed ? (
+          <Tooltip content="Help" position="right">
+            <NavLink
+              to={ROUTES.HELP_SUPPORT}
+              className={({ isActive }) =>
+                `sidebar__help-link ${isActive ? 'sidebar__nav-link--active' : ''}`
+              }
+              aria-label="Help"
+            >
+              <span className="sidebar__nav-icon">
+                <HelpCircle size={20} />
+              </span>
+            </NavLink>
+          </Tooltip>
+        ) : (
+          <NavLink
+            to={ROUTES.HELP_SUPPORT}
+            className={({ isActive }) =>
+              `sidebar__help-link ${isActive ? 'sidebar__nav-link--active' : ''}`
+            }
+            aria-label="Help"
+          >
+            <span className="sidebar__nav-icon">
+              <HelpCircle size={20} />
+            </span>
+            {!isCollapsed && <span className="sidebar__nav-label">Help</span>}
+          </NavLink>
+        )}
+        {isCollapsed ? (
+          <Tooltip content="Logout" position="right">
+            <button
+              className="sidebar__logout-button"
+              onClick={handleLogout}
+              aria-label="Logout"
+            >
+              <span className="sidebar__nav-icon">
+                <LogOut size={20} />
+              </span>
+            </button>
+          </Tooltip>
+        ) : (
+          <button
+            className="sidebar__logout-button"
+            onClick={handleLogout}
+            aria-label="Logout"
+          >
+            <span className="sidebar__nav-icon">
+              <LogOut size={20} />
+            </span>
+            {!isCollapsed && <span className="sidebar__nav-label">Logout</span>}
+          </button>
+        )}
       </div>
     </aside>
   );

@@ -35,6 +35,7 @@
 
   --color-secondary: #f1f5f9;
   --color-secondary-foreground: #1f2933;
+  --color-secondary-hover: #e2e8f0;
 
   --color-muted: #f1f5f9;
   --color-muted-foreground: #64748b;
@@ -93,6 +94,7 @@
 
   --color-secondary: #334155;
   --color-secondary-foreground: #f1f5f9;
+  --color-secondary-hover: #475569;
 
   --color-muted: #334155;
   --color-muted-foreground: #cbd5e1;

@@ -1,1 +1,8 @@
-/* Market Pulse page styles */
+.market-pulse__heading {
+  font-size: 2rem;
+}
+
+.market-pulse__subheading {
+  font-size: 1rem;
+  color: #666;
+}

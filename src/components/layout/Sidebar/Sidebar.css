@@ -104,15 +104,21 @@
   margin-bottom: 0.25rem;
 }
 
+.sidebar__nav-item .tooltip-wrapper {
+  display: block;
+  width: 100%;
+}
+
 .sidebar__nav-link {
   display: flex;
   align-items: center;
-  padding: 0.75rem 1rem;
+  padding: 0.5rem 0.75rem;
   color: var(--color-sidebar-foreground);
   text-decoration: none;
   transition: var(--transition-colors);
   border-radius: 0.5rem;
   margin: 0 0.5rem;
+  width: calc(100% - 1rem);
 }
 
 .sidebar__nav-link:hover {
@@ -151,7 +157,7 @@
 
 .sidebar__nav-label {
   margin-left: 0.75rem;
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   white-space: nowrap;
 }
 
@@ -162,7 +168,7 @@
 
 .sidebar--collapsed .sidebar__nav-link {
   justify-content: center;
-  padding: 0.75rem 0;
+  padding: 0.5rem 0;
 }
 
 .sidebar--collapsed .sidebar__toggle {
@@ -195,17 +201,23 @@
   margin-top: auto;
 }
 
+.sidebar__bottom-actions .tooltip-wrapper {
+  display: block;
+  width: 100%;
+}
+
 .sidebar--collapsed .sidebar__bottom-actions {
   align-items: center;
   justify-content: center;
 }
 
 .sidebar__help-button,
-.sidebar__logout-button {
+.sidebar__logout-button,
+.sidebar__help-link {
   display: flex;
   align-items: center;
   width: calc(100% - 1rem);
-  padding: 0.75rem 1rem;
+  padding: 0.5rem 0.75rem;
   color: var(--color-sidebar-foreground);
   transition: var(--transition-colors);
   background: transparent;
@@ -220,28 +232,43 @@
   margin-top: auto;
 }
 
-.sidebar__help-button:hover {
-  background-color: #ededed;
-  color: #111111;
-}
-
-.sidebar__help-button:hover .sidebar__nav-icon {
-  color: #111111;
-}
-
-.sidebar--collapsed .sidebar__help-button,
-.sidebar--collapsed .sidebar__logout-button {
-  width: auto;
-  justify-content: center;
-  margin-left: 0.5rem;
-  margin-right: 0.5rem;
-}
-
+.sidebar__help-button:hover,
+.sidebar__help-link:hover,
 .sidebar__logout-button:hover {
   background-color: #ededed;
   color: #111111;
 }
 
+.sidebar__help-button:hover .sidebar__nav-icon,
+.sidebar__help-link:hover .sidebar__nav-icon,
 .sidebar__logout-button:hover .sidebar__nav-icon {
   color: #111111;
+}
+
+.sidebar__help-link.sidebar__nav-link--active {
+  background-color: var(--color-sidebar-active);
+  color: var(--color-primary);
+  font-weight: bold;
+}
+
+.sidebar__help-link.sidebar__nav-link--active .sidebar__nav-icon {
+  color: var(--color-primary);
+}
+
+.sidebar__help-link.sidebar__nav-link--active:hover {
+  background-color: var(--color-sidebar-active);
+  color: var(--color-primary);
+}
+
+.sidebar__help-link.sidebar__nav-link--active:hover .sidebar__nav-icon {
+  color: var(--color-primary);
+}
+
+.sidebar--collapsed .sidebar__help-button,
+.sidebar--collapsed .sidebar__logout-button,
+.sidebar--collapsed .sidebar__help-link {
+  width: auto;
+  justify-content: center;
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
 }

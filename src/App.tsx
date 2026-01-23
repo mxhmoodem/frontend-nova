@@ -15,6 +15,8 @@ import MarketPulse from './pages/MarketPulse/MarketPulse';
 import RegulatoryRadar from './pages/RegulatoryRadar/RegulatoryRadar';
 import ContentHub from './pages/ContentHub/ContentHub';
 import Settings from './pages/Settings/Settings';
+import HelpAndSupport from './pages/HelpAndSupport/HelpAndSupport';
+import Storybook from './pages/Storybook/Storybook';
 import { ROUTES } from './constants/routes';
 import './App.css';
 
@@ -52,6 +54,8 @@ function App() {
               <Route path="regulatory-radar" element={<RegulatoryRadar />} />
               <Route path="content-hub" element={<ContentHub />} />
               <Route path="settings" element={<Settings />} />
+              <Route path="help-support" element={<HelpAndSupport />} />
+              <Route path="storybook" element={<Storybook />} />
             </Route>
 
             {/* Catch-all redirect to login */}

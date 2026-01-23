@@ -1,0 +1,131 @@
+.chat-message {
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+.chat-message__container {
+  display: flex;
+  gap: 0.75rem;
+  max-width: 80%;
+}
+
+.chat-message--ai .chat-message__container {
+  margin-right: auto;
+}
+
+.chat-message--user .chat-message__container {
+  margin-left: auto;
+}
+
+.chat-message__avatar {
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.chat-message__avatar--ai {
+  background: linear-gradient(135deg, #db2e27 0%, #e8524d 100%);
+  color: white;
+}
+
+.chat-message__avatar--user {
+  background: #e8e8e9;
+  border: 1px solid #d1d1d1;
+}
+
+.chat-message__initials {
+  font-size: 16px;
+  font-weight: 600;
+  color: #4a4a4a;
+}
+
+.chat-message__content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  flex: 1;
+  min-width: 0;
+}
+
+.chat-message__bubble {
+  padding: 1rem 1.25rem;
+  border-radius: 12px;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+.chat-message--ai .chat-message__bubble {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.chat-message--user .chat-message__bubble {
+  background: #f8fafb;
+  border: 1px solid #e5e7eb;
+}
+
+.chat-message__text {
+  margin: 0;
+  font-size: 0.9375rem;
+  line-height: 1.6;
+  color: #1f2937;
+}
+
+.chat-message__timestamp {
+  font-size: 0.75rem;
+  color: #9ca3af;
+  padding: 0 0.25rem;
+}
+
+.chat-message--user .chat-message__timestamp {
+  text-align: right;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .chat-message__container {
+    max-width: 90%;
+  }
+
+  .chat-message__avatar {
+    width: 36px;
+    height: 36px;
+  }
+
+  .chat-message__bubble {
+    padding: 0.875rem 1rem;
+  }
+}
+
+/* Dark mode support */
+[data-theme='dark'] .chat-message--ai .chat-message__bubble {
+  background: #1f2937;
+  border-color: #374151;
+}
+
+[data-theme='dark'] .chat-message--user .chat-message__bubble {
+  background: #111827;
+  border-color: #374151;
+}
+
+[data-theme='dark'] .chat-message__text {
+  color: #f3f4f6;
+}
+
+[data-theme='dark'] .chat-message__timestamp {
+  color: #6b7280;
+}
+
+[data-theme='dark'] .chat-message__avatar--user {
+  background: #374151;
+  border-color: #4b5563;
+}
+
+[data-theme='dark'] .chat-message__initials {
+  color: #d1d5db;
+}
