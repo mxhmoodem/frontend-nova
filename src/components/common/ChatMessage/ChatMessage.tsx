@@ -6,7 +6,7 @@ import './ChatMessage.css';
 export default function ChatMessage({
   role,
   content,
-  userName = 'User',
+  userInitals = 'User',
   timestamp,
 }: ChatMessageProps) {
   const isAI = role === 'ai';
@@ -32,7 +32,7 @@ export default function ChatMessage({
         {!isAI && (
           <div className="chat-message__avatar chat-message__avatar--user">
             <span className="chat-message__initials">
-              {getInitials(userName)}
+              {getInitials(userInitals)}
             </span>
           </div>
         )}

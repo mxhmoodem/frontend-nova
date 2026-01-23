@@ -16,6 +16,7 @@ export default function AIQuerySearch({
   const handleSubmit = () => {
     if (question.trim() && !disabled) {
       onAsk(question.trim());
+      setQuestion('');
     }
   };
 
