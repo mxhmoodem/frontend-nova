@@ -72,6 +72,9 @@ const NotificationDropDown: FC<NotificationDropDownProps> = ({ onClose }) => {
               }`}
               onClick={() => handleNotificationClick(notification.id)}
             >
+              {!notification.read && (
+                <span className="notification-item__unread-indicator"></span>
+              )}
               <div className="notification-item__content">
                 <h4 className="notification-item__title">
                   {notification.title}

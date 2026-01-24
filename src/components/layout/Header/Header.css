@@ -21,6 +21,35 @@
   gap: 0.75rem;
 }
 
+/* Notification wrapper */
+.header__notification-wrapper {
+  position: relative;
+}
+
+/* Notification badge */
+.header__notification-badge {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  width: 12px;
+  height: 12px;
+  background-color: #ef4444;
+  border: 2px solid #ffffff;
+  border-radius: 50%;
+  display: inline-block;
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  z-index: 10;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
 /* Action buttons */
 .header__action {
   color: var(--color-header-icon);

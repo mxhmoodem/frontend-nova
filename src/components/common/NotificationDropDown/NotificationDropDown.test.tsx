@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 
-describe('NotificationDropDown', () => {
+describe('N', () => {
   it('should be implemented', () => {
     expect(true).toBe(true);
   });
