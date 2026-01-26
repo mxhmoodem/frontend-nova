@@ -300,7 +300,9 @@ export default function Storybook() {
                   <Upload size={20} />
                 </div>
                 <div className="storybook__modal-card-content">
-                  <h4 className="storybook__modal-card-title">Upload Document Modal</h4>
+                  <h4 className="storybook__modal-card-title">
+                    Upload Document Modal
+                  </h4>
                   <p className="storybook__modal-card-description">
                     Specialized modal for document uploads with drag-and-drop,
                     file validation, and metadata form fields.
