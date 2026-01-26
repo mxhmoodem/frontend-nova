@@ -2,17 +2,7 @@ import ChartTypeSelector from '../components/ChartTypeSelector';
 import ColumnMappingComponent from '../components/ColumnMapping';
 import LiveChartPreview from '../components/LiveChartPreview';
 import ErrorBoundary from '../components/ErrorBoundary';
-import {
-  DataFile,
-  ParsedData,
-  ChartType,
-  ChartFilter,
-  ColumnMapping,
-  ChartStyling,
-  AggregationType,
-  SortOrder,
-} from '../types';
-import { AgChartOptions } from 'ag-charts-community';
+import { AggregationType, SortOrder } from '../types';
 import './steps.css';
 import { StepConfigureChartProps } from '../types';
 

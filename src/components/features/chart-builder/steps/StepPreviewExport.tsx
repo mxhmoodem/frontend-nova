@@ -1,7 +1,5 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import LiveChartPreview from '../components/LiveChartPreview';
-import { ChartConfiguration } from '../types';
-import { AgChartOptions } from 'ag-charts-community';
 import { getDataSummary } from '../utils/validation';
 import {
   exportChartAsPNG,
