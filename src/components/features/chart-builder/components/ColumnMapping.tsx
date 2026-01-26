@@ -12,11 +12,7 @@ export default function ColumnMappingComponent({
   };
 
   const handleYAxisChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const selected = Array.from(
-      e.target.selectedOptions,
-      (option) => option.value
-    );
-    onChange({ ...mapping, yAxis: selected });
+    onChange({ ...mapping, yAxis: [e.target.value] });
   };
 
   const handleGroupByChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -44,11 +40,11 @@ export default function ColumnMappingComponent({
       <div className="mapping-group">
         <label>Y Axis</label>
         <select
-          multiple
-          value={mapping.yAxis}
+          value={mapping.yAxis[0] || ''}
           onChange={handleYAxisChange}
           className="mapping-select"
         >
+          <option value="">Select column</option>
           {columns.map((col) => (
             <option key={col} value={col}>
               {col}
@@ -71,7 +67,6 @@ export default function ColumnMappingComponent({
           ))}
         </select>
       </div>
-      {/* Add more advanced mapping fields as needed */}
     </div>
   );
 }

@@ -278,7 +278,7 @@ export default function StepPreviewExport({
       <div className="step-content">
         {/* Chart Preview */}
         <div className="final-preview">
-          <LiveChartPreview options={chartOptions} />
+          <LiveChartPreview options={chartOptions} height={420} />
         </div>
 
         {/* Summary Cards */}

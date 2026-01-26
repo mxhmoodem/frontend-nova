@@ -88,8 +88,14 @@ export default function LiveChartPreview({
   }
 
   return (
-    <div className="live-chart-preview">
-      <AgCharts options={chartOptions} />
+    <div
+      className="live-chart-preview"
+      style={{ height: `${height}px`, minHeight: `${height}px` }}
+    >
+      <AgCharts
+        options={chartOptions}
+        style={{ width: '100%', height: `${height}px` }}
+      />
     </div>
   );
 }

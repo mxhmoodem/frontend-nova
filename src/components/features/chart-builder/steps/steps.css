@@ -395,8 +395,10 @@
   border: 1px solid #e5e7eb;
   display: flex;
   flex-direction: column;
-  min-height: 500px;
-  flex: 1;
+}
+
+.final-preview .live-chart-preview {
+  width: 100%;
 }
 
 /* Summary Cards */
