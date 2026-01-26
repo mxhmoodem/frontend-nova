@@ -21,9 +21,27 @@
 
 .content-hub__heading {
   font-size: 2rem;
+  display: flex;
+  align-items: center;
 }
 
 .content-hub__subheading {
   font-size: 1rem;
   color: var(--color-muted-foreground);
+}
+
+.content-hub-header {
+  padding: 0 0 1rem 0;
+}
+
+.content-hub-header__top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.content-hub-header__buttons {
+  display: flex;
+  gap: 0.75rem;
 }

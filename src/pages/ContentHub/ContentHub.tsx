@@ -1,38 +1,30 @@
 import { useState } from 'react';
-import { Upload } from 'lucide-react';
+import { FiBarChart2, FiUpload } from 'react-icons/fi';
 import { InformationButton } from '../../components/common/InformationButton/InformationButton';
-import { Button } from '../../components/common/Button/Button';
-import { UploadDocumentModal } from '../../components/common/UploadDocumentModal/UploadDocumentModal';
 import { InfoModal } from '../../components/features/common/InfoModal';
+import { Button } from '../../components/common';
+import ChartBuilderModal from '../../components/features/chart-builder';
 import { infoModalContent } from '../../constants/infoModalContent';
-import type { DocumentFormData } from '../../components/common/UploadDocumentModal/UploadDocumentModal.types';
 import './ContentHub.css';
 
 export default function ContentHub() {
-  const [isUploadModalOpen, setIsUploadModalOpen] = useState(false);
   const [showInfo, setShowInfo] = useState(false);
-
-  /**
-   * Handle document upload submission
-   */
-  const handleUpload = (file: File, formData: DocumentFormData) => {
-    // TODO: Implement actual upload logic (API call)
-    console.log('Uploading document:', { file, formData });
-    alert(`Document "${formData.title}" uploaded successfully!`);
-  };
+  const [showChartBuilder, setShowChartBuilder] = useState(false);
 
   return (
-    <div className="content-hub">
-      {/* Info Modal */}
+    <div>
       <InfoModal
         isOpen={showInfo}
         onClose={() => setShowInfo(false)}
         title="Content Hub"
         content={infoModalContent.contentHub}
       />
-
-      <div className="content-hub__header">
-        <div className="content-hub__header-left">
+      <ChartBuilderModal
+        isOpen={showChartBuilder}
+        onClose={() => setShowChartBuilder(false)}
+      />
+      <header className="content-hub-header">
+        <div className="content-hub-header__top">
           <h2 className="content-hub__heading">
             Content Hub
             <InformationButton
@@ -41,27 +33,25 @@ export default function ContentHub() {
               onClick={() => setShowInfo(true)}
             />
           </h2>
-          <p className="content-hub__subheading">
-            Central repository for all your global market intelligence documents
-          </p>
+          <div className="content-hub-header__buttons">
+            <Button
+              variant="secondary"
+              text="Upload Document"
+              icon={<FiUpload size={16} />}
+              onClick={() => {}}
+            />
+            <Button
+              variant="primary"
+              text="Chart Builder"
+              icon={<FiBarChart2 size={16} />}
+              onClick={() => setShowChartBuilder(true)}
+            />
+          </div>
         </div>
-        <div className="content-hub__header-right">
-          <Button
-            text="Upload Document"
-            icon={<Upload size={16} />}
-            variant="primary"
-            onClick={() => setIsUploadModalOpen(true)}
-          />
-        </div>
-      </div>
-
-      {/* Upload Document Modal */}
-      <UploadDocumentModal
-        isOpen={isUploadModalOpen}
-        onClose={() => setIsUploadModalOpen(false)}
-        onUpload={handleUpload}
-        defaultAuthor="Current User"
-      />
+        <p className="content-hub__subheading">
+          Central repository for all your global market intelligence documents
+        </p>
+      </header>
     </div>
   );
 }
