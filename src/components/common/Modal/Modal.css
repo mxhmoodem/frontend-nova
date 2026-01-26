@@ -59,6 +59,11 @@
   max-width: 640px;
 }
 
+.modal--xlarge {
+  max-width: 1200px;
+  min-height: 700px;
+}
+
 /* Modal Header */
 .modal__header {
   display: flex;

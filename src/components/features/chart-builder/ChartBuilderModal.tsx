@@ -1,4 +1,6 @@
 import { useState, useMemo } from 'react';
+import { Modal } from '../../common/Modal/Modal';
+import { Button } from '../../common';
 import StepSelectSource from './steps/StepSelectSource';
 import StepConfigureChart from './steps/StepConfigureChart';
 import StepPreviewExport from './steps/StepPreviewExport';
@@ -157,128 +159,101 @@ export default function ChartBuilderModal({
     return !validationError;
   };
 
+  // Footer with navigation buttons
+  const footerContent = (
+    <div className="chart-builder-navigation">
+      {currentStep > 1 && (
+        <Button variant="secondary" text="Back" onClick={handleBack} />
+      )}
+      <div className="chart-builder-nav-spacer" />
+      {currentStep < 3 ? (
+        <Button
+          variant="primary"
+          text="Next Step"
+          onClick={handleNext}
+          disabled={!canProceed()}
+        />
+      ) : (
+        <Button variant="primary" text="Done" onClick={handleDone} />
+      )}
+    </div>
+  );
+
   return (
-    <div className="chart-builder-modal-overlay" onClick={onClose}>
-      <div className="chart-builder-modal" onClick={(e) => e.stopPropagation()}>
-        {/* Header */}
-        <div className="chart-builder-header">
-          <div className="chart-builder-title">
-            <div className="chart-builder-icon">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                <rect x="3" y="3" width="7" height="7" fill="#dc2626" />
-                <rect x="3" y="13" width="7" height="7" fill="#dc2626" />
-                <rect x="13" y="3" width="7" height="7" fill="#dc2626" />
-                <rect x="13" y="13" width="7" height="7" fill="#dc2626" />
+    <Modal
+      isOpen={isOpen}
+      onClose={onClose}
+      title="Chart Builder"
+      subtitle="Turn raw data into visual insights"
+      size="xlarge"
+      className="chart-builder-modal"
+      footer={footerContent}
+    >
+      {/* Step Indicator */}
+      <StepIndicator currentStep={currentStep} />
+
+      {/* Validation Warnings */}
+      {validationWarnings.length > 0 && (
+        <div className="chart-builder-warnings">
+          {validationWarnings.map((warning, index) => (
+            <div key={index} className="warning-message">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                <path
+                  d="M8 1L1 14h14L8 1z"
+                  stroke="#d97706"
+                  strokeWidth="1.5"
+                  fill="none"
+                />
+                <path
+                  d="M8 6v3M8 11.5v.5"
+                  stroke="#d97706"
+                  strokeWidth="1.5"
+                  strokeLinecap="round"
+                />
               </svg>
+              {warning}
             </div>
-            <div>
-              <h2>Chart Builder</h2>
-              <p className="chart-builder-subtitle">
-                Turn raw data into visual insights
-              </p>
-            </div>
-          </div>
-          <button
-            className="chart-builder-close"
-            onClick={onClose}
-            aria-label="Close"
-          >
-            ✕
-          </button>
+          ))}
         </div>
+      )}
 
-        {/* Step Indicator */}
-        <StepIndicator currentStep={currentStep} />
-
-        {/* Validation Warnings */}
-        {validationWarnings.length > 0 && (
-          <div className="chart-builder-warnings">
-            {validationWarnings.map((warning, index) => (
-              <div key={index} className="warning-message">
-                <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                  <path
-                    d="M8 1L1 14h14L8 1z"
-                    stroke="#d97706"
-                    strokeWidth="1.5"
-                    fill="none"
-                  />
-                  <path
-                    d="M8 6v3M8 11.5v.5"
-                    stroke="#d97706"
-                    strokeWidth="1.5"
-                    strokeLinecap="round"
-                  />
-                </svg>
-                {warning}
-              </div>
-            ))}
-          </div>
+      {/* Step Content */}
+      <div className="chart-builder-content">
+        {currentStep === 1 && (
+          <StepSelectSource
+            selectedFile={configuration.selectedFile}
+            parsedData={configuration.parsedData}
+            onFileSelect={handleFileSelect}
+          />
         )}
-
-        {/* Step Content */}
-        <div className="chart-builder-content">
-          {currentStep === 1 && (
-            <StepSelectSource
+        {currentStep === 2 &&
+          configuration.selectedFile &&
+          configuration.parsedData && (
+            <StepConfigureChart
               selectedFile={configuration.selectedFile}
               parsedData={configuration.parsedData}
-              onFileSelect={handleFileSelect}
-            />
-          )}
-          {currentStep === 2 &&
-            configuration.selectedFile &&
-            configuration.parsedData && (
-              <StepConfigureChart
-                selectedFile={configuration.selectedFile}
-                parsedData={configuration.parsedData}
-                chartType={configuration.chartType}
-                columnMapping={configuration.columnMapping}
-                filters={configuration.filters}
-                styling={configuration.styling}
-                aggregation={configuration.aggregation}
-                sortOrder={configuration.sortOrder}
-                chartOptions={chartOptions}
-                onChartTypeChange={handleChartTypeChange}
-                onColumnMappingChange={handleColumnMappingChange}
-                onFilterChange={handleFilterChange}
-                onStylingChange={handleStylingChange}
-                onAggregationChange={handleAggregationChange}
-                onSortOrderChange={handleSortOrderChange}
-              />
-            )}
-          {currentStep === 3 && configuration.selectedFile && (
-            <StepPreviewExport
-              configuration={configuration}
+              chartType={configuration.chartType}
+              columnMapping={configuration.columnMapping}
+              filters={configuration.filters}
+              styling={configuration.styling}
+              aggregation={configuration.aggregation}
+              sortOrder={configuration.sortOrder}
               chartOptions={chartOptions}
+              onChartTypeChange={handleChartTypeChange}
+              onColumnMappingChange={handleColumnMappingChange}
+              onFilterChange={handleFilterChange}
+              onStylingChange={handleStylingChange}
+              onAggregationChange={handleAggregationChange}
+              onSortOrderChange={handleSortOrderChange}
             />
           )}
-        </div>
-
-        {/* Navigation */}
-        <div className="chart-builder-navigation">
-          {currentStep > 1 && (
-            <button
-              className="chart-builder-btn-secondary"
-              onClick={handleBack}
-            >
-              Back
-            </button>
-          )}
-          <div className="chart-builder-nav-spacer"></div>
-          {currentStep < 3 ? (
-            <button
-              className="chart-builder-btn-primary"
-              onClick={handleNext}
-              disabled={!canProceed()}
-            >
-              Next Step
-            </button>
-          ) : (
-            <button className="chart-builder-btn-primary" onClick={handleDone}>
-              Done
-            </button>
-          )}
-        </div>
+        {currentStep === 3 && configuration.selectedFile && (
+          <StepPreviewExport
+            configuration={configuration}
+            chartOptions={chartOptions}
+          />
+        )}
       </div>
-    </div>
+    </Modal>
   );
 }

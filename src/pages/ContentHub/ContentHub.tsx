@@ -3,13 +3,22 @@ import { FiBarChart2, FiUpload } from 'react-icons/fi';
 import { InformationButton } from '../../components/common/InformationButton/InformationButton';
 import { InfoModal } from '../../components/features/common/InfoModal';
 import { Button } from '../../components/common';
+import { UploadDocumentModal } from '../../components/common/UploadDocumentModal/UploadDocumentModal';
 import ChartBuilderModal from '../../components/features/chart-builder';
 import { infoModalContent } from '../../constants/infoModalContent';
+import type { DocumentFormData } from '../../components/common/UploadDocumentModal/UploadDocumentModal.types';
 import './ContentHub.css';
 
 export default function ContentHub() {
   const [showInfo, setShowInfo] = useState(false);
   const [showChartBuilder, setShowChartBuilder] = useState(false);
+  const [showUploadModal, setShowUploadModal] = useState(false);
+
+  const handleDocumentUpload = (file: File, formData: DocumentFormData) => {
+    console.log('Document uploaded:', { file, formData });
+    // TODO: Implement actual upload logic
+    setShowUploadModal(false);
+  };
 
   return (
     <div>
@@ -22,6 +31,11 @@ export default function ContentHub() {
       <ChartBuilderModal
         isOpen={showChartBuilder}
         onClose={() => setShowChartBuilder(false)}
+      />
+      <UploadDocumentModal
+        isOpen={showUploadModal}
+        onClose={() => setShowUploadModal(false)}
+        onUpload={handleDocumentUpload}
       />
       <header className="content-hub-header">
         <div className="content-hub-header__top">
@@ -38,7 +52,7 @@ export default function ContentHub() {
               variant="secondary"
               text="Upload Document"
               icon={<FiUpload size={16} />}
-              onClick={() => {}}
+              onClick={() => setShowUploadModal(true)}
             />
             <Button
               variant="primary"

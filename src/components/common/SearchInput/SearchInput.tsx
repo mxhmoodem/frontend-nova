@@ -1,8 +1,8 @@
-import { FormEvent, ChangeEvent, KeyboardEvent } from 'react';
+import React, { FormEvent, ChangeEvent, KeyboardEvent } from 'react';
 import { SearchInputProps } from './SearchInput.types';
 import './SearchInput.css';
 
-export function SearchInput({
+export const SearchInput: React.FC<SearchInputProps> = ({
   value,
   onChange,
   onSubmit,
@@ -14,10 +14,10 @@ export function SearchInput({
   ariaLabel,
   label,
   className = '',
-  size = 'md', // Default size
+  size = 'md',
   id,
   name,
-}: SearchInputProps) {
+}) => {
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     onChange(e.target.value);
   };
@@ -78,6 +78,6 @@ export function SearchInput({
       </form>
     </div>
   );
-}
+};
 
 export default SearchInput;

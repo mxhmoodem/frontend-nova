@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect, useCallback } from 'react';
+import React, { useState, useRef, useEffect, useCallback } from 'react';
 import { createPortal } from 'react-dom';
 import './Tooltip.css';
 import type {
@@ -7,13 +7,13 @@ import type {
   TooltipCoords,
 } from './Tooltip.model';
 
-export default function Tooltip({
+const Tooltip: React.FC<TooltipProps> = ({
   content,
   children,
   position = 'top',
   delay = 150,
   className = '',
-}: TooltipProps) {
+}) => {
   const [isVisible, setIsVisible] = useState(false);
   const [computedPosition, setComputedPosition] =
     useState<TooltipPosition>(position);
@@ -171,4 +171,6 @@ export default function Tooltip({
       {createPortal(tooltipElement, document.body)}
     </span>
   );
-}
+};
+
+export default Tooltip;

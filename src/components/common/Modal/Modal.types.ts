@@ -3,7 +3,7 @@ import { ReactNode } from 'react';
 /**
  * Modal size variants
  */
-export type ModalSize = 'small' | 'medium' | 'large';
+export type ModalSize = 'small' | 'medium' | 'large' | 'xlarge';
 
 /**
  * Props for the Modal component
