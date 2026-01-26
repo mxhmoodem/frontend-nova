@@ -7,7 +7,6 @@
 .ai-console__subheading {
   font-size: 1rem;
   color: #666;
-  margin-top: 0.25rem;
 }
 
 /* Landing Layout */
@@ -193,7 +192,7 @@
 
 .ai-search-container {
   position: absolute;
-  bottom: 2rem;
+  bottom: 1rem;
   left: 50%;
   transform: translateX(-50%);
   width: 100%;
@@ -224,18 +223,26 @@
   font-size: 1rem;
 }
 
-.ai-search-container .ai-query-search__submit-button {
-  background: linear-gradient(135deg, #ff9566 0%, #ff5e98 100%);
-  color: white;
-  border-radius: 50%;
-  width: 32px;
-  height: 32px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0;
-}
-
 .ai-search-container .ai-query-search__submit-button svg {
   margin: 0;
+}
+
+/* Chart Builder Button */
+.open-chart-builder-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 24px;
+  background-color: #dc2626;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.open-chart-builder-btn:hover {
+  background-color: #b91c1c;
 }

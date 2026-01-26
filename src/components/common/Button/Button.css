@@ -41,6 +41,7 @@
 .button--secondary {
   background-color: var(--color-secondary);
   color: var(--color-secondary-foreground);
+  border: 1.5px solid var(--color-border);
 }
 
 .button--secondary:hover:not(:disabled) {
