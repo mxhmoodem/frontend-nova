@@ -4,7 +4,9 @@ import { useAuth } from '../../../hooks/useAuth/useAuth';
 import { ROUTES } from '../../../constants/routes';
 import { FEATURES } from './Login.config';
 import HSBCLogo from '../../../assets/icons/hsbc-logo.png';
+import { listLegislation, getLegislationById } from '../../../services/api/routes/legislation';
 import './Login.css';
+import { useEffect } from 'react';
 
 export default function Login() {
   const { login } = useAuth();
