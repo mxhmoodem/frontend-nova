@@ -1,16 +1,16 @@
-﻿import { useState } from 'react';
+﻿import React, { useState } from 'react';
 import { FiPaperclip } from 'react-icons/fi';
 import { IoSend } from 'react-icons/io5';
 import { SearchInput } from '../SearchInput';
 import './AIQuerySearch.css';
 import { AIQuerySearchProps } from './AIQuerySearch.model';
 
-export default function AIQuerySearch({
+const AIQuerySearch: React.FC<AIQuerySearchProps> = ({
   onAsk,
   placeholder = 'Ask about regulations, market data, or documents...',
   disabled = false,
   initialValue = '',
-}: AIQuerySearchProps) {
+}) => {
   const [question, setQuestion] = useState(initialValue);
 
   const handleSubmit = () => {
@@ -53,4 +53,6 @@ export default function AIQuerySearch({
       }
     />
   );
-}
+};
+
+export default AIQuerySearch;

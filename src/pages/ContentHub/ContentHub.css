@@ -1,3 +1,24 @@
+.content-hub {
+  width: 100%;
+}
+
+.content-hub__header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--spacing-lg);
+  flex-wrap: wrap;
+}
+
+.content-hub__header-left {
+  flex: 1;
+  min-width: 0;
+}
+
+.content-hub__header-right {
+  flex-shrink: 0;
+}
+
 .content-hub__heading {
   font-size: 2rem;
   display: flex;
@@ -6,7 +27,7 @@
 
 .content-hub__subheading {
   font-size: 1rem;
-  color: #666;
+  color: var(--color-muted-foreground);
 }
 
 .content-hub-header {

@@ -4,6 +4,9 @@ import { SearchInput } from '../../components/common/SearchInput';
 import { AIQuerySearch } from '../../components/common/AIQuerySearch';
 import { LookupSearch } from '../../components/common/LookupSearch';
 import { ChatMessage } from '../../components/common/ChatMessage';
+import { Modal } from '../../components/common/Modal/Modal';
+import { UploadDocumentModal } from '../../components/common/UploadDocumentModal/UploadDocumentModal';
+import type { DocumentFormData } from '../../components/common/UploadDocumentModal/UploadDocumentModal.types';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import {
   Sparkles,
@@ -12,6 +15,8 @@ import {
   Save,
   Trash2,
   Search,
+  Upload,
+  Info,
 } from 'lucide-react';
 import './Storybook.css';
 
@@ -20,6 +25,10 @@ const queryClient = new QueryClient();
 
 export default function Storybook() {
   const [searchValue, setSearchValue] = useState('');
+
+  // Modal state
+  const [isBasicModalOpen, setIsBasicModalOpen] = useState(false);
+  const [isUploadModalOpen, setIsUploadModalOpen] = useState(false);
 
   // Mock fetch function for LookupSearch
   const fetchMockResults = async (query: string) => {
@@ -53,6 +62,16 @@ export default function Storybook() {
   const handleSearchSubmit = () => {
     console.log('Search submitted:', searchValue);
     alert(`Search: ${searchValue}`);
+  };
+
+  /**
+   * Handle document upload
+   */
+  const handleDocumentUpload = (file: File, formData: DocumentFormData) => {
+    console.log('Document uploaded:', { file, formData });
+    alert(
+      `Document "${formData.title}" (${formData.documentType}) uploaded successfully!`
+    );
   };
 
   return (
@@ -234,6 +253,126 @@ export default function Storybook() {
             </div>
           </div>
         </section>
+
+        {/* Modal Components Section */}
+        <section className="storybook__section">
+          <h3>Modal Components</h3>
+          <p className="storybook__description">
+            Dialog overlays for focused user interactions. Includes base Modal
+            and specialized UploadDocumentModal.
+          </p>
+
+          <div className="storybook__modal-section">
+            {/* Base Modal Card */}
+            <div className="storybook__modal-card">
+              <div className="storybook__modal-card-header">
+                <div className="storybook__modal-card-icon">
+                  <Info size={20} />
+                </div>
+                <div className="storybook__modal-card-content">
+                  <h4 className="storybook__modal-card-title">Base Modal</h4>
+                  <p className="storybook__modal-card-description">
+                    Customizable modal with header, body, and optional footer.
+                    Supports multiple sizes and keyboard navigation.
+                  </p>
+                </div>
+              </div>
+              <div className="storybook__modal-card-features">
+                <span className="storybook__feature-tag">Focus Trapping</span>
+                <span className="storybook__feature-tag">ARIA Support</span>
+                <span className="storybook__feature-tag">3 Sizes</span>
+                <span className="storybook__feature-tag">ESC to Close</span>
+              </div>
+              <div className="storybook__modal-card-action">
+                <Button
+                  text="Open Basic Modal"
+                  icon={<Info size={16} />}
+                  variant="secondary"
+                  onClick={() => setIsBasicModalOpen(true)}
+                />
+              </div>
+            </div>
+
+            {/* Upload Document Modal Card */}
+            <div className="storybook__modal-card">
+              <div className="storybook__modal-card-header">
+                <div className="storybook__modal-card-icon storybook__modal-card-icon--upload">
+                  <Upload size={20} />
+                </div>
+                <div className="storybook__modal-card-content">
+                  <h4 className="storybook__modal-card-title">
+                    Upload Document Modal
+                  </h4>
+                  <p className="storybook__modal-card-description">
+                    Specialized modal for document uploads with drag-and-drop,
+                    file validation, and metadata form fields.
+                  </p>
+                </div>
+              </div>
+              <div className="storybook__modal-card-features">
+                <span className="storybook__feature-tag">Drag & Drop</span>
+                <span className="storybook__feature-tag">PDF</span>
+                <span className="storybook__feature-tag">DOCX</span>
+                <span className="storybook__feature-tag">XLSX</span>
+                <span className="storybook__feature-tag">Images</span>
+              </div>
+              <div className="storybook__modal-card-action">
+                <Button
+                  text="Upload Document"
+                  icon={<Upload size={16} />}
+                  variant="primary"
+                  onClick={() => setIsUploadModalOpen(true)}
+                />
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Basic Modal Instance */}
+        <Modal
+          isOpen={isBasicModalOpen}
+          onClose={() => setIsBasicModalOpen(false)}
+          title="Example Modal"
+          subtitle="This is a demonstration of the base Modal component."
+          size="medium"
+          footer={
+            <div className="storybook__modal-footer">
+              <Button
+                text="Cancel"
+                variant="secondary"
+                onClick={() => setIsBasicModalOpen(false)}
+              />
+              <Button
+                text="Confirm"
+                variant="primary"
+                onClick={() => {
+                  alert('Confirmed!');
+                  setIsBasicModalOpen(false);
+                }}
+              />
+            </div>
+          }
+        >
+          <p>
+            Modals are used to display content that requires user attention or
+            interaction. They overlay the main content and can be closed by
+            clicking the X button, clicking outside (overlay), or pressing
+            Escape.
+          </p>
+          <p style={{ marginTop: '1rem' }}>
+            The Modal component supports three sizes: small, medium, and large.
+            It also includes accessibility features like focus trapping and ARIA
+            attributes.
+          </p>
+        </Modal>
+
+        {/* Upload Document Modal Instance */}
+        <UploadDocumentModal
+          isOpen={isUploadModalOpen}
+          onClose={() => setIsUploadModalOpen(false)}
+          onUpload={handleDocumentUpload}
+          defaultAuthor="Dan Smith"
+        />
       </div>
     </QueryClientProvider>
   );

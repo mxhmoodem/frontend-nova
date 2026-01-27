@@ -1,5 +1,5 @@
-import { describe, it, expect } from 'vitest';
-import { render, screen } from '@testing-library/react';
+import { describe, it, expect, vi, afterEach } from 'vitest';
+import { render, screen, fireEvent } from '@testing-library/react';
 import InfoModal from './InfoModal';
 import type { InfoModalContent } from './InfoModal.types';
 
@@ -13,8 +13,12 @@ const mockContent: InfoModalContent = {
 };
 
 describe('InfoModal', () => {
+  afterEach(() => {
+    document.body.style.overflow = '';
+  });
+
   it('renders nothing when closed', () => {
-    const { container } = render(
+    render(
       <InfoModal
         isOpen={false}
         onClose={() => {}}
@@ -22,7 +26,7 @@ describe('InfoModal', () => {
         content={mockContent}
       />
     );
-    expect(container.firstChild).toBeNull();
+    expect(screen.queryByText('Test Modal')).toBeNull();
   });
 
   it('renders modal when open', () => {
@@ -34,7 +38,7 @@ describe('InfoModal', () => {
         content={mockContent}
       />
     );
-    expect(screen.getByText('Test Modal')).toBeDefined();
+    expect(screen.getByText('Test Modal')).toBeInTheDocument();
   });
 
   it('renders content sections', () => {
@@ -46,11 +50,15 @@ describe('InfoModal', () => {
         content={mockContent}
       />
     );
-    expect(screen.getByText('Test purpose')).toBeDefined();
-    expect(screen.getByText('Feature 1')).toBeDefined();
+    expect(screen.getByText('Test purpose')).toBeInTheDocument();
+    expect(screen.getByText('Feature 1')).toBeInTheDocument();
+    expect(screen.getByText('Feature 2')).toBeInTheDocument();
+    expect(screen.getByText('Test when to use')).toBeInTheDocument();
+    expect(screen.getByText('Step 1')).toBeInTheDocument();
+    expect(screen.getByText('Test relation')).toBeInTheDocument();
   });
 
-  it('renders close button', () => {
+  it('renders close button from Modal component', () => {
     render(
       <InfoModal
         isOpen={true}
@@ -59,6 +67,48 @@ describe('InfoModal', () => {
         content={mockContent}
       />
     );
-    expect(screen.getByLabelText('Close modal')).toBeDefined();
+    expect(screen.getByLabelText('Close modal')).toBeInTheDocument();
+  });
+
+  it('renders Got it button in footer', () => {
+    render(
+      <InfoModal
+        isOpen={true}
+        onClose={() => {}}
+        title="Test Modal"
+        content={mockContent}
+      />
+    );
+    expect(screen.getByText('Got it')).toBeInTheDocument();
+  });
+
+  it('calls onClose when Got it button is clicked', () => {
+    const handleClose = vi.fn();
+    render(
+      <InfoModal
+        isOpen={true}
+        onClose={handleClose}
+        title="Test Modal"
+        content={mockContent}
+      />
+    );
+
+    fireEvent.click(screen.getByText('Got it'));
+    expect(handleClose).toHaveBeenCalledTimes(1);
+  });
+
+  it('calls onClose when close button is clicked', () => {
+    const handleClose = vi.fn();
+    render(
+      <InfoModal
+        isOpen={true}
+        onClose={handleClose}
+        title="Test Modal"
+        content={mockContent}
+      />
+    );
+
+    fireEvent.click(screen.getByLabelText('Close modal'));
+    expect(handleClose).toHaveBeenCalledTimes(1);
   });
 });

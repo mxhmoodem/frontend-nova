@@ -1,14 +1,15 @@
+import React from 'react';
 import { Sparkles } from 'lucide-react';
 import { getInitials } from '../../../utils/formatters';
 import { ChatMessageProps } from './ChatMessage.types';
 import './ChatMessage.css';
 
-export default function ChatMessage({
+const ChatMessage: React.FC<ChatMessageProps> = ({
   role,
   content,
   userInitals = 'User',
   timestamp,
-}: ChatMessageProps) {
+}) => {
   const isAI = role === 'ai';
 
   return (
@@ -39,4 +40,6 @@ export default function ChatMessage({
       </div>
     </div>
   );
-}
+};
+
+export default ChatMessage;

@@ -86,3 +86,122 @@
   background: #0f1419;
   border-color: #374151;
 }
+
+/* Modal footer for storybook demos */
+.storybook__modal-footer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.75rem;
+}
+
+/* Modal Demo Section - Professional Styling */
+.storybook__modal-section {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1rem;
+}
+
+.storybook__modal-card {
+  background: var(--color-background);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.storybook__modal-card:hover {
+  border-color: var(--color-primary);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+[data-theme='dark'] .storybook__modal-card:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.storybook__modal-card-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.storybook__modal-card-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-md);
+  background: var(--color-primary-light, rgba(59, 130, 246, 0.1));
+  color: var(--color-primary);
+  flex-shrink: 0;
+}
+
+.storybook__modal-card-icon--upload {
+  background: rgba(16, 185, 129, 0.1);
+  color: #10b981;
+}
+
+[data-theme='dark'] .storybook__modal-card-icon {
+  background: rgba(59, 130, 246, 0.15);
+}
+
+[data-theme='dark'] .storybook__modal-card-icon--upload {
+  background: rgba(16, 185, 129, 0.15);
+}
+
+.storybook__modal-card-title {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--color-foreground);
+  text-transform: none;
+  letter-spacing: normal;
+}
+
+.storybook__modal-card-description {
+  margin: 0;
+  font-size: 0.875rem;
+  color: var(--color-muted-foreground);
+  line-height: 1.5;
+}
+
+.storybook__modal-card-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.storybook__modal-card-features {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: auto;
+  padding-top: 0.75rem;
+}
+
+.storybook__feature-tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.25rem 0.625rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  background: var(--color-muted, rgba(0, 0, 0, 0.05));
+  color: var(--color-muted-foreground);
+  border-radius: var(--radius-sm);
+}
+
+[data-theme='dark'] .storybook__feature-tag {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.storybook__modal-card-action {
+  padding-top: 1rem;
+  border-top: 1px solid var(--color-border);
+  margin-top: auto;
+}

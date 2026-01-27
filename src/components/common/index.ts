@@ -10,5 +10,13 @@ export type {
   LookupResult,
   FetchLookupResults,
 } from './LookupSearch';
+export { Modal } from './Modal/Modal';
+export type { ModalProps, ModalSize } from './Modal/Modal.types';
 export { SearchInput, default as SearchInputDefault } from './SearchInput';
 export type { SearchInputProps } from './SearchInput';
+export { UploadDocumentModal } from './UploadDocumentModal/UploadDocumentModal';
+export type {
+  UploadDocumentModalProps,
+  DocumentFormData,
+  DocumentType,
+} from './UploadDocumentModal/UploadDocumentModal.types';

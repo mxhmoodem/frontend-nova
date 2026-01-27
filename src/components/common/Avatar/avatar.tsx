@@ -1,8 +1,9 @@
+import React from 'react';
 import './avatar.css';
 import { AvatarProps } from './avatar.model';
 import { getInitials } from '../../../utils/formatters';
 
-export default function Avatar({ name, role, onclick }: AvatarProps) {
+const Avatar: React.FC<AvatarProps> = ({ name, role, onclick }) => {
   return (
     <div className="avatar" onClick={onclick}>
       <div className="avatar__circle">
@@ -14,4 +15,6 @@ export default function Avatar({ name, role, onclick }: AvatarProps) {
       </div>
     </div>
   );
-}
+};
+
+export default Avatar;
