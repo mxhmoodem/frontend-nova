@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { InformationButton } from '../../components/common/InformationButton/InformationButton';
 import { InfoModal } from '../../components/features/common/InfoModal';
 import { infoModalContent } from '../../constants/infoModalContent';
+import { LiveNewsCard } from '../../components/features/liveNewsCard';
 import './MarketPulse.css';
 
 export default function MarketPulse() {
@@ -26,6 +27,10 @@ export default function MarketPulse() {
       <p className="market-pulse__subheading">
         Real-time analysis of global payment trends and transaction volumes
       </p>
+      
+      <div className="market-pulse__content">
+        <LiveNewsCard title="Live Global Payment News" />
+      </div>
     </div>
   );
 }
