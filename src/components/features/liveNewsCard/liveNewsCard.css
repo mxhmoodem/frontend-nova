@@ -1,0 +1,216 @@
+.live-news-card {
+  background: var(--bg-primary, #ffffff);
+  border: 1px solid var(--border-color, #e5e7eb);
+  border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.live-news-card:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Header */
+.live-news-card__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px;
+  border-bottom: 1px solid var(--border-color, #e5e7eb);
+  background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+}
+
+.live-news-card__title-section {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.live-news-card__icon {
+  font-size: 24px;
+  color: var(--primary-color, #3b82f6);
+  flex-shrink: 0;
+}
+
+.live-news-card__title {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text-primary, #000000);
+}
+
+.live-news-card__live-indicator {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  background-color: #fee2e2;
+  color: #dc2626;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+}
+
+.live-news-card__live-dot {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  background-color: #dc2626;
+  border-radius: 50%;
+  animation: livePulse 1.5s ease-in-out infinite;
+}
+
+@keyframes livePulse {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.5;
+    transform: scale(0.8);
+  }
+}
+
+/* Content */
+.live-news-card__content {
+  padding: 20px;
+  min-height: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+  overflow: hidden;
+}
+
+.live-news-card__content.rotating {
+  animation: cardRotate 0.3s ease-in-out;
+}
+
+@keyframes cardRotate {
+  0% {
+    opacity: 1;
+    transform: rotateY(0);
+  }
+  50% {
+    opacity: 0;
+    transform: rotateY(90deg);
+  }
+  100% {
+    opacity: 1;
+    transform: rotateY(0);
+  }
+}
+
+.live-news-card__news-item {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.live-news-card__category-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: fit-content;
+  padding: 4px 12px;
+  border-radius: 6px;
+  font-size: 11px;
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.live-news-card__news-title {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text-primary, #000000);
+  line-height: 1.4;
+}
+
+.live-news-card__news-description {
+  margin: 0;
+  font-size: 14px;
+  color: var(--text-secondary, #666666);
+  line-height: 1.6;
+}
+
+/* Footer info */
+.live-news-card__footer-info {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding-top: 12px;
+  border-top: 1px solid var(--border-color, #e5e7eb);
+  font-size: 12px;
+  color: var(--text-tertiary, #999999);
+}
+
+.live-news-card__source {
+  font-weight: 600;
+  color: var(--primary-color, #3b82f6);
+}
+
+.live-news-card__timestamp {
+  font-style: italic;
+}
+
+/* Actions */
+.live-news-card__actions {
+  padding: 12px 16px;
+  border-top: 1px solid var(--border-color, #e5e7eb);
+  background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+  display: flex;
+  justify-content: center;
+}
+
+.live-news-card__next-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  background: var(--primary-color, #3b82f6);
+  color: #ffffff;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.live-news-card__next-button:hover:not(:disabled) {
+  background: #2563eb;
+  transform: translateX(2px);
+  box-shadow: 0 2px 8px rgba(59, 130, 246, 0.3);
+}
+
+.live-news-card__next-button:active:not(:disabled) {
+  transform: translateX(0);
+}
+
+.live-news-card__next-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .live-news-card__title {
+    font-size: 14px;
+  }
+
+  .live-news-card__news-title {
+    font-size: 16px;
+  }
+
+  .live-news-card__live-indicator {
+    padding: 3px 8px;
+    font-size: 10px;
+  }
+}
