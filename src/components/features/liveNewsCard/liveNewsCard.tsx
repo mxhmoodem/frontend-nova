@@ -1,61 +1,15 @@
-// CSS is imported via the index.ts barrel export to avoid TypeScript issues
 import { FC, useState, useEffect, useCallback } from 'react';
 import { IoNewspaperOutline } from 'react-icons/io5';
 import { MdChevronRight } from 'react-icons/md';
 import type { NewsItem, LiveNewsCardProps } from './liveNewsCard.types';
 
-const LiveNewsCard: FC<LiveNewsCardProps> = ({
+export default function LiveNewsCardWrapper(props: LiveNewsCardProps) {
+  return <LiveNewsCard {...props} />;
+}
+
+const LiveNewsCard: <LiveNewsCardProps>= ({
   title = 'Live Global Payment News',
 }) => {
-  // Sample news data - replace with API call
-  const newsData: NewsItem[] = [
-    {
-      id: '1',
-      title: 'Global Payments Expands Cross-Border Services',
-      description:
-        'Major expansion in instant cross-border payment infrastructure announced today.',
-      category: 'payment',
-      timestamp: '2 hours ago',
-      source: 'FinanceToday',
-    },
-    {
-      id: '2',
-      title: 'Central Banks Launch Digital Currency Initiative',
-      description:
-        'Multiple central banks coordinate on CBDC standards and implementation.',
-      category: 'fintech',
-      timestamp: '4 hours ago',
-      source: 'CryptoNews',
-    },
-    {
-      id: '3',
-      title: 'Cryptocurrency Regulations Update',
-      description:
-        'New regulatory framework established for stablecoin issuance worldwide.',
-      category: 'regulation',
-      timestamp: '6 hours ago',
-      source: 'RegulatoryDaily',
-    },
-    {
-      id: '4',
-      title: 'Bitcoin Reaches New Market Milestone',
-      description:
-        'Institutional adoption drives crypto market to historic highs.',
-      category: 'crypto',
-      timestamp: '8 hours ago',
-      source: 'BlockchainWeekly',
-    },
-    {
-      id: '5',
-      title: 'FinTech Startups Raise Record Funding',
-      description:
-        'Payment and financial technology companies secure $5B in Q1 funding.',
-      category: 'fintech',
-      timestamp: '10 hours ago',
-      source: 'TechVentures',
-    },
-  ];
-
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isRotating, setIsRotating] = useState(false);
   const newsDataLength = newsData.length;
@@ -70,7 +24,6 @@ const LiveNewsCard: FC<LiveNewsCardProps> = ({
     }, 300);
   }, [newsDataLength]);
 
-  // Auto-rotate every 15 seconds
   useEffect(() => {
     const interval = setInterval(() => {
       handleRotate();
