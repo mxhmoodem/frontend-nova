@@ -1,40 +1,15 @@
 import './NotificationDropDown.css';
-import { FC } from 'react';
-import { Notification, NotificationDropDownProps } from './NotificationDropDown.model';
+import { NotificationDropDownProps } from 'NotificationDropDown.model.ts';
 
-const NotificationDropDown: FC<NotificationDropDownProps> = ({ onClose, notifications: initialNotifications }) => {
-  // Sample notifications - replace with real data from API/context
-  const notifications: Notification[] = initialNotifications || [
-    {
-      id: '1',
-      title: 'Market Alert',
-      message: 'AAPL stock price increased by 5%',
-      timestamp: '2 minutes ago',
-      read: false,
-    },
-    {
-      id: '2',
-      title: 'Portfolio Update',
-      message: 'Your portfolio performance improved',
-      timestamp: '1 hour ago',
-      read: false,
-    },
-    {
-      id: '3',
-      title: 'System Update',
-      message: 'Platform maintenance completed',
-      timestamp: '1 day ago',
-      read: true,
-    },
-  ];
-
+function NotificationDropDown({
+  onClose,
+  notifications = [],
+}: NotificationDropDownProps) {
   const handleNotificationClick = (id: string) => {
-    // Handle notification click - mark as read, navigate, etc.
     console.log('Notification clicked:', id);
   };
 
   const handleClearAll = () => {
-    // Clear all notifications
     console.log('Clear all notifications');
   };
 
@@ -62,8 +37,9 @@ const NotificationDropDown: FC<NotificationDropDownProps> = ({ onClose, notifica
               onClick={() => handleNotificationClick(notification.id)}
             >
               {!notification.read && (
-                <span className="notification-item__unread-indicator"></span>
+                <span className="notification-item__unread-indicator" />
               )}
+
               <div className="notification-item__content">
                 <h4 className="notification-item__title">
                   {notification.title}
@@ -72,6 +48,7 @@ const NotificationDropDown: FC<NotificationDropDownProps> = ({ onClose, notifica
                   {notification.message}
                 </p>
               </div>
+
               <span className="notification-item__timestamp">
                 {notification.timestamp}
               </span>
@@ -96,6 +73,6 @@ const NotificationDropDown: FC<NotificationDropDownProps> = ({ onClose, notifica
       )}
     </div>
   );
-};
+}
 
 export default NotificationDropDown;
