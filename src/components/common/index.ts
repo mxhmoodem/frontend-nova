@@ -2,8 +2,21 @@ export { AIQuerySearch } from './AIQuerySearch';
 export type { AIQuerySearchProps } from './AIQuerySearch';
 export { default as Avatar } from './Avatar/avatar';
 export { Button } from './Button/Button';
+export { Card } from './Card';
+export type { CardProps, CardVariant } from './Card';
 export { ChatMessage } from './ChatMessage';
 export type { ChatMessageProps, MessageRole } from './ChatMessage';
+export { DocumentCard } from './DocumentCard';
+export type {
+  DocumentCardProps,
+  DocumentData,
+  FileType,
+  DocumentCategory,
+} from './DocumentCard';
+export { DocumentGrid } from './DocumentGrid';
+export type { DocumentGridProps } from './DocumentGrid';
+export { DocumentList } from './DocumentList';
+export type { DocumentListProps } from './DocumentList';
 export { LookupSearch } from './LookupSearch';
 export type {
   LookupSearchProps,

@@ -205,3 +205,20 @@
   border-top: 1px solid var(--color-border);
   margin-top: auto;
 }
+
+/* Document Card Demo */
+.storybook__card-demo {
+  margin-top: 1rem;
+}
+
+.storybook__card-types {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  max-width: 100%;
+}
+
+.storybook__card-types .document-card--grid {
+  min-width: 180px;
+  max-width: none;
+}

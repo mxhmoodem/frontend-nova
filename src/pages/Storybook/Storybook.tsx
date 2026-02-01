@@ -6,7 +6,11 @@ import { LookupSearch } from '../../components/common/LookupSearch';
 import { ChatMessage } from '../../components/common/ChatMessage';
 import { Modal } from '../../components/common/Modal/Modal';
 import { UploadDocumentModal } from '../../components/common/UploadDocumentModal/UploadDocumentModal';
+import { DocumentCard } from '../../components/common/DocumentCard/DocumentCard';
+import { DocumentGrid } from '../../components/common/DocumentGrid/DocumentGrid';
+import { DocumentList } from '../../components/common/DocumentList/DocumentList';
 import type { DocumentFormData } from '../../components/common/UploadDocumentModal/UploadDocumentModal.types';
+import type { DocumentData } from '../../components/common/DocumentCard/DocumentCard.types';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import {
   Sparkles,
@@ -16,12 +20,57 @@ import {
   Trash2,
   Search,
   Upload,
-  Info,
+  LayoutGrid,
+  List,
 } from 'lucide-react';
 import './Storybook.css';
 
 // Create a query client for LookupSearch
 const queryClient = new QueryClient();
+
+// Mock documents for demonstration
+const DEMO_DOCUMENTS: DocumentData[] = [
+  {
+    id: '1',
+    title: 'Q4 2024 Financial Report',
+    fileType: 'pdf',
+    fileSize: 2457600,
+    author: 'John Smith',
+    createdAt: new Date('2024-01-15'),
+    category: 'report',
+    isFavorite: false,
+  },
+  {
+    id: '2',
+    title: 'Market Analysis Europe',
+    fileType: 'xlsx',
+    fileSize: 1048576,
+    author: 'Jane Doe',
+    createdAt: new Date('2024-01-10'),
+    category: 'market',
+    isFavorite: true,
+  },
+  {
+    id: '3',
+    title: 'Compliance Guidelines',
+    fileType: 'docx',
+    fileSize: 512000,
+    author: 'Bob Wilson',
+    createdAt: new Date('2024-01-05'),
+    category: 'compliance',
+    isFavorite: false,
+  },
+  {
+    id: '4',
+    title: 'EPC Regulatory Update',
+    fileType: 'pdf',
+    fileSize: 1843200,
+    author: 'Sarah Johnson',
+    createdAt: new Date('2024-01-18'),
+    category: 'regulation',
+    isFavorite: true,
+  },
+];
 
 export default function Storybook() {
   const [searchValue, setSearchValue] = useState('');
@@ -29,6 +78,10 @@ export default function Storybook() {
   // Modal state
   const [isBasicModalOpen, setIsBasicModalOpen] = useState(false);
   const [isUploadModalOpen, setIsUploadModalOpen] = useState(false);
+
+  // Document card state
+  const [cardViewMode, setCardViewMode] = useState<'grid' | 'list'>('grid');
+  const [documents, setDocuments] = useState<DocumentData[]>(DEMO_DOCUMENTS);
 
   // Mock fetch function for LookupSearch
   const fetchMockResults = async (query: string) => {
@@ -71,6 +124,17 @@ export default function Storybook() {
     console.log('Document uploaded:', { file, formData });
     alert(
       `Document "${formData.title}" (${formData.documentType}) uploaded successfully!`
+    );
+  };
+
+  /**
+   * Handle favorite toggle
+   */
+  const handleFavoriteToggle = (document: DocumentData) => {
+    setDocuments((prev) =>
+      prev.map((doc) =>
+        doc.id === document.id ? { ...doc, isFavorite: !doc.isFavorite } : doc
+      )
     );
   };
 
@@ -254,76 +318,131 @@ export default function Storybook() {
           </div>
         </section>
 
-        {/* Modal Components Section */}
+        {/* Modal Components Section - Simplified */}
         <section className="storybook__section">
           <h3>Modal Components</h3>
           <p className="storybook__description">
-            Dialog overlays for focused user interactions. Includes base Modal
-            and specialized UploadDocumentModal.
+            Dialog overlays for focused user interactions.
           </p>
 
-          <div className="storybook__modal-section">
-            {/* Base Modal Card */}
-            <div className="storybook__modal-card">
-              <div className="storybook__modal-card-header">
-                <div className="storybook__modal-card-icon">
-                  <Info size={20} />
-                </div>
-                <div className="storybook__modal-card-content">
-                  <h4 className="storybook__modal-card-title">Base Modal</h4>
-                  <p className="storybook__modal-card-description">
-                    Customizable modal with header, body, and optional footer.
-                    Supports multiple sizes and keyboard navigation.
-                  </p>
-                </div>
-              </div>
-              <div className="storybook__modal-card-features">
-                <span className="storybook__feature-tag">Focus Trapping</span>
-                <span className="storybook__feature-tag">ARIA Support</span>
-                <span className="storybook__feature-tag">3 Sizes</span>
-                <span className="storybook__feature-tag">ESC to Close</span>
-              </div>
-              <div className="storybook__modal-card-action">
-                <Button
-                  text="Open Basic Modal"
-                  icon={<Info size={16} />}
-                  variant="secondary"
-                  onClick={() => setIsBasicModalOpen(true)}
-                />
-              </div>
+          <div className="storybook__demo-item">
+            <h4>Modals</h4>
+            <div className="storybook__demo-row">
+              <Button
+                text="Open Basic Modal"
+                variant="secondary"
+                onClick={() => setIsBasicModalOpen(true)}
+              />
+              <Button
+                text="Upload Document"
+                icon={<Upload size={16} />}
+                variant="primary"
+                onClick={() => setIsUploadModalOpen(true)}
+              />
             </div>
+          </div>
+        </section>
 
-            {/* Upload Document Modal Card */}
-            <div className="storybook__modal-card">
-              <div className="storybook__modal-card-header">
-                <div className="storybook__modal-card-icon storybook__modal-card-icon--upload">
-                  <Upload size={20} />
-                </div>
-                <div className="storybook__modal-card-content">
-                  <h4 className="storybook__modal-card-title">
-                    Upload Document Modal
-                  </h4>
-                  <p className="storybook__modal-card-description">
-                    Specialized modal for document uploads with drag-and-drop,
-                    file validation, and metadata form fields.
-                  </p>
-                </div>
-              </div>
-              <div className="storybook__modal-card-features">
-                <span className="storybook__feature-tag">Drag & Drop</span>
-                <span className="storybook__feature-tag">PDF</span>
-                <span className="storybook__feature-tag">DOCX</span>
-                <span className="storybook__feature-tag">XLSX</span>
-                <span className="storybook__feature-tag">Images</span>
-              </div>
-              <div className="storybook__modal-card-action">
-                <Button
-                  text="Upload Document"
-                  icon={<Upload size={16} />}
-                  variant="primary"
-                  onClick={() => setIsUploadModalOpen(true)}
+        {/* Document Card Components Section */}
+        <section className="storybook__section">
+          <h3>Document Card Components</h3>
+          <p className="storybook__description">
+            Cards for displaying documents with file icons, metadata, and
+            actions. Supports both grid and list views.
+          </p>
+
+          <div className="storybook__demo-item">
+            <h4>View Toggle</h4>
+            <div className="storybook__demo-row">
+              <Button
+                text="Grid View"
+                icon={<LayoutGrid size={16} />}
+                variant={cardViewMode === 'grid' ? 'primary' : 'secondary'}
+                onClick={() => setCardViewMode('grid')}
+              />
+              <Button
+                text="List View"
+                icon={<List size={16} />}
+                variant={cardViewMode === 'list' ? 'primary' : 'secondary'}
+                onClick={() => setCardViewMode('list')}
+              />
+            </div>
+          </div>
+
+          <div className="storybook__demo-item">
+            <h4>{cardViewMode === 'grid' ? 'Grid View' : 'List View'}</h4>
+            <div className="storybook__card-demo">
+              {cardViewMode === 'grid' ? (
+                <DocumentGrid
+                  documents={documents}
+                  onDocumentClick={(doc) => alert(`Clicked: ${doc.title}`)}
+                  onDownload={(doc) => alert(`Download: ${doc.title}`)}
+                  onFavoriteToggle={handleFavoriteToggle}
+                  columns={3}
                 />
-              </div>
+              ) : (
+                <DocumentList
+                  documents={documents}
+                  onDocumentClick={(doc) => alert(`Clicked: ${doc.title}`)}
+                  onDownload={(doc) => alert(`Download: ${doc.title}`)}
+                  onShare={(doc) => alert(`Share: ${doc.title}`)}
+                  onDelete={(doc) => alert(`Delete: ${doc.title}`)}
+                />
+              )}
+            </div>
+          </div>
+
+          <div className="storybook__demo-item">
+            <h4>Single Card (All File Types)</h4>
+            <div className="storybook__demo-row storybook__card-types">
+              <DocumentCard
+                document={{
+                  id: 'pdf',
+                  title: 'PDF Document',
+                  fileType: 'pdf',
+                  fileSize: 1024000,
+                  createdAt: new Date(),
+                  category: 'regulation',
+                }}
+                viewMode="grid"
+                onClick={() => {}}
+              />
+              <DocumentCard
+                document={{
+                  id: 'docx',
+                  title: 'Word Document',
+                  fileType: 'docx',
+                  fileSize: 512000,
+                  createdAt: new Date(),
+                  category: 'compliance',
+                }}
+                viewMode="grid"
+                onClick={() => {}}
+              />
+              <DocumentCard
+                document={{
+                  id: 'xlsx',
+                  title: 'Excel Spreadsheet',
+                  fileType: 'xlsx',
+                  fileSize: 2048000,
+                  createdAt: new Date(),
+                  category: 'data',
+                }}
+                viewMode="grid"
+                onClick={() => {}}
+              />
+              <DocumentCard
+                document={{
+                  id: 'pptx',
+                  title: 'PowerPoint',
+                  fileType: 'pptx',
+                  fileSize: 3072000,
+                  createdAt: new Date(),
+                  category: 'strategy',
+                }}
+                viewMode="grid"
+                onClick={() => {}}
+              />
             </div>
           </div>
         </section>

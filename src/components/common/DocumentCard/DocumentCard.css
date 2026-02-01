@@ -1,0 +1,391 @@
+/* Document Card Styles */
+
+/* File Type Colors */
+.document-card__file-icon--pdf {
+  --file-color: #dc2626;
+}
+
+.document-card__file-icon--docx,
+.document-card__file-icon--doc {
+  --file-color: #2563eb;
+}
+
+.document-card__file-icon--xlsx,
+.document-card__file-icon--xls,
+.document-card__file-icon--csv {
+  --file-color: #16a34a;
+}
+
+.document-card__file-icon--pptx,
+.document-card__file-icon--ppt {
+  --file-color: #ea580c;
+}
+
+.document-card__file-icon--json {
+  --file-color: #eab308;
+}
+
+.document-card__file-icon--txt {
+  --file-color: #6b7280;
+}
+
+.document-card__file-icon--image {
+  --file-color: #8b5cf6;
+}
+
+.document-card__file-icon--unknown {
+  --file-color: #9ca3af;
+}
+
+/* ==================== */
+/* Grid View Styles     */
+/* ==================== */
+.document-card--grid {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  min-width: 220px;
+  max-width: 300px;
+  background-color: var(--color-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  transition:
+    box-shadow var(--transition-base),
+    transform var(--transition-base);
+}
+
+.document-card--grid:hover {
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-4px);
+}
+
+.document-card--grid:hover .document-card__title {
+  color: var(--color-primary);
+}
+
+.document-card--grid.document-card--selected {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 2px var(--color-primary);
+}
+
+/* Grid - File Icon Section */
+.document-card__icon-section {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-xl) var(--spacing-md);
+  background-color: var(--color-muted);
+}
+
+.document-card__file-icon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-xs);
+}
+
+.document-card__file-icon svg {
+  width: 48px;
+  height: 48px;
+  color: var(--file-color);
+}
+
+.document-card__file-type-label {
+  font-size: 0.625rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: var(--file-color);
+  letter-spacing: 0.05em;
+}
+
+/* Grid - Favorite Button */
+.document-card__favorite {
+  position: absolute;
+  top: var(--spacing-sm);
+  right: var(--spacing-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  background: transparent;
+  border: none;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  color: var(--color-muted-foreground);
+  transition: color var(--transition-base);
+}
+
+.document-card__favorite:hover {
+  color: var(--color-primary);
+}
+
+.document-card__favorite--active {
+  color: var(--color-primary);
+}
+
+.document-card__favorite--active svg {
+  fill: var(--color-primary);
+}
+
+/* Grid - Content Section */
+.document-card__content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+  padding: var(--spacing-md);
+}
+
+.document-card__title {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--color-card-foreground);
+  line-height: 1.4;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  transition: color var(--transition-base);
+}
+
+/* Grid - Meta Info */
+.document-card__meta {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+  font-size: 0.75rem;
+  color: var(--color-muted-foreground);
+}
+
+.document-card__meta-row {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+}
+
+.document-card__meta-row svg {
+  width: 12px;
+  height: 12px;
+  flex-shrink: 0;
+}
+
+.document-card__size {
+  font-weight: 500;
+}
+
+/* Grid - Category Tag */
+.document-card__category {
+  display: inline-flex;
+  align-items: center;
+  align-self: flex-start;
+  padding: 2px 8px;
+  font-size: 0.625rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border-radius: var(--radius-sm);
+}
+
+.document-card__category--regulation {
+  background-color: rgba(220, 38, 38, 0.1);
+  color: #dc2626;
+}
+
+.document-card__category--market {
+  background-color: rgba(37, 99, 235, 0.1);
+  color: #2563eb;
+}
+
+.document-card__category--strategy {
+  background-color: rgba(139, 92, 246, 0.1);
+  color: #8b5cf6;
+}
+
+.document-card__category--data {
+  background-color: rgba(22, 163, 74, 0.1);
+  color: #16a34a;
+}
+
+.document-card__category--compliance {
+  background-color: rgba(234, 179, 8, 0.1);
+  color: #ca8a04;
+}
+
+.document-card__category--research {
+  background-color: rgba(6, 182, 212, 0.1);
+  color: #0891b2;
+}
+
+.document-card__category--report {
+  background-color: rgba(249, 115, 22, 0.1);
+  color: #ea580c;
+}
+
+.document-card__category--other {
+  background-color: var(--color-muted);
+  color: var(--color-muted-foreground);
+}
+
+/* ==================== */
+/* List View Styles     */
+/* ==================== */
+.document-card--list {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+  padding: var(--spacing-sm) var(--spacing-md);
+  background-color: var(--color-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  transition:
+    background-color var(--transition-base),
+    border-color var(--transition-base);
+}
+
+.document-card--list:hover {
+  background-color: var(--color-muted);
+}
+
+.document-card--list:hover .document-card__title {
+  color: var(--color-primary);
+}
+
+.document-card--list.document-card--selected {
+  border-color: var(--color-primary);
+  background-color: rgba(219, 0, 17, 0.05);
+}
+
+/* List - File Icon */
+.document-card--list .document-card__file-icon {
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--color-muted);
+  border-radius: var(--radius-sm);
+}
+
+.document-card--list .document-card__file-icon svg {
+  width: 24px;
+  height: 24px;
+}
+
+/* List - Main Info */
+.document-card--list .document-card__info {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.document-card--list .document-card__title {
+  font-size: 0.875rem;
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: block;
+  -webkit-line-clamp: unset;
+}
+
+.document-card--list .document-card__subtitle {
+  font-size: 0.75rem;
+  color: var(--color-muted-foreground);
+}
+
+/* List - Category */
+.document-card--list .document-card__category {
+  flex-shrink: 0;
+}
+
+/* List - Size */
+.document-card--list .document-card__size {
+  flex-shrink: 0;
+  min-width: 60px;
+  font-size: 0.75rem;
+  color: var(--color-muted-foreground);
+  text-align: right;
+}
+
+/* List - Date Info */
+.document-card--list .document-card__date-info {
+  flex-shrink: 0;
+  min-width: 140px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 2px;
+  font-size: 0.75rem;
+  color: var(--color-muted-foreground);
+}
+
+.document-card--list .document-card__date {
+  white-space: nowrap;
+}
+
+.document-card--list .document-card__author {
+  font-size: 0.6875rem;
+}
+
+/* List - Actions */
+.document-card__actions {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  flex-shrink: 0;
+}
+
+.document-card__action-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  background: transparent;
+  border: none;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  color: var(--color-muted-foreground);
+  transition:
+    color var(--transition-base),
+    background-color var(--transition-base);
+}
+
+.document-card__action-btn:hover {
+  color: var(--color-card-foreground);
+  background-color: var(--color-secondary);
+}
+
+.document-card__action-btn--danger:hover {
+  color: var(--color-destructive);
+  background-color: rgba(239, 68, 68, 0.1);
+}
+
+.document-card__action-btn svg {
+  width: 16px;
+  height: 16px;
+}
+
+/* Clickable state */
+.document-card--clickable {
+  cursor: pointer;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .document-card--list .document-card__date-info {
+    display: none;
+  }
+
+  .document-card--list .document-card__category {
+    display: none;
+  }
+}
