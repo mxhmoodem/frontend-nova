@@ -6,6 +6,10 @@ import { useTheme } from '../../../hooks/useTheme';
 import { Avatar, Button } from '../../../components/common';
 import { useAuth } from '../../../hooks/useAuth';
 import NotificationDropDown from '../../common/NotificationDropDown/NotificationDropDown';
+<<<<<<< Updated upstream
+=======
+import { hasUnreadNotifications, Notification } from '../../common/NotificationDropDown/NotificationDropDown.model';
+>>>>>>> Stashed changes
 
 export default function Header() {
   const { theme, toggleTheme } = useTheme();
@@ -13,7 +17,11 @@ export default function Header() {
   const [isNotificationOpen, setIsNotificationOpen] = useState(false);
 
   // Sample notifications - replace with real data from API/context
+<<<<<<< Updated upstream
   const notifications = [
+=======
+  const notifications: Notification[] = [
+>>>>>>> Stashed changes
     {
       id: '1',
       title: 'Market Alert',
@@ -36,11 +44,15 @@ export default function Header() {
       read: true,
     },
   ];
+<<<<<<< Updated upstream
 
   // Check if there are any unread notifications
   const hasUnreadNotifications = notifications.some((n) => !n.read);
+=======
+>>>>>>> Stashed changes
 
   const userName = user?.name || 'Jane Smith';
+  const hasUnread = hasUnreadNotifications(notifications);
 
   return (
     <header className="header">
@@ -51,6 +63,7 @@ export default function Header() {
       <div className="header__right">
         {/* Notifications */}
         <div className="header__notification-wrapper">
+<<<<<<< Updated upstream
           <Button
             variant="ghost"
             className="header__action"
@@ -67,6 +80,21 @@ export default function Header() {
           {isNotificationOpen && (
             <NotificationDropDown
               onClose={() => setIsNotificationOpen(false)}
+=======
+          <button
+            className="header__action"
+            aria-label="Notifications"
+            onClick={() => setIsNotificationOpen(!isNotificationOpen)}
+            title="Notifications"
+          >
+            <IoMdNotifications size={24} />
+            {hasUnread && <span className="header__notification-badge"></span>}
+          </button>
+          {isNotificationOpen && (
+            <NotificationDropDown 
+              onClose={() => setIsNotificationOpen(false)} 
+              notifications={notifications}
+>>>>>>> Stashed changes
             />
           )}
         </div>

@@ -25,8 +25,12 @@ export const getUnreadCount = (notifications: Notification[]): number => {
 /**
  * Check if there are any unread notifications
  */
+<<<<<<< Updated upstream
 export const hasUnreadNotifications = (
   notifications: Notification[]
 ): boolean => {
+=======
+export const hasUnreadNotifications = (notifications: Notification[]): boolean => {
+>>>>>>> Stashed changes
   return getUnreadCount(notifications) > 0;
 };

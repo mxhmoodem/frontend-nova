@@ -1,21 +1,10 @@
 import './NotificationDropDown.css';
 import { FC } from 'react';
+import { Notification, NotificationDropDownProps } from './NotificationDropDown.model';
 
-interface Notification {
-  id: string;
-  title: string;
-  message: string;
-  timestamp: string;
-  read: boolean;
-}
-
-interface NotificationDropDownProps {
-  onClose: () => void;
-}
-
-const NotificationDropDown: FC<NotificationDropDownProps> = ({ onClose }) => {
+const NotificationDropDown: FC<NotificationDropDownProps> = ({ onClose, notifications: initialNotifications }) => {
   // Sample notifications - replace with real data from API/context
-  const notifications: Notification[] = [
+  const notifications: Notification[] = initialNotifications || [
     {
       id: '1',
       title: 'Market Alert',
