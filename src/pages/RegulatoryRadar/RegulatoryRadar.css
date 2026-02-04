@@ -106,10 +106,10 @@
 }
 
 /* ==================== */
-/* Content Area         */
+/* Timeline Section     */
 /* ==================== */
-.regulatory-radar__content {
-  /* Placeholder for future content */
+.regulatory-radar__timeline-section {
+  margin-top: var(--spacing-lg);
 }
 
 /* ==================== */

@@ -6,6 +6,14 @@ export { Card } from './Card';
 export type { CardProps, CardVariant } from './Card';
 export { ChatMessage } from './ChatMessage';
 export type { ChatMessageProps, MessageRole } from './ChatMessage';
+export { ComplianceTimeline, TimelineCard } from './ComplianceTimeline';
+export type {
+  ComplianceTimelineProps,
+  TimelineCardProps,
+  TimelineEvent,
+  TimelinePriority,
+  TimelineRegion,
+} from './ComplianceTimeline';
 export { DocumentCard } from './DocumentCard';
 export type {
   DocumentCardProps,
