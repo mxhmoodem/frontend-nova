@@ -236,8 +236,12 @@ describe('ComplianceTimeline', () => {
 
     it('renders date filter tabs', () => {
       render(<ComplianceTimeline events={mockEvents} />);
-      expect(screen.getByRole('option', { name: 'All Events' })).toBeInTheDocument();
-      expect(screen.getByRole('option', { name: 'Upcoming' })).toBeInTheDocument();
+      expect(
+        screen.getByRole('option', { name: 'All Events' })
+      ).toBeInTheDocument();
+      expect(
+        screen.getByRole('option', { name: 'Upcoming' })
+      ).toBeInTheDocument();
       expect(screen.getByRole('option', { name: 'Past' })).toBeInTheDocument();
     });
 
@@ -282,7 +286,7 @@ describe('ComplianceTimeline', () => {
   describe('date filtering', () => {
     it('defaults to Upcoming tab', () => {
       render(<ComplianceTimeline events={mockEvents} />);
-      
+
       const upcomingTab = screen.getByRole('option', { name: 'Upcoming' });
       expect(upcomingTab).toHaveClass('compliance-timeline__date-tab--active');
     });
@@ -292,7 +296,9 @@ describe('ComplianceTimeline', () => {
 
       // All mock events are in the future, so all should show with Upcoming
       expect(screen.getByText('Immediate Deadline')).toBeInTheDocument();
-      expect(screen.getByText('UK APP Fraud Reimbursement')).toBeInTheDocument();
+      expect(
+        screen.getByText('UK APP Fraud Reimbursement')
+      ).toBeInTheDocument();
     });
 
     it('shows all events when All Events tab clicked', () => {
@@ -313,9 +319,7 @@ describe('ComplianceTimeline', () => {
       expect(
         screen.getByText('UK APP Fraud Reimbursement')
       ).toBeInTheDocument();
-      expect(
-        screen.queryByText('Immediate Deadline')
-      ).not.toBeInTheDocument();
+      expect(screen.queryByText('Immediate Deadline')).not.toBeInTheDocument();
     });
 
     it('toggles priority filter off when clicked again', () => {
@@ -350,7 +354,7 @@ describe('ComplianceTimeline', () => {
 
       const criticalBtn = screen.getByRole('button', { name: /Critical/i });
       const highBtn = screen.getByRole('button', { name: /High/i });
-      
+
       fireEvent.click(criticalBtn);
       fireEvent.click(highBtn);
       fireEvent.click(screen.getByRole('button', { name: /clear/i }));
