@@ -1,8 +1,47 @@
+/* Market Pulse Page Styles */
+.market-pulse {
+  width: 100%;
+}
+
+.market-pulse__header {
+  margin-bottom: var(--spacing-xl);
+}
+
 .market-pulse__heading {
   font-size: 2rem;
+  font-weight: 600;
+  margin: 0 0 var(--spacing-xs) 0;
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
 }
 
 .market-pulse__subheading {
   font-size: 1rem;
-  color: #666;
+  color: var(--color-muted-foreground);
+  margin: 0;
+}
+
+/* Stats Grid */
+.market-pulse__stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--spacing-lg);
+  margin-bottom: var(--spacing-xl);
+}
+
+@media (max-width: 1200px) {
+  .market-pulse__stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .market-pulse__stats-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .market-pulse__heading {
+    font-size: 1.5rem;
+  }
 }
