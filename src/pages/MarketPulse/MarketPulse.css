@@ -5,4 +5,19 @@
 .market-pulse__subheading {
   font-size: 1rem;
   color: #666;
+  margin-bottom: 2rem;
+}
+
+.market-pulse__content {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+@media (max-width: 768px) {
+  .market-pulse__content {
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+  }
 }
