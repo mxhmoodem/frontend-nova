@@ -2,6 +2,18 @@ import { ReactNode } from 'react';
 
 export type TrendDirection = 'up' | 'down' | 'neutral';
 
+export interface DataSource {
+  /**
+   * Name of the data source
+   */
+  name: string;
+
+  /**
+   * URL to the data source
+   */
+  url?: string;
+}
+
 export interface MarketStatCardProps {
   /**
    * The label/title for the stat
@@ -29,9 +41,9 @@ export interface MarketStatCardProps {
   icon?: ReactNode;
 
   /**
-   * Data source attribution (e.g., "FCA", "UK Finance")
+   * Data source attribution with optional URL
    */
-  source?: string;
+  source?: DataSource;
 
   /**
    * Time period for the data (e.g., "Q4 2025", "YTD")

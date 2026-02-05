@@ -44,13 +44,31 @@ describe('MarketStatCard', () => {
       render(
         <MarketStatCard
           {...defaultProps}
-          source="UK Finance"
+          source={{ name: 'UK Finance' }}
           period="Q4 2025"
         />
       );
 
       expect(screen.getByText('UK Finance')).toBeInTheDocument();
       expect(screen.getByText('Q4 2025')).toBeInTheDocument();
+    });
+
+    it('renders source as link when URL provided', () => {
+      render(
+        <MarketStatCard
+          {...defaultProps}
+          source={{
+            name: 'UK Finance',
+            url: 'https://www.ukfinance.org.uk',
+          }}
+        />
+      );
+
+      const link = screen.getByRole('link', { name: 'UK Finance' });
+      expect(link).toBeInTheDocument();
+      expect(link).toHaveAttribute('href', 'https://www.ukfinance.org.uk');
+      expect(link).toHaveAttribute('target', '_blank');
+      expect(link).toHaveAttribute('rel', 'noopener noreferrer');
     });
 
     it('does not render footer when no source or period', () => {

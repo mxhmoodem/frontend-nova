@@ -32,7 +32,11 @@ export type {
   FetchLookupResults,
 } from './LookupSearch';
 export { MarketStatCard } from './MarketStatCard';
-export type { MarketStatCardProps, TrendDirection } from './MarketStatCard';
+export type {
+  MarketStatCardProps,
+  TrendDirection,
+  DataSource,
+} from './MarketStatCard';
 export { Modal } from './Modal/Modal';
 export type { ModalProps, ModalSize } from './Modal/Modal.types';
 export { SearchInput, default as SearchInputDefault } from './SearchInput';

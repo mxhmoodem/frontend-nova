@@ -80,7 +80,20 @@ export const MarketStatCard: React.FC<MarketStatCardProps> = ({
 
       {(source || period) && (
         <div className="market-stat-card__footer">
-          {source && <span className="market-stat-card__source">{source}</span>}
+          {source &&
+            (source.url ? (
+              <a
+                href={source.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="market-stat-card__source market-stat-card__source--link"
+                onClick={(e) => e.stopPropagation()}
+              >
+                {source.name}
+              </a>
+            ) : (
+              <span className="market-stat-card__source">{source.name}</span>
+            ))}
           {source && period && (
             <span className="market-stat-card__separator">•</span>
           )}

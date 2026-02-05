@@ -15,7 +15,10 @@ const MARKET_STATS = [
     change: 12.5,
     trend: 'up' as const,
     icon: <PoundSterling size={18} />,
-    source: 'UK Finance',
+    source: {
+      name: 'UK Finance',
+      url: 'https://www.ukfinance.org.uk/data-and-research',
+    },
     period: 'Q4 2025',
   },
   {
@@ -25,7 +28,10 @@ const MARKET_STATS = [
     change: 5.2,
     trend: 'up' as const,
     icon: <Smartphone size={18} />,
-    source: 'Pay.UK',
+    source: {
+      name: 'Pay.UK',
+      url: 'https://www.wearepay.uk/what-we-do/payment-statistics/',
+    },
     period: 'YTD',
   },
   {
@@ -35,7 +41,10 @@ const MARKET_STATS = [
     change: -2.1,
     trend: 'down' as const,
     icon: <CreditCard size={18} />,
-    source: 'UK Cards Assoc.',
+    source: {
+      name: 'UK Finance',
+      url: 'https://www.ukfinance.org.uk/data-and-research/data/cards',
+    },
     period: 'Q4 2025',
   },
   {
@@ -45,7 +54,10 @@ const MARKET_STATS = [
     change: 8.4,
     trend: 'up' as const,
     icon: <Zap size={18} />,
-    source: 'Pay.UK',
+    source: {
+      name: 'Pay.UK',
+      url: 'https://www.wearepay.uk/what-we-do/payment-statistics/',
+    },
     period: 'Dec 2025',
   },
 ];
