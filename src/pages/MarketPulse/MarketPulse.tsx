@@ -2,7 +2,12 @@ import { useState } from 'react';
 import { PoundSterling, Smartphone, CreditCard, Zap } from 'lucide-react';
 import { InformationButton } from '../../components/common/InformationButton/InformationButton';
 import { InfoModal } from '../../components/features/common/InfoModal';
-import { MarketStatCard } from '../../components/common';
+import {
+  MarketStatCard,
+  PaymentMethodBreakdown,
+  TrendAlerts,
+} from '../../components/common';
+import type { PaymentMethod, TrendAlert } from '../../components/common';
 import { infoModalContent } from '../../constants/infoModalContent';
 import './MarketPulse.css';
 
@@ -19,7 +24,7 @@ const MARKET_STATS = [
       name: 'UK Finance',
       url: 'https://www.ukfinance.org.uk/data-and-research',
     },
-    period: 'Q4 2025',
+    period: 'Q4 2024',
   },
   {
     id: 'digital-wallets',
@@ -45,7 +50,7 @@ const MARKET_STATS = [
       name: 'UK Finance',
       url: 'https://www.ukfinance.org.uk/data-and-research/data/cards',
     },
-    period: 'Q4 2025',
+    period: 'Q4 2024',
   },
   {
     id: 'faster-payments',
@@ -58,7 +63,54 @@ const MARKET_STATS = [
       name: 'Pay.UK',
       url: 'https://www.wearepay.uk/what-we-do/payment-statistics/',
     },
-    period: 'Dec 2025',
+    period: 'Dec 2024',
+  },
+];
+
+// Payment method breakdown data - reflects UK Finance published breakdown
+const PAYMENT_METHODS: PaymentMethod[] = [
+  { id: 'cards', name: 'Card Payments', percentage: 45, color: '#3B82F6' },
+  { id: 'faster', name: 'Faster Payments', percentage: 28, color: '#10B981' },
+  {
+    id: 'direct-debit',
+    name: 'Direct Debit',
+    percentage: 18,
+    color: '#8B5CF6',
+  },
+  { id: 'cash', name: 'Cash', percentage: 6, color: '#F59E0B' },
+  { id: 'other', name: 'Other', percentage: 3, color: '#6B7280' },
+];
+
+// Trend alerts - notable changes from UK payment data
+const TREND_ALERTS: TrendAlert[] = [
+  {
+    id: 'open-banking',
+    metric: 'Open Banking Payments',
+    change: 34,
+    direction: 'up',
+    period: 'YoY',
+    context: 'Strong VRP adoption in utilities',
+  },
+  {
+    id: 'cash-usage',
+    metric: 'Cash Usage',
+    change: 12,
+    direction: 'down',
+    period: 'YoY',
+  },
+  {
+    id: 'contactless',
+    metric: 'Contactless Share',
+    change: 8,
+    direction: 'up',
+    period: 'QoQ',
+  },
+  {
+    id: 'cheques',
+    metric: 'Cheque Volume',
+    change: 18,
+    direction: 'down',
+    period: 'YoY',
   },
 ];
 
@@ -88,7 +140,7 @@ export default function MarketPulse() {
           />
         </h2>
         <p className="market-pulse__subheading">
-          Real-time analysis of global payment trends and transaction volumes
+          Real-time analysis of UK payment trends and transaction volumes
         </p>
       </div>
 
@@ -107,6 +159,32 @@ export default function MarketPulse() {
             testId={`market-stat-${stat.id}`}
           />
         ))}
+      </div>
+
+      <div className="market-pulse__charts-section">
+        <div className="market-pulse__chart-main">
+          <PaymentMethodBreakdown
+            title="UK Payment Method Mix"
+            methods={PAYMENT_METHODS}
+            source={{
+              name: 'UK Finance',
+              url: 'https://www.ukfinance.org.uk/data-and-research',
+            }}
+            period="Q4 2024"
+            testId="payment-breakdown"
+          />
+        </div>
+        <div className="market-pulse__chart-sidebar">
+          <TrendAlerts
+            title="Notable Changes"
+            alerts={TREND_ALERTS}
+            source={{
+              name: 'Pay.UK / UK Finance',
+              url: 'https://www.wearepay.uk/what-we-do/payment-statistics/',
+            }}
+            testId="trend-alerts"
+          />
+        </div>
       </div>
     </div>
   );
