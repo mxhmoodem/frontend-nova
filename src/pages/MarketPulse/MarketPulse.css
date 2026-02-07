@@ -30,9 +30,45 @@
   margin-bottom: var(--spacing-xl);
 }
 
+/* Charts Section */
+.market-pulse__charts-section {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: var(--spacing-lg);
+}
+
+.market-pulse__chart-main {
+  min-height: 350px;
+}
+
+.market-pulse__chart-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-lg);
+}
+
+/* Responsive */
 @media (max-width: 1200px) {
   .market-pulse__stats-grid {
     grid-template-columns: repeat(2, 1fr);
+  }
+
+  .market-pulse__charts-section {
+    grid-template-columns: 1fr;
+  }
+
+  .market-pulse__chart-sidebar {
+    flex-direction: row;
+  }
+
+  .market-pulse__chart-sidebar > * {
+    flex: 1;
+  }
+}
+
+@media (max-width: 768px) {
+  .market-pulse__chart-sidebar {
+    flex-direction: column;
   }
 }
 
@@ -40,7 +76,7 @@
   .market-pulse__stats-grid {
     grid-template-columns: 1fr;
   }
-  
+
   .market-pulse__heading {
     font-size: 1.5rem;
   }

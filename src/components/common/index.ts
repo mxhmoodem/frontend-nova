@@ -25,6 +25,8 @@ export { DocumentGrid } from './DocumentGrid';
 export type { DocumentGridProps } from './DocumentGrid';
 export { DocumentList } from './DocumentList';
 export type { DocumentListProps } from './DocumentList';
+export { InsightCard } from './InsightCard';
+export type { InsightCardProps } from './InsightCard';
 export { LookupSearch } from './LookupSearch';
 export type {
   LookupSearchProps,
@@ -39,8 +41,15 @@ export type {
 } from './MarketStatCard';
 export { Modal } from './Modal/Modal';
 export type { ModalProps, ModalSize } from './Modal/Modal.types';
+export { PaymentMethodBreakdown } from './PaymentMethodBreakdown';
+export type {
+  PaymentMethodBreakdownProps,
+  PaymentMethod,
+} from './PaymentMethodBreakdown';
 export { SearchInput, default as SearchInputDefault } from './SearchInput';
 export type { SearchInputProps } from './SearchInput';
+export { TrendAlerts } from './TrendAlerts';
+export type { TrendAlertsProps, TrendAlert } from './TrendAlerts';
 export { StatCard } from './StatCard';
 export type { StatCardProps, StatCardVariant } from './StatCard';
 export { UploadDocumentModal } from './UploadDocumentModal/UploadDocumentModal';
