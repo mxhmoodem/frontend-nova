@@ -6,7 +6,12 @@
  */
 
 // Types
-export type { MarketTrend, MarketTrendList } from './market.types';
+export type {
+  MarketTrend,
+  MarketTrendListResponse,
+  MarketObject,
+  MarketObjectResponse,
+} from './market.types';
 
 // API
 export { marketApi } from './market.api';

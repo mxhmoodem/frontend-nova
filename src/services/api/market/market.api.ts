@@ -7,20 +7,29 @@
 
 import { apiClient } from '../shared';
 import { MARKET_ENDPOINTS } from './market.endpoints';
-import type { MarketTrend, MarketTrendList } from './market.types';
+import type {
+  MarketObjectResponse,
+  MarketTrendListResponse,
+} from './market.types';
 
 export const marketApi = {
   /**
    * Get all market trends
    */
-  getAll: async (): Promise<MarketTrendList> => {
-    return apiClient.get<MarketTrendList>(MARKET_ENDPOINTS.list);
+  getAll: async (): Promise<MarketTrendListResponse> => {
+    return apiClient.get<MarketTrendListResponse>(MARKET_ENDPOINTS.list);
   },
 
   /**
-   * Get a specific market trend by ID
+   * Get a specific market trend object by ID.
+   * Backend requires bucket as query param.
    */
-  getById: async (id: string): Promise<MarketTrend> => {
-    return apiClient.get<MarketTrend>(MARKET_ENDPOINTS.byId(id));
+  getById: async (
+    id: string,
+    bucket: string
+  ): Promise<MarketObjectResponse> => {
+    return apiClient.get<MarketObjectResponse>(MARKET_ENDPOINTS.byId(id), {
+      params: { bucket },
+    });
   },
 };

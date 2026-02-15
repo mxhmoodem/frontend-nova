@@ -117,7 +117,9 @@ export {
 export {
   // Types
   type MarketTrend,
-  type MarketTrendList,
+  type MarketTrendListResponse,
+  type MarketObject,
+  type MarketObjectResponse,
   // API
   marketApi,
   // Keys

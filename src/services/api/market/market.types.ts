@@ -23,4 +23,23 @@ export interface MarketTrend {
 /**
  * List of market trends
  */
-export type MarketTrendList = MarketTrend[];
+export interface MarketTrendListResponse {
+  data: MarketTrend[];
+  count: number;
+}
+
+/**
+ * Market object payload returned by GET /market/{id}
+ */
+export interface MarketObject {
+  id: string;
+  bucket: string;
+  key: string;
+  metadata: Record<string, string>;
+  content_type?: string | null;
+  content_base64: string;
+}
+
+export interface MarketObjectResponse {
+  data: MarketObject;
+}

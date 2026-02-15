@@ -9,13 +9,16 @@ import { useQuery } from '@tanstack/react-query';
 import { QUERY_CONFIG } from '../shared';
 import { marketApi } from './market.api';
 import { marketKeys } from './market.keys';
-import type { MarketTrend, MarketTrendList } from './market.types';
+import type {
+  MarketObjectResponse,
+  MarketTrendListResponse,
+} from './market.types';
 
 /**
  * Hook to fetch all market trends
  */
 export function useMarketTrends() {
-  return useQuery<MarketTrendList>({
+  return useQuery<MarketTrendListResponse>({
     queryKey: marketKeys.lists(),
     queryFn: marketApi.getAll,
     staleTime: QUERY_CONFIG.staleTime,
@@ -25,11 +28,11 @@ export function useMarketTrends() {
 /**
  * Hook to fetch a specific market trend by ID
  */
-export function useMarketTrend(id: string) {
-  return useQuery<MarketTrend>({
-    queryKey: marketKeys.detail(id),
-    queryFn: () => marketApi.getById(id),
-    enabled: !!id,
+export function useMarketTrend(id: string, bucket: string) {
+  return useQuery<MarketObjectResponse>({
+    queryKey: marketKeys.detail(id, bucket),
+    queryFn: () => marketApi.getById(id, bucket),
+    enabled: Boolean(id && bucket),
     staleTime: QUERY_CONFIG.staleTime,
   });
 }

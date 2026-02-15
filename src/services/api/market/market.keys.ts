@@ -9,5 +9,6 @@ export const marketKeys = {
   list: (filters?: Record<string, unknown>) =>
     [...marketKeys.lists(), filters] as const,
   details: () => [...marketKeys.all, 'detail'] as const,
-  detail: (id: string) => [...marketKeys.details(), id] as const,
+  detail: (id: string, bucket?: string) =>
+    [...marketKeys.details(), id, bucket] as const,
 };
