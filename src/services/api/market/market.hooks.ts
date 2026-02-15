@@ -9,7 +9,10 @@ import { useQuery } from '@tanstack/react-query';
 import { QUERY_CONFIG } from '../shared';
 import { marketApi } from './market.api';
 import { marketKeys } from './market.keys';
-import type { MarketObjectResponse, MarketTrendListResponse } from './market.types';
+import type {
+  MarketObjectResponse,
+  MarketTrendListResponse,
+} from './market.types';
 
 /**
  * Hook to fetch all market trends

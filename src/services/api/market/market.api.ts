@@ -7,7 +7,10 @@
 
 import { apiClient } from '../shared';
 import { MARKET_ENDPOINTS } from './market.endpoints';
-import type { MarketObjectResponse, MarketTrendListResponse } from './market.types';
+import type {
+  MarketObjectResponse,
+  MarketTrendListResponse,
+} from './market.types';
 
 export const marketApi = {
   /**
@@ -21,7 +24,10 @@ export const marketApi = {
    * Get a specific market trend object by ID.
    * Backend requires bucket as query param.
    */
-  getById: async (id: string, bucket: string): Promise<MarketObjectResponse> => {
+  getById: async (
+    id: string,
+    bucket: string
+  ): Promise<MarketObjectResponse> => {
     return apiClient.get<MarketObjectResponse>(MARKET_ENDPOINTS.byId(id), {
       params: { bucket },
     });
