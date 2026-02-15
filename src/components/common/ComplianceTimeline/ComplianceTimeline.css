@@ -41,15 +41,24 @@
   font-size: 0.75rem;
   font-weight: 600;
   color: #dc2626;
-  background: linear-gradient(135deg, rgba(239, 68, 68, 0.1) 0%, rgba(239, 68, 68, 0.05) 100%);
+  background: linear-gradient(
+    135deg,
+    rgba(239, 68, 68, 0.1) 0%,
+    rgba(239, 68, 68, 0.05) 100%
+  );
   border: 1px solid rgba(239, 68, 68, 0.2);
   border-radius: var(--radius-full);
   animation: pulse-urgency 2s ease-in-out infinite;
 }
 
 @keyframes pulse-urgency {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.7; }
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
 }
 
 .compliance-timeline__status-badges {
@@ -67,7 +76,11 @@
   font-size: 0.75rem;
   font-weight: 600;
   color: #c2410c;
-  background: linear-gradient(135deg, rgba(249, 115, 22, 0.1) 0%, rgba(249, 115, 22, 0.05) 100%);
+  background: linear-gradient(
+    135deg,
+    rgba(249, 115, 22, 0.1) 0%,
+    rgba(249, 115, 22, 0.05) 100%
+  );
   border: 1px solid rgba(249, 115, 22, 0.2);
   border-radius: var(--radius-full);
 }
@@ -80,7 +93,11 @@
   font-size: 0.75rem;
   font-weight: 600;
   color: #7c3aed;
-  background: linear-gradient(135deg, rgba(139, 92, 246, 0.1) 0%, rgba(139, 92, 246, 0.05) 100%);
+  background: linear-gradient(
+    135deg,
+    rgba(139, 92, 246, 0.1) 0%,
+    rgba(139, 92, 246, 0.05) 100%
+  );
   border: 1px solid rgba(139, 92, 246, 0.2);
   border-radius: var(--radius-full);
 }
@@ -263,7 +280,8 @@
   opacity: 0.5;
 }
 
-.compliance-timeline__date-option--active .compliance-timeline__date-option-count {
+.compliance-timeline__date-option--active
+  .compliance-timeline__date-option-count {
   color: var(--color-primary);
   background-color: rgba(219, 0, 17, 0.15);
 }
@@ -745,16 +763,19 @@
   opacity: 1;
 }
 
-.timeline-card--past.timeline-card--status-effective .timeline-card__date-badge {
+.timeline-card--past.timeline-card--status-effective
+  .timeline-card__date-badge {
   background-color: rgba(16, 185, 129, 0.08);
   border-color: rgba(16, 185, 129, 0.2);
 }
 
-.timeline-card--past.timeline-card--status-effective .timeline-card__date-month {
+.timeline-card--past.timeline-card--status-effective
+  .timeline-card__date-month {
   color: #059669;
 }
 
-.timeline-card--past.timeline-card--status-effective .timeline-card__date-past-indicator {
+.timeline-card--past.timeline-card--status-effective
+  .timeline-card__date-past-indicator {
   display: none;
 }
 

@@ -1,18 +1,13 @@
-import { api } from '../api/api';
-import {
-  MarketListResponse,
-  MarketObjectResponse,
-} from './marketTrendsApi.types';
+import { marketApi } from '../api/market/market.api';
 
 /**
  * Retrieves all market trend items.
  */
-export const listMarketTrends = () => api.get<MarketListResponse>('/market');
+export const listMarketTrends = () =>
+  marketApi.getAll();
 
 /**
  * Retrieves a market object by ID and bucket.
  */
 export const getMarketTrendObject = (itemId: string, bucket: string) =>
-  api.get<MarketObjectResponse>(`/market/${itemId}`, {
-    query: { bucket },
-  });
+  marketApi.getById(itemId, bucket);
