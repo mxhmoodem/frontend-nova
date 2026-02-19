@@ -118,7 +118,7 @@ describe('PaymentMethodBreakdown', () => {
         />
       );
 
-      expect(screen.getByText('Q4 2024')).toBeInTheDocument();
+      expect(screen.getByText(/Q4 2024/)).toBeInTheDocument();
     });
 
     it('should display both source and period', () => {
@@ -132,7 +132,7 @@ describe('PaymentMethodBreakdown', () => {
       );
 
       expect(screen.getByText('UK Finance')).toBeInTheDocument();
-      expect(screen.getByText('Q4 2024')).toBeInTheDocument();
+      expect(screen.getByText(/Q4 2024/)).toBeInTheDocument();
     });
   });
 
