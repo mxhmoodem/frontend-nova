@@ -114,7 +114,7 @@ describe('PaymentMethodBreakdown', () => {
         <PaymentMethodBreakdown
           title="Payment Methods"
           methods={mockMethods}
-          period="Q4 2024"
+          currentPeriod="Q4 2024"
         />
       );
 
@@ -127,7 +127,7 @@ describe('PaymentMethodBreakdown', () => {
           title="Payment Methods"
           methods={mockMethods}
           source={{ name: 'UK Finance' }}
-          period="Q4 2024"
+          currentPeriod="Q4 2024"
         />
       );
 

@@ -44,19 +44,29 @@ export {
 // ============================================================================
 export {
   // Types
-  type PaymentStats,
-  type PaymentMethod,
-  type TrendAlert,
+  type TrendDirection,
+  type StatItem,
+  type PaymentStatsResponse,
+  type TrendAlertApi,
+  type TrendAlertsResponse,
+  type RefreshResponse,
+  type TimeRange,
+  type MetricKey,
+  type HistoryDataPoint,
+  type MetricHistory,
+  type HistoryResponse,
+  type HistoryDateRange,
   // API
   paymentApi,
   // Keys
   paymentKeys,
   // Hooks
   usePaymentStats,
-  usePaymentMethods,
   useTrendAlerts,
   useRefreshPaymentData,
   usePaymentData,
+  usePaymentHistory,
+  usePaymentHistoryByDateRange,
 } from './payment';
 
 // ============================================================================

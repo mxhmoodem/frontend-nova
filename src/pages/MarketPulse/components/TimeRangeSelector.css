@@ -1,0 +1,38 @@
+.time-range-selector {
+  display: inline-flex;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-border);
+  padding: 4px;
+  background-color: var(--color-muted);
+  gap: 2px;
+}
+
+.time-range-selector__btn {
+  padding: 8px 16px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  border: none;
+  border-radius: var(--radius-md);
+  background: transparent;
+  color: var(--color-muted-foreground);
+  cursor: pointer;
+  transition:
+    background-color var(--transition-base),
+    color var(--transition-base),
+    box-shadow var(--transition-base);
+}
+
+.time-range-selector__btn:hover:not(.time-range-selector__btn--active) {
+  color: var(--color-foreground);
+}
+
+.time-range-selector__btn--active {
+  background-color: var(--color-background);
+  color: var(--color-primary);
+  box-shadow: var(--shadow-sm);
+}
+
+.time-range-selector__btn:focus-visible {
+  outline: 2px solid var(--color-ring);
+  outline-offset: 2px;
+}

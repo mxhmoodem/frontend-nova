@@ -51,6 +51,24 @@ export interface MarketStatCardProps {
   period?: string;
 
   /**
+   * Brief description explaining what this metric measures
+   * Useful for providing context to end users
+   */
+  description?: string;
+
+  /**
+   * Detailed tooltip content shown on hover
+   * Explains "What this means" for the user's context
+   */
+  tooltip?: string;
+
+  /**
+   * Whether this metric has a significant change (e.g., ±5%)
+   * Shows an alert badge to draw attention
+   */
+  isSignificant?: boolean;
+
+  /**
    * Additional CSS class names
    */
   className?: string;
