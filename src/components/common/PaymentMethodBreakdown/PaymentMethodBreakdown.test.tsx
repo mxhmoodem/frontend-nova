@@ -114,11 +114,11 @@ describe('PaymentMethodBreakdown', () => {
         <PaymentMethodBreakdown
           title="Payment Methods"
           methods={mockMethods}
-          period="Q4 2024"
+          currentPeriod="Q4 2024"
         />
       );
 
-      expect(screen.getByText('Q4 2024')).toBeInTheDocument();
+      expect(screen.getByText(/Q4 2024/)).toBeInTheDocument();
     });
 
     it('should display both source and period', () => {
@@ -127,12 +127,12 @@ describe('PaymentMethodBreakdown', () => {
           title="Payment Methods"
           methods={mockMethods}
           source={{ name: 'UK Finance' }}
-          period="Q4 2024"
+          currentPeriod="Q4 2024"
         />
       );
 
       expect(screen.getByText('UK Finance')).toBeInTheDocument();
-      expect(screen.getByText('Q4 2024')).toBeInTheDocument();
+      expect(screen.getByText(/Q4 2024/)).toBeInTheDocument();
     });
   });
 

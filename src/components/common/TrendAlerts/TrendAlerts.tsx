@@ -33,30 +33,43 @@ export const TrendAlerts = ({
         </div>
       </div>
 
-      <ul className="trend-alerts__list">
-        {alerts.map((alert) => (
-          <li
-            key={alert.id}
-            className={`trend-alerts__alert trend-alerts__alert--${alert.direction}`}
-          >
-            <div className="trend-alerts__alert-indicator">
-              {renderAlertIcon(alert.direction)}
-            </div>
-            <div className="trend-alerts__alert-content">
-              <span className="trend-alerts__alert-metric">{alert.metric}</span>
-              <span
-                className={`trend-alerts__alert-change trend-alerts__alert-change--${alert.direction}`}
-              >
-                {formatChange(alert.change, alert.direction)}
-              </span>
-              <span className="trend-alerts__alert-period">{alert.period}</span>
-            </div>
-            {alert.context && (
-              <p className="trend-alerts__alert-context">{alert.context}</p>
-            )}
-          </li>
-        ))}
-      </ul>
+      {alerts.length === 0 ? (
+        <div className="trend-alerts__empty">
+          <p className="trend-alerts__empty-text">All metrics stable</p>
+          <p className="trend-alerts__empty-subtext">
+            No significant changes (&gt;5%) this period
+          </p>
+        </div>
+      ) : (
+        <ul className="trend-alerts__list">
+          {alerts.map((alert) => (
+            <li
+              key={alert.id}
+              className={`trend-alerts__alert trend-alerts__alert--${alert.direction}`}
+            >
+              <div className="trend-alerts__alert-indicator">
+                {renderAlertIcon(alert.direction)}
+              </div>
+              <div className="trend-alerts__alert-content">
+                <span className="trend-alerts__alert-metric">
+                  {alert.metric}
+                </span>
+                <span
+                  className={`trend-alerts__alert-change trend-alerts__alert-change--${alert.direction}`}
+                >
+                  {formatChange(alert.change, alert.direction)}
+                </span>
+                <span className="trend-alerts__alert-period">
+                  {alert.period}
+                </span>
+              </div>
+              {alert.context && (
+                <p className="trend-alerts__alert-context">{alert.context}</p>
+              )}
+            </li>
+          ))}
+        </ul>
+      )}
 
       {source && (
         <div className="trend-alerts__footer">

@@ -32,12 +32,19 @@
   outline-offset: 2px;
 }
 
+/* Significant change state */
+.market-stat-card--significant {
+  border-color: #f59e0b;
+  box-shadow: 0 0 0 1px rgba(245, 158, 11, 0.2);
+}
+
 /* Header with icon and trend */
 .market-stat-card__header {
   display: flex;
   align-items: center;
   justify-content: space-between;
   margin-bottom: var(--spacing-md);
+  gap: var(--spacing-sm);
 }
 
 .market-stat-card__icon {
@@ -50,6 +57,24 @@
   background-color: var(--color-muted);
   color: var(--color-muted-foreground);
   flex-shrink: 0;
+}
+
+/* Alert badge for significant changes */
+.market-stat-card__alert-badge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #f59e0b;
+  animation: pulse-alert 2s ease-in-out infinite;
+}
+
+@keyframes pulse-alert {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
 }
 
 /* Trend indicator */
@@ -96,6 +121,39 @@
   font-size: 0.875rem;
   color: var(--color-muted-foreground);
   margin: 0;
+}
+
+/* Description with tooltip */
+.market-stat-card__description-row {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--spacing-xs);
+  margin-top: var(--spacing-sm);
+}
+
+.market-stat-card__description {
+  font-size: 0.75rem;
+  color: var(--color-muted-foreground);
+  margin: 0;
+  line-height: 1.4;
+  opacity: 0.8;
+  flex: 1;
+}
+
+.market-stat-card__info-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-muted-foreground);
+  cursor: help;
+  flex-shrink: 0;
+  opacity: 0.6;
+  transition: opacity var(--transition-base), color var(--transition-base);
+}
+
+.market-stat-card__info-icon:hover {
+  opacity: 1;
+  color: var(--color-primary);
 }
 
 /* Footer with source and period */

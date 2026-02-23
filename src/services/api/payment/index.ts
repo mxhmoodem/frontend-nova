@@ -7,11 +7,18 @@
 
 // Types
 export type {
-  PaymentStats,
-  PaymentMethod,
-  PaymentMethodsResponse,
-  TrendAlert,
+  TrendDirection,
+  StatItem,
+  PaymentStatsResponse,
+  TrendAlertApi,
   TrendAlertsResponse,
+  RefreshResponse,
+  TimeRange,
+  MetricKey,
+  HistoryDataPoint,
+  MetricHistory,
+  HistoryResponse,
+  HistoryDateRange,
 } from './payment.types';
 
 // API
@@ -23,8 +30,9 @@ export { paymentKeys } from './payment.keys';
 // Hooks
 export {
   usePaymentStats,
-  usePaymentMethods,
   useTrendAlerts,
   useRefreshPaymentData,
   usePaymentData,
+  usePaymentHistory,
+  usePaymentHistoryByDateRange,
 } from './payment.hooks';
