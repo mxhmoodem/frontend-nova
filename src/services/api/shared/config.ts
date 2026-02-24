@@ -16,7 +16,7 @@ export const API_CONFIG = {
     timeout: 30000,
   },
   production: {
-    baseUrl: 'https://your-domain.com/api/v1',
+    baseUrl: 'https://backend-nova-production.up.railway.app/api/v1',
     timeout: 30000,
   },
   staging: {
