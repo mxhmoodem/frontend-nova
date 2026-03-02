@@ -10,7 +10,7 @@ import {
 } from 'lucide-react';
 import { InformationButton } from '../../components/common/InformationButton/InformationButton';
 import { InfoModal } from '../../components/features/common/InfoModal';
-import { MarketStatCard } from '../../components/common';
+import { MarketStatCard, Button } from '../../components/common';
 import { infoModalContent } from '../../constants/infoModalContent';
 import {
   usePaymentStats,
@@ -309,10 +309,14 @@ export default function MarketPulse() {
             Unable to load payment data. Please try again.
           </p>
         </div>
-        <button className="market-pulse__retry-btn" onClick={handleRefresh}>
-          <RefreshCw size={16} />
-          Retry
-        </button>
+        <Button
+          text="Retry"
+          icon={<RefreshCw size={16} />}
+          variant="secondary"
+          onClick={handleRefresh}
+          isLoading={refreshMutation.isPending}
+          tooltip="Refresh data from Bank of England"
+        />
       </div>
     );
   }
@@ -338,18 +342,14 @@ export default function MarketPulse() {
           <p className="market-pulse__subheading">
             UK payment trends from Bank of England data
           </p>
-          <button
-            className="market-pulse__refresh-btn"
+          <Button
+            text={refreshMutation.isPending ? 'Refreshing...' : 'Refresh'}
+            icon={<RefreshCw size={16} />}
+            variant="secondary"
             onClick={handleRefresh}
-            disabled={refreshMutation.isPending}
-            title="Refresh data from Bank of England"
-          >
-            <RefreshCw
-              size={16}
-              className={refreshMutation.isPending ? 'spinning' : ''}
-            />
-            {refreshMutation.isPending ? 'Refreshing...' : 'Refresh'}
-          </button>
+            isLoading={refreshMutation.isPending}
+            tooltip="Refresh data from Bank of England"
+          />
         </div>
         {statsData?.last_updated && (
           <p className="market-pulse__last-updated">
