@@ -10,9 +10,10 @@ interface MetricChartProps {
   metricKey: MetricKey;
   history: MetricHistory;
   color: string;
+  size?: 'default' | 'large';
 }
 
-export function MetricChart({ metricKey, history, color }: MetricChartProps) {
+export function MetricChart({ metricKey, history, color, size = 'default' }: MetricChartProps) {
   // Transform data for chart display
   const chartData = useMemo(() => {
     if (!history.data || history.data.length === 0) return [];
@@ -52,6 +53,8 @@ export function MetricChart({ metricKey, history, color }: MetricChartProps) {
     };
   }, [chartData]);
 
+  const isLarge = size === 'large';
+
   // AG Charts options
   const chartOptions = useMemo(
     () => ({
@@ -62,11 +65,14 @@ export function MetricChart({ metricKey, history, color }: MetricChartProps) {
           xKey: 'date',
           yKey: 'value',
           stroke: color,
-          strokeWidth: 2,
+          strokeWidth: isLarge ? 2.5 : 2,
           fill: color,
-          fillOpacity: 0.1,
+          fillOpacity: isLarge ? 0.15 : 0.1,
           marker: {
             enabled: false,
+          },
+          tooltip: {
+            enabled: true,
           },
         },
       ],
@@ -75,7 +81,7 @@ export function MetricChart({ metricKey, history, color }: MetricChartProps) {
           type: 'category' as const,
           position: 'bottom' as const,
           label: {
-            fontSize: 10,
+            fontSize: isLarge ? 11 : 10,
           },
           line: {
             enabled: false,
@@ -88,7 +94,10 @@ export function MetricChart({ metricKey, history, color }: MetricChartProps) {
           type: 'number' as const,
           position: 'left' as const,
           label: {
-            enabled: false,
+            enabled: isLarge,
+            fontSize: 10,
+            formatter: (params: { value: number }) =>
+              formatMetricValue(params.value, history.unit),
           },
           line: {
             enabled: false,
@@ -110,18 +119,25 @@ export function MetricChart({ metricKey, history, color }: MetricChartProps) {
         fill: 'transparent',
       },
       padding: {
-        top: 10,
-        right: 10,
-        bottom: 30,
-        left: 10,
+        top: isLarge ? 16 : 10,
+        right: isLarge ? 16 : 10,
+        bottom: isLarge ? 36 : 30,
+        left: isLarge ? 60 : 10,
       },
     }),
-    [chartData, color]
+    [chartData, color, isLarge, history.unit]
   );
+
+  const chartClassName = [
+    'metric-chart',
+    isLarge && 'metric-chart--large',
+  ]
+    .filter(Boolean)
+    .join(' ');
 
   if (chartData.length === 0) {
     return (
-      <div className="metric-chart metric-chart--empty">
+      <div className={`${chartClassName} metric-chart--empty`}>
         <div className="metric-chart__header">
           <h3 className="metric-chart__title">{history.metric_name}</h3>
         </div>
@@ -131,7 +147,7 @@ export function MetricChart({ metricKey, history, color }: MetricChartProps) {
   }
 
   return (
-    <div className="metric-chart" data-metric={metricKey}>
+    <div className={chartClassName} data-metric={metricKey}>
       <div className="metric-chart__header">
         <div className="metric-chart__title-section">
           <h3 className="metric-chart__title">{history.metric_name}</h3>
@@ -154,7 +170,7 @@ export function MetricChart({ metricKey, history, color }: MetricChartProps) {
       <div className="metric-chart__chart-container">
         <AgCharts
           options={chartOptions as unknown as AgChartOptions}
-          style={{ width: '100%', height: 160 }}
+          style={{ width: '100%', height: isLarge ? 320 : 160 }}
         />
       </div>
     </div>

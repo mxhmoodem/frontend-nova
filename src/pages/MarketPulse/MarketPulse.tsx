@@ -16,6 +16,7 @@ import {
   usePaymentStats,
   useRefreshPaymentData,
   usePaymentHistory,
+  useMarketTrends,
 } from '../../services/api';
 import type {
   StatItem,
@@ -26,9 +27,12 @@ import type {
 } from '../../services/api';
 import {
   DateRangePicker,
-  MetricFilter,
   MetricChart,
   ChartSkeleton,
+  NewsBanner,
+  NewsList,
+  NewsModal,
+  MetricTabs,
 } from './components';
 import type { AvailableDateRange } from './components';
 import './MarketPulse.css';
@@ -132,8 +136,10 @@ export default function MarketPulse() {
   const [dateRange, setDateRange] = useState<HistoryDateRange>(
     getDefaultDateRange()
   );
-  const [selectedMetrics, setSelectedMetrics] =
-    useState<MetricKey[]>(ALL_METRICS);
+  const [activeMetric, setActiveMetric] = useState<MetricKey>(
+    'total_consumer_credit'
+  );
+  const [showNewsModal, setShowNewsModal] = useState(false);
 
   // Fetch payment data using React Query hooks
   const {
@@ -151,6 +157,18 @@ export default function MarketPulse() {
     error: historyErrorDetails,
     refetch: refetchHistory,
   } = usePaymentHistory(24);
+
+  // Fetch market news
+  const {
+    data: marketNewsData,
+    isLoading: newsLoading,
+    isError: newsError,
+    refetch: refetchNews,
+  } = useMarketTrends();
+
+  const newsItems = Array.isArray(marketNewsData?.data?.items)
+    ? marketNewsData.data.items
+    : [];
 
   const isLoading = statsLoading;
   const hasError = statsError;
@@ -233,10 +251,8 @@ export default function MarketPulse() {
     };
   }, [historyData, dateRange]);
 
-  // Filter to only show metrics that have data
-  const visibleMetrics = selectedMetrics.filter(
-    (key) => filteredHistoryData?.[key]
-  );
+  // Check if active metric has data in the filtered range
+  const activeMetricHasData = Boolean(filteredHistoryData?.[activeMetric]);
 
   // Build stat cards from API data
   const statCards = useMemo(() => {
@@ -349,6 +365,13 @@ export default function MarketPulse() {
         )}
       </div>
 
+      {/* News Banner — latest headline rotator */}
+      <NewsBanner
+        items={newsItems}
+        isLoading={newsLoading}
+        testId="market-pulse-news-banner"
+      />
+
       <div className="market-pulse__stats-grid">
         {statCards.map(
           (stat) =>
@@ -371,76 +394,96 @@ export default function MarketPulse() {
         )}
       </div>
 
-      {/* Historical Trends Section */}
+      {/* Main Content: Chart Panel + News Sidebar */}
       <section className="market-pulse__charts-section">
-        <div className="market-pulse__charts-header">
-          <h3 className="market-pulse__section-title">Historical Trends</h3>
-          <div className="market-pulse__chart-filters">
-            <DateRangePicker
-              value={dateRange}
-              onChange={setDateRange}
-              availableRange={availableDateRange}
+        <div className="market-pulse__content-grid">
+          {/* Left: Historical Trends with Metric Tabs */}
+          <div className="market-pulse__chart-panel">
+            <div className="market-pulse__charts-header">
+              <h3 className="market-pulse__section-title">Historical Trends</h3>
+              <div className="market-pulse__chart-filters">
+                <DateRangePicker
+                  value={dateRange}
+                  onChange={setDateRange}
+                  availableRange={availableDateRange}
+                />
+              </div>
+            </div>
+
+            <MetricTabs
+              activeMetric={activeMetric}
+              onChange={setActiveMetric}
+              metrics={ALL_METRICS}
+              colors={METRIC_COLORS}
+              testId="metric-tabs"
             />
-            <MetricFilter
-              selected={selectedMetrics}
-              onChange={setSelectedMetrics}
+
+            {/* Chart Content */}
+            {historyLoading ? (
+              <ChartSkeleton />
+            ) : historyError ? (
+              <div className="market-pulse__charts-error">
+                <AlertCircle size={32} className="market-pulse__error-icon" />
+                <p className="market-pulse__error-title">
+                  Failed to load historical data
+                </p>
+                <p className="market-pulse__error-message">
+                  {historyErrorDetails?.message ||
+                    'An unexpected error occurred'}
+                </p>
+                <button
+                  type="button"
+                  className="market-pulse__retry-btn"
+                  onClick={() => refetchHistory()}
+                >
+                  Try Again
+                </button>
+              </div>
+            ) : !activeMetricHasData ? (
+              <div className="market-pulse__charts-empty">
+                <p>No data available for this metric and date range</p>
+              </div>
+            ) : (
+              <MetricChart
+                metricKey={activeMetric}
+                history={filteredHistoryData![activeMetric]!}
+                color={METRIC_COLORS[activeMetric]}
+                size="large"
+              />
+            )}
+
+            {/* Data footnote */}
+            {filteredHistoryData && (
+              <p className="market-pulse__charts-footnote">
+                Showing {filteredHistoryData.months_included} months of Bank of
+                England data. Updated monthly at 6 AM UTC.
+              </p>
+            )}
+          </div>
+
+          {/* Right: News Sidebar */}
+          <div className="market-pulse__news-panel">
+            <NewsList
+              items={newsItems}
+              isLoading={newsLoading}
+              isError={newsError}
+              onRetry={() => refetchNews()}
+              maxItems={5}
+              compact
+              onViewAll={() => setShowNewsModal(true)}
+              testId="market-pulse-news-list"
             />
           </div>
         </div>
-
-        {/* Charts Content */}
-        {historyLoading ? (
-          <div className="market-pulse__charts-grid">
-            {[1, 2, 3, 4].map((i) => (
-              <ChartSkeleton key={i} />
-            ))}
-          </div>
-        ) : historyError ? (
-          <div className="market-pulse__charts-error">
-            <AlertCircle size={32} className="market-pulse__error-icon" />
-            <p className="market-pulse__error-title">
-              Failed to load historical data
-            </p>
-            <p className="market-pulse__error-message">
-              {historyErrorDetails?.message || 'An unexpected error occurred'}
-            </p>
-            <button
-              type="button"
-              className="market-pulse__retry-btn"
-              onClick={() => refetchHistory()}
-            >
-              Try Again
-            </button>
-          </div>
-        ) : selectedMetrics.length === 0 ? (
-          <div className="market-pulse__charts-empty">
-            <p>Select at least one metric to display</p>
-          </div>
-        ) : visibleMetrics.length === 0 ? (
-          <div className="market-pulse__charts-empty">
-            <p>No data available for selected metrics and date range</p>
-          </div>
-        ) : (
-          <div className="market-pulse__charts-grid">
-            {visibleMetrics.map((key) => (
-              <MetricChart
-                key={key}
-                metricKey={key}
-                history={filteredHistoryData![key]!}
-                color={METRIC_COLORS[key]}
-              />
-            ))}
-          </div>
-        )}
-
-        {/* Data footnote */}
-        {filteredHistoryData && (
-          <p className="market-pulse__charts-footnote">
-            Showing {filteredHistoryData.months_included} months of Bank of
-            England data. Updated monthly at 6 AM UTC.
-          </p>
-        )}
       </section>
+
+      {/* News Modal — all articles */}
+      <NewsModal
+        isOpen={showNewsModal}
+        onClose={() => setShowNewsModal(false)}
+        items={newsItems}
+        testId="market-pulse-news-modal"
+      />
     </div>
   );
 }

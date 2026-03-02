@@ -105,6 +105,39 @@
   border-top: 1px solid var(--color-border);
 }
 
+/* Content Grid — chart panel + news sidebar */
+.market-pulse__content-grid {
+  display: grid;
+  grid-template-columns: 1fr 380px;
+  gap: var(--spacing-xl);
+  align-items: start;
+}
+
+.market-pulse__chart-panel {
+  min-width: 0;
+}
+
+.market-pulse__news-panel {
+  min-width: 0;
+  max-height: calc(100vh - 200px);
+  overflow-y: auto;
+  padding-right: var(--spacing-xs);
+}
+
+/* Scrollbar styling for news panel */
+.market-pulse__news-panel::-webkit-scrollbar {
+  width: 4px;
+}
+
+.market-pulse__news-panel::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.market-pulse__news-panel::-webkit-scrollbar-thumb {
+  background-color: var(--color-border);
+  border-radius: 2px;
+}
+
 .market-pulse__charts-header {
   display: flex;
   flex-wrap: wrap;
@@ -192,6 +225,16 @@
 
   .market-pulse__charts-grid {
     grid-template-columns: repeat(2, 1fr);
+  }
+
+  .market-pulse__content-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .market-pulse__news-panel {
+    max-height: none;
+    overflow-y: visible;
+    padding-right: 0;
   }
 }
 
