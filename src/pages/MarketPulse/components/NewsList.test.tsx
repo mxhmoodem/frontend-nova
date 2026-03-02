@@ -14,11 +14,7 @@ vi.mock('./NewsCard', () => ({
     compact?: boolean;
     testId?: string;
   }) => (
-    <div
-      data-testid={testId}
-      data-title={item.title}
-      data-compact={compact}
-    />
+    <div data-testid={testId} data-title={item.title} data-compact={compact} />
   ),
 }));
 
@@ -125,9 +121,7 @@ describe('NewsList', () => {
       const items = createMockItems(8);
       render(<NewsList items={items} maxItems={5} />);
 
-      expect(
-        screen.getByText(/View all 8 articles/)
-      ).toBeInTheDocument();
+      expect(screen.getByText(/View all 8 articles/)).toBeInTheDocument();
     });
 
     it('does not show "View all" when items fit within maxItems', () => {
@@ -227,9 +221,7 @@ describe('NewsList', () => {
     it('renders empty message when no items', () => {
       render(<NewsList items={[]} />);
 
-      expect(
-        screen.getByText('No market news available')
-      ).toBeInTheDocument();
+      expect(screen.getByText('No market news available')).toBeInTheDocument();
     });
   });
 
