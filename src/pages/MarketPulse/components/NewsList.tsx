@@ -119,8 +119,8 @@ export function NewsList({
         ))}
       </div>
 
-      {hasMore && (
-        onViewAll ? (
+      {hasMore &&
+        (onViewAll ? (
           <button
             type="button"
             className="news-list__toggle"
@@ -141,13 +141,11 @@ export function NewsList({
               </>
             ) : (
               <>
-                View all {sortedItems.length} articles{' '}
-                <ChevronDown size={14} />
+                View all {sortedItems.length} articles <ChevronDown size={14} />
               </>
             )}
           </button>
-        )
-      )}
+        ))}
     </section>
   );
 }
