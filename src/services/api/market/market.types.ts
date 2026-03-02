@@ -22,10 +22,12 @@ export interface MarketTrend {
 
 /**
  * List of market trends
+ * API response shape: { data: { items: MarketTrend[] } }
  */
 export interface MarketTrendListResponse {
-  data: MarketTrend[];
-  count: number;
+  data: {
+    items: MarketTrend[];
+  };
 }
 
 /**

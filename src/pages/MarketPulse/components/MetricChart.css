@@ -82,6 +82,20 @@
   font-size: 0.875rem;
 }
 
+/* Large size variant */
+.metric-chart--large {
+  padding: var(--spacing-xl);
+}
+
+.metric-chart--large .metric-chart__value {
+  font-size: 2rem;
+}
+
+.metric-chart--large .metric-chart__chart-container {
+  height: 320px;
+  margin-top: var(--spacing-md);
+}
+
 /* Responsive */
 @media (max-width: 640px) {
   .metric-chart {
@@ -94,5 +108,9 @@
 
   .metric-chart__chart-container {
     height: 120px;
+  }
+
+  .metric-chart--large .metric-chart__chart-container {
+    height: 200px;
   }
 }
