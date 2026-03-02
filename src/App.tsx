@@ -4,6 +4,7 @@ import {
   Route,
   Navigate,
 } from 'react-router-dom';
+import { SpeedInsights } from '@vercel/speed-insights/react';
 import { ThemeProvider } from './context/ThemeContext/ThemeContext';
 import { AuthProvider } from './context/AuthContext/AuthContext';
 import { ProtectedRoute } from './components/layout/ProtectedRoute';
@@ -61,6 +62,7 @@ function App() {
             {/* Catch-all redirect to login */}
             <Route path="*" element={<Navigate to={ROUTES.LOGIN} replace />} />
           </Routes>
+          <SpeedInsights />
         </Router>
       </AuthProvider>
     </ThemeProvider>
