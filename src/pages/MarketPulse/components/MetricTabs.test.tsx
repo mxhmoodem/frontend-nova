@@ -55,14 +55,18 @@ describe('MetricTabs', () => {
     it('renders color indicator for each tab', () => {
       const { container } = setup();
 
-      const indicators = container.querySelectorAll('.metric-tabs__indicator');
+      const indicators = container.querySelectorAll(
+        '.metric-tabs__indicator'
+      );
       expect(indicators).toHaveLength(4);
     });
 
     it('applies correct color to indicator', () => {
       const { container } = setup();
 
-      const indicators = container.querySelectorAll('.metric-tabs__indicator');
+      const indicators = container.querySelectorAll(
+        '.metric-tabs__indicator'
+      );
       expect(indicators[0]).toHaveStyle({
         backgroundColor: '#5B8DEF',
       });
@@ -82,9 +86,7 @@ describe('MetricTabs', () => {
     it('marks active tab with aria-selected=true', () => {
       setup({ activeMetric: 'credit_card_lending' });
 
-      const activeTab = screen
-        .getByText('Credit Cards')
-        .closest('[role="tab"]');
+      const activeTab = screen.getByText('Credit Cards').closest('[role="tab"]');
       expect(activeTab).toHaveAttribute('aria-selected', 'true');
     });
 
@@ -100,7 +102,9 @@ describe('MetricTabs', () => {
     it('applies active class to selected tab', () => {
       setup({ activeMetric: 'mortgage_approvals' });
 
-      const activeTab = screen.getByText('Mortgages').closest('[role="tab"]');
+      const activeTab = screen
+        .getByText('Mortgages')
+        .closest('[role="tab"]');
       expect(activeTab).toHaveClass('metric-tabs__tab--active');
     });
 

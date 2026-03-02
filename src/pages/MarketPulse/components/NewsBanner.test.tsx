@@ -92,7 +92,9 @@ describe('NewsBanner', () => {
       const items = createMockItems(3);
       render(<NewsBanner items={items} />);
 
-      expect(screen.getByLabelText('Previous headline')).toBeInTheDocument();
+      expect(
+        screen.getByLabelText('Previous headline')
+      ).toBeInTheDocument();
       expect(screen.getByLabelText('Next headline')).toBeInTheDocument();
     });
 
@@ -103,7 +105,9 @@ describe('NewsBanner', () => {
       expect(
         screen.queryByLabelText('Previous headline')
       ).not.toBeInTheDocument();
-      expect(screen.queryByLabelText('Next headline')).not.toBeInTheDocument();
+      expect(
+        screen.queryByLabelText('Next headline')
+      ).not.toBeInTheDocument();
     });
 
     it('advances to next headline on "Next" click', () => {
@@ -238,7 +242,9 @@ describe('NewsBanner', () => {
     });
 
     it('sets aria-busy when loading', () => {
-      const { container } = render(<NewsBanner items={[]} isLoading />);
+      const { container } = render(
+        <NewsBanner items={[]} isLoading />
+      );
 
       expect(container.querySelector('[aria-busy="true"]')).toBeInTheDocument();
     });
@@ -275,7 +281,9 @@ describe('NewsBanner', () => {
       const items = createMockItems(3);
       render(<NewsBanner items={items} />);
 
-      expect(screen.getByLabelText('News navigation')).toBeInTheDocument();
+      expect(
+        screen.getByLabelText('News navigation')
+      ).toBeInTheDocument();
     });
   });
 });

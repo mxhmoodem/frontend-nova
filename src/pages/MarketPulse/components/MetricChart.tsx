@@ -13,12 +13,7 @@ interface MetricChartProps {
   size?: 'default' | 'large';
 }
 
-export function MetricChart({
-  metricKey,
-  history,
-  color,
-  size = 'default',
-}: MetricChartProps) {
+export function MetricChart({ metricKey, history, color, size = 'default' }: MetricChartProps) {
   // Transform data for chart display
   const chartData = useMemo(() => {
     if (!history.data || history.data.length === 0) return [];
@@ -133,7 +128,10 @@ export function MetricChart({
     [chartData, color, isLarge, history.unit]
   );
 
-  const chartClassName = ['metric-chart', isLarge && 'metric-chart--large']
+  const chartClassName = [
+    'metric-chart',
+    isLarge && 'metric-chart--large',
+  ]
     .filter(Boolean)
     .join(' ');
 

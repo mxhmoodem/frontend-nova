@@ -37,9 +37,7 @@ describe('NewsCard', () => {
 
     it('renders the description in default mode', () => {
       render(<NewsCard item={mockItem} />);
-      expect(
-        screen.getByText(/Visa is reportedly joining/)
-      ).toBeInTheDocument();
+      expect(screen.getByText(/Visa is reportedly joining/)).toBeInTheDocument();
     });
 
     it('hides description in compact mode', () => {
@@ -56,7 +54,9 @@ describe('NewsCard', () => {
 
     it('renders relative time', () => {
       render(<NewsCard item={mockItem} />);
-      expect(screen.getByText('mocked-time-2026-03-02')).toBeInTheDocument();
+      expect(
+        screen.getByText('mocked-time-2026-03-02')
+      ).toBeInTheDocument();
     });
 
     it('renders "Read article" text', () => {

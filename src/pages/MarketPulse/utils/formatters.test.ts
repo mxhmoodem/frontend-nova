@@ -1,10 +1,5 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
-import {
-  formatMetricValue,
-  formatChartDate,
-  formatRelativeTime,
-  extractDomain,
-} from './formatters';
+import { formatMetricValue, formatChartDate, formatRelativeTime, extractDomain } from './formatters';
 
 describe('MarketPulse formatters', () => {
   describe('formatMetricValue', () => {
