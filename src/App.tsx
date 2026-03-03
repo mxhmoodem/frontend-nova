@@ -6,6 +6,8 @@ import {
 } from 'react-router-dom';
 import { ThemeProvider } from './context/ThemeContext/ThemeContext';
 import { AuthProvider } from './context/AuthContext/AuthContext';
+import { AIConsoleProvider } from './context/AIConsoleContext';
+import { QueryProvider } from './services/api/shared/queryProvider';
 import { ProtectedRoute } from './components/layout/ProtectedRoute';
 import DashboardLayout from './components/layout/DashboardLayout';
 import { Login } from './pages/Auth';
@@ -22,48 +24,58 @@ import './App.css';
 
 function App() {
   return (
-    <ThemeProvider>
-      <AuthProvider>
-        <Router>
-          <Routes>
-            {/* Public Routes */}
-            <Route path={ROUTES.LOGIN} element={<Login />} />
+    <QueryProvider>
+      <ThemeProvider>
+        <AuthProvider>
+          <AIConsoleProvider>
+            <Router>
+              <Routes>
+                {/* Public Routes */}
+                <Route path={ROUTES.LOGIN} element={<Login />} />
 
-            {/* Root redirect to overview */}
-            <Route
-              path={ROUTES.ROOT}
-              element={<Navigate to={ROUTES.OVERVIEW} replace />}
-            />
+                {/* Root redirect to overview */}
+                <Route
+                  path={ROUTES.ROOT}
+                  element={<Navigate to={ROUTES.OVERVIEW} replace />}
+                />
 
-            {/* Protected Routes */}
-            <Route
-              path={ROUTES.APP_ROOT}
-              element={
-                <ProtectedRoute>
-                  <DashboardLayout />
-                </ProtectedRoute>
-              }
-            >
-              <Route
-                index
-                element={<Navigate to={ROUTES.OVERVIEW} replace />}
-              />
-              <Route path="overview" element={<Overview />} />
-              <Route path="ai-console" element={<AIConsole />} />
-              <Route path="market-pulse" element={<MarketPulse />} />
-              <Route path="regulatory-radar" element={<RegulatoryRadar />} />
-              <Route path="content-hub" element={<ContentHub />} />
-              <Route path="settings" element={<Settings />} />
-              <Route path="help-support" element={<HelpAndSupport />} />
-              <Route path="storybook" element={<Storybook />} />
-            </Route>
+                {/* Protected Routes */}
+                <Route
+                  path={ROUTES.APP_ROOT}
+                  element={
+                    <ProtectedRoute>
+                      <DashboardLayout />
+                    </ProtectedRoute>
+                  }
+                >
+                  <Route
+                    index
+                    element={<Navigate to={ROUTES.OVERVIEW} replace />}
+                  />
+                  <Route path="overview" element={<Overview />} />
+                  <Route path="ai-console" element={<AIConsole />} />
+                  <Route path="market-pulse" element={<MarketPulse />} />
+                  <Route
+                    path="regulatory-radar"
+                    element={<RegulatoryRadar />}
+                  />
+                  <Route path="content-hub" element={<ContentHub />} />
+                  <Route path="settings" element={<Settings />} />
+                  <Route path="help-support" element={<HelpAndSupport />} />
+                  <Route path="storybook" element={<Storybook />} />
+                </Route>
 
-            {/* Catch-all redirect to login */}
-            <Route path="*" element={<Navigate to={ROUTES.LOGIN} replace />} />
-          </Routes>
-        </Router>
-      </AuthProvider>
-    </ThemeProvider>
+                {/* Catch-all redirect to login */}
+                <Route
+                  path="*"
+                  element={<Navigate to={ROUTES.LOGIN} replace />}
+                />
+              </Routes>
+            </Router>
+          </AIConsoleProvider>
+        </AuthProvider>
+      </ThemeProvider>
+    </QueryProvider>
   );
 }
 
