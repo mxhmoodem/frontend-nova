@@ -4,5 +4,5 @@
  */
 
 export const AGENT_ENDPOINTS = {
-  query: '/agent',
+  query: '/agent/',
 } as const;
