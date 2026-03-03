@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 import { AgCharts } from 'ag-charts-react';
-import type { AgChartOptions } from 'ag-charts-community';
+import type { AgCartesianChartOptions } from 'ag-charts-community';
 import { TrendingUp, TrendingDown } from 'lucide-react';
 import type { MetricHistory, MetricKey } from '../../../services/api';
 import { formatMetricValue } from '../utils/formatters';
@@ -13,7 +13,12 @@ interface MetricChartProps {
   size?: 'default' | 'large';
 }
 
-export function MetricChart({ metricKey, history, color, size = 'default' }: MetricChartProps) {
+export function MetricChart({
+  metricKey,
+  history,
+  color,
+  size = 'default',
+}: MetricChartProps) {
   // Transform data for chart display
   const chartData = useMemo(() => {
     if (!history.data || history.data.length === 0) return [];
@@ -56,12 +61,12 @@ export function MetricChart({ metricKey, history, color, size = 'default' }: Met
   const isLarge = size === 'large';
 
   // AG Charts options
-  const chartOptions = useMemo(
+  const chartOptions = useMemo<AgCartesianChartOptions>(
     () => ({
       data: chartData,
       series: [
         {
-          type: 'area' as const,
+          type: 'area',
           xKey: 'date',
           yKey: 'value',
           stroke: color,
@@ -76,10 +81,10 @@ export function MetricChart({ metricKey, history, color, size = 'default' }: Met
           },
         },
       ],
-      axes: [
-        {
-          type: 'category' as const,
-          position: 'bottom' as const,
+      axes: {
+        x: {
+          type: 'category',
+          position: 'bottom',
           label: {
             fontSize: isLarge ? 11 : 10,
           },
@@ -90,9 +95,9 @@ export function MetricChart({ metricKey, history, color, size = 'default' }: Met
             enabled: false,
           },
         },
-        {
-          type: 'number' as const,
-          position: 'left' as const,
+        y: {
+          type: 'number',
+          position: 'left',
           label: {
             enabled: isLarge,
             fontSize: 10,
@@ -114,7 +119,7 @@ export function MetricChart({ metricKey, history, color, size = 'default' }: Met
             ],
           },
         },
-      ],
+      },
       background: {
         fill: 'transparent',
       },
@@ -128,10 +133,7 @@ export function MetricChart({ metricKey, history, color, size = 'default' }: Met
     [chartData, color, isLarge, history.unit]
   );
 
-  const chartClassName = [
-    'metric-chart',
-    isLarge && 'metric-chart--large',
-  ]
+  const chartClassName = ['metric-chart', isLarge && 'metric-chart--large']
     .filter(Boolean)
     .join(' ');
 
@@ -169,7 +171,7 @@ export function MetricChart({ metricKey, history, color, size = 'default' }: Met
 
       <div className="metric-chart__chart-container">
         <AgCharts
-          options={chartOptions as unknown as AgChartOptions}
+          options={chartOptions}
           style={{ width: '100%', height: isLarge ? 320 : 160 }}
         />
       </div>

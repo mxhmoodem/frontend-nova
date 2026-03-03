@@ -36,11 +36,7 @@ describe('NewsModal', () => {
 
     it('renders modal with title when open', () => {
       render(
-        <NewsModal
-          isOpen={true}
-          onClose={vi.fn()}
-          items={createMockItems(3)}
-        />
+        <NewsModal isOpen={true} onClose={vi.fn()} items={createMockItems(3)} />
       );
 
       expect(screen.getByText('Market News')).toBeInTheDocument();
@@ -48,11 +44,7 @@ describe('NewsModal', () => {
 
     it('renders article count in subtitle', () => {
       render(
-        <NewsModal
-          isOpen={true}
-          onClose={vi.fn()}
-          items={createMockItems(5)}
-        />
+        <NewsModal isOpen={true} onClose={vi.fn()} items={createMockItems(5)} />
       );
 
       expect(screen.getByText('5 articles')).toBeInTheDocument();
@@ -60,11 +52,7 @@ describe('NewsModal', () => {
 
     it('renders singular article count', () => {
       render(
-        <NewsModal
-          isOpen={true}
-          onClose={vi.fn()}
-          items={createMockItems(1)}
-        />
+        <NewsModal isOpen={true} onClose={vi.fn()} items={createMockItems(1)} />
       );
 
       expect(screen.getByText('1 article')).toBeInTheDocument();
@@ -72,11 +60,7 @@ describe('NewsModal', () => {
 
     it('renders all article cards', () => {
       render(
-        <NewsModal
-          isOpen={true}
-          onClose={vi.fn()}
-          items={createMockItems(3)}
-        />
+        <NewsModal isOpen={true} onClose={vi.fn()} items={createMockItems(3)} />
       );
 
       expect(screen.getByText('Article 1')).toBeInTheDocument();
@@ -86,16 +70,10 @@ describe('NewsModal', () => {
 
     it('shows descriptions (non-compact mode)', () => {
       render(
-        <NewsModal
-          isOpen={true}
-          onClose={vi.fn()}
-          items={createMockItems(1)}
-        />
+        <NewsModal isOpen={true} onClose={vi.fn()} items={createMockItems(1)} />
       );
 
-      expect(
-        screen.getByText('Description for article 1')
-      ).toBeInTheDocument();
+      expect(screen.getByText('Description for article 1')).toBeInTheDocument();
     });
 
     it('renders with testId', () => {
@@ -114,13 +92,9 @@ describe('NewsModal', () => {
 
   describe('empty state', () => {
     it('shows empty message when no items', () => {
-      render(
-        <NewsModal isOpen={true} onClose={vi.fn()} items={[]} />
-      );
+      render(<NewsModal isOpen={true} onClose={vi.fn()} items={[]} />);
 
-      expect(
-        screen.getByText('No market news available')
-      ).toBeInTheDocument();
+      expect(screen.getByText('No market news available')).toBeInTheDocument();
     });
 
     it('handles non-array items gracefully', () => {
@@ -132,9 +106,7 @@ describe('NewsModal', () => {
         />
       );
 
-      expect(
-        screen.getByText('No market news available')
-      ).toBeInTheDocument();
+      expect(screen.getByText('No market news available')).toBeInTheDocument();
     });
   });
 
@@ -142,11 +114,7 @@ describe('NewsModal', () => {
     it('calls onClose when close button is clicked', () => {
       const onClose = vi.fn();
       render(
-        <NewsModal
-          isOpen={true}
-          onClose={onClose}
-          items={createMockItems(1)}
-        />
+        <NewsModal isOpen={true} onClose={onClose} items={createMockItems(1)} />
       );
 
       screen.getByLabelText('Close modal').click();

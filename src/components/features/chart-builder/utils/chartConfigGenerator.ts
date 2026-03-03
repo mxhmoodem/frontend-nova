@@ -41,7 +41,6 @@ export const generateAGChartOptions = (
 
   switch (chartType) {
     case 'bar':
-      // @ts-expect-error AG Charts axes type expects Record but array works fine
       return {
         ...baseOptions,
         series: [
@@ -56,22 +55,21 @@ export const generateAGChartOptions = (
             },
           },
         ],
-        axes: [
-          {
+        axes: {
+          x: {
             type: 'category',
             position: 'bottom',
             title: { text: columnMapping.xAxis },
           },
-          {
+          y: {
             type: 'number',
             position: 'left',
             title: { text: columnMapping.yAxis[0] },
           },
-        ],
+        },
       } as AgCartesianChartOptions;
 
     case 'line':
-      // @ts-expect-error AG Charts axes type expects Record but array works fine
       return {
         ...baseOptions,
         series: columnMapping.yAxis.map((yKey, index) => ({
@@ -87,22 +85,21 @@ export const generateAGChartOptions = (
             enabled: styling.showTooltips,
           },
         })),
-        axes: [
-          {
+        axes: {
+          x: {
             type: 'category',
             position: 'bottom',
             title: { text: columnMapping.xAxis },
           },
-          {
+          y: {
             type: 'number',
             position: 'left',
             title: { text: columnMapping.yAxis.join(', ') },
           },
-        ],
+        },
       } as AgCartesianChartOptions;
 
     case 'area':
-      // @ts-expect-error AG Charts axes type expects Record but array works fine
       return {
         ...baseOptions,
         series: columnMapping.yAxis.map((yKey, index) => ({
@@ -117,22 +114,21 @@ export const generateAGChartOptions = (
             enabled: styling.showTooltips,
           },
         })),
-        axes: [
-          {
+        axes: {
+          x: {
             type: 'category',
             position: 'bottom',
             title: { text: columnMapping.xAxis },
           },
-          {
+          y: {
             type: 'number',
             position: 'left',
             title: { text: columnMapping.yAxis.join(', ') },
           },
-        ],
+        },
       } as AgCartesianChartOptions;
 
     case 'scatter':
-      // @ts-expect-error AG Charts axes type expects Record but array works fine
       return {
         ...baseOptions,
         series: [
@@ -147,18 +143,18 @@ export const generateAGChartOptions = (
             },
           },
         ],
-        axes: [
-          {
+        axes: {
+          x: {
             type: 'number',
             position: 'bottom',
             title: { text: columnMapping.xAxis },
           },
-          {
+          y: {
             type: 'number',
             position: 'left',
             title: { text: columnMapping.yAxis[0] },
           },
-        ],
+        },
       } as AgCartesianChartOptions;
 
     case 'pie':
@@ -179,7 +175,6 @@ export const generateAGChartOptions = (
       } as AgPolarChartOptions;
 
     case 'combo':
-      // @ts-expect-error AG Charts axes type expects Record but array works fine
       return {
         ...baseOptions,
         series: [
@@ -202,18 +197,18 @@ export const generateAGChartOptions = (
               ]
             : []),
         ],
-        axes: [
-          {
+        axes: {
+          x: {
             type: 'category',
             position: 'bottom',
             title: { text: columnMapping.xAxis },
           },
-          {
+          y: {
             type: 'number',
             position: 'left',
             title: { text: columnMapping.yAxis[0] },
           },
-        ],
+        },
       } as AgCartesianChartOptions;
 
     case 'candlestick':
@@ -225,7 +220,6 @@ export const generateAGChartOptions = (
       ) {
         return null;
       }
-      // @ts-expect-error AG Charts axes type expects Record but array works fine
       return {
         ...baseOptions,
         series: [
@@ -241,18 +235,18 @@ export const generateAGChartOptions = (
             },
           },
         ],
-        axes: [
-          {
+        axes: {
+          x: {
             type: 'category',
             position: 'bottom',
             title: { text: columnMapping.xAxis },
           },
-          {
+          y: {
             type: 'number',
             position: 'left',
             title: { text: 'Price' },
           },
-        ],
+        },
       } as AgCartesianChartOptions;
 
     default:
