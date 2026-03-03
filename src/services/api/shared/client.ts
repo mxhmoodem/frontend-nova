@@ -40,7 +40,13 @@ export interface RequestOptions {
 // ============================================================================
 
 function buildUrl(endpoint: string, params?: RequestOptions['params']): string {
-  const url = new URL(`${API_BASE_URL}${endpoint}`);
+  const fullUrl = `${API_BASE_URL}${endpoint}`;
+  console.log('[buildUrl] Constructing URL:', {
+    API_BASE_URL,
+    endpoint,
+    fullUrl,
+  });
+  const url = new URL(fullUrl);
 
   if (params) {
     Object.entries(params).forEach(([key, value]) => {
@@ -50,7 +56,9 @@ function buildUrl(endpoint: string, params?: RequestOptions['params']): string {
     });
   }
 
-  return url.toString();
+  const finalUrl = url.toString();
+  console.log('[buildUrl] Final URL:', finalUrl);
+  return finalUrl;
 }
 
 function createTimeoutController(timeout: number): AbortController {
@@ -84,6 +92,8 @@ export const apiClient = {
     const { headers, timeout = API_TIMEOUT, signal, params } = options;
     const timeoutController = createTimeoutController(timeout);
     const url = buildUrl(endpoint, params);
+
+    console.log('[apiClient.get] About to fetch:', url);
 
     try {
       const response = await fetch(url, {
