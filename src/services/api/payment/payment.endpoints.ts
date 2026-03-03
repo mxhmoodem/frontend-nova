@@ -6,7 +6,7 @@
 
 export const PAYMENT_ENDPOINTS = {
   stats: '/payment/stats',
-  methods: '/payment/payment-methods',
   trendAlerts: '/payment/trend-alerts',
   refresh: '/payment/refresh',
+  history: '/payment/history',
 } as const;

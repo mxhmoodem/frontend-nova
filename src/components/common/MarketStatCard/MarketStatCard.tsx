@@ -1,5 +1,12 @@
 import React, { KeyboardEvent } from 'react';
-import { TrendingUp, TrendingDown, Minus } from 'lucide-react';
+import {
+  TrendingUp,
+  TrendingDown,
+  Minus,
+  AlertTriangle,
+  Info,
+} from 'lucide-react';
+import Tooltip from '../Tooltip/Tooltip';
 import { MarketStatCardProps } from './MarketStatCard.types';
 import './MarketStatCard.css';
 
@@ -11,6 +18,9 @@ export const MarketStatCard: React.FC<MarketStatCardProps> = ({
   icon,
   source,
   period,
+  description,
+  tooltip,
+  isSignificant = false,
   className = '',
   onClick,
   testId,
@@ -20,6 +30,7 @@ export const MarketStatCard: React.FC<MarketStatCardProps> = ({
   const classNames = [
     'market-stat-card',
     isClickable && 'market-stat-card--clickable',
+    isSignificant && 'market-stat-card--significant',
     className,
   ]
     .filter(Boolean)
@@ -63,6 +74,14 @@ export const MarketStatCard: React.FC<MarketStatCardProps> = ({
     <div {...cardProps}>
       <div className="market-stat-card__header">
         {icon && <span className="market-stat-card__icon">{icon}</span>}
+        {isSignificant && (
+          <span
+            className="market-stat-card__alert-badge"
+            title="Significant change detected"
+          >
+            <AlertTriangle size={14} />
+          </span>
+        )}
         {change !== undefined && (
           <span
             className={`market-stat-card__trend market-stat-card__trend--${trend}`}
@@ -77,6 +96,22 @@ export const MarketStatCard: React.FC<MarketStatCardProps> = ({
 
       <p className="market-stat-card__value">{value}</p>
       <p className="market-stat-card__label">{label}</p>
+
+      {description && (
+        <div className="market-stat-card__description-row">
+          <p className="market-stat-card__description">{description}</p>
+          {tooltip && (
+            <Tooltip content={tooltip} position="bottom">
+              <span
+                className="market-stat-card__info-icon"
+                aria-label="What this means"
+              >
+                <Info size={14} />
+              </span>
+            </Tooltip>
+          )}
+        </div>
+      )}
 
       {(source || period) && (
         <div className="market-stat-card__footer">
