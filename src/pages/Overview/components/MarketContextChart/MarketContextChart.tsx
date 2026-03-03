@@ -53,7 +53,7 @@ export function MarketContextChart({
   const seriesData = useMemo(() => {
     const credit = historyData?.total_consumer_credit?.data?.slice(-12) ?? [];
     const mortgage =
-      historyData?.gross_mortgage_advances?.data?.slice(-12) ?? [];
+      historyData?.mortgage_approvals?.data?.slice(-12) ?? [];
 
     if (credit.length === 0) {
       return MOCK_MONTHS.map((d) => ({ ...d, type: 'Credit' }));
