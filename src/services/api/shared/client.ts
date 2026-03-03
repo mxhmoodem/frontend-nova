@@ -40,14 +40,7 @@ export interface RequestOptions {
 // ============================================================================
 
 function buildUrl(endpoint: string, params?: RequestOptions['params']): string {
-  console.log('[buildUrl] Input:', { API_BASE_URL, endpoint });
   const url = new URL(`${API_BASE_URL}${endpoint}`);
-  console.log(
-    '[buildUrl] Constructed URL:',
-    url.toString(),
-    'Protocol:',
-    url.protocol
-  );
 
   if (params) {
     Object.entries(params).forEach(([key, value]) => {
@@ -57,9 +50,7 @@ function buildUrl(endpoint: string, params?: RequestOptions['params']): string {
     });
   }
 
-  const finalUrl = url.toString();
-  console.log('[buildUrl] Final URL:', finalUrl);
-  return finalUrl;
+  return url.toString();
 }
 
 function createTimeoutController(timeout: number): AbortController {

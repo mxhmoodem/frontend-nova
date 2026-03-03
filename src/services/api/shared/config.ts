@@ -35,15 +35,6 @@ export const CURRENT_ENV = getEnvironment();
 export const API_BASE_URL = API_CONFIG[CURRENT_ENV].baseUrl;
 export const API_TIMEOUT = API_CONFIG[CURRENT_ENV].timeout;
 
-// Log configuration for debugging (always log to help diagnose issues)
-console.log('[API Config]', {
-  mode: import.meta.env.MODE,
-  env: CURRENT_ENV,
-  baseUrl: API_BASE_URL,
-  VITE_API_BASE_URL: import.meta.env.VITE_API_BASE_URL,
-  VITE_ENV: import.meta.env.VITE_ENV,
-});
-
 // HTTP DEFAULTS
 export const DEFAULT_HEADERS: HeadersInit = {
   'Content-Type': 'application/json',
