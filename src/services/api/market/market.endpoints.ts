@@ -4,6 +4,6 @@
  */
 
 export const MARKET_ENDPOINTS = {
-  list: '/market',
+  list: '/market/',
   byId: (id: string) => `/market/${id}`,
 } as const;

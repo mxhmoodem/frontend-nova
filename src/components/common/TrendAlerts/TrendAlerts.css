@@ -148,6 +148,30 @@
   text-decoration: underline;
 }
 
+/* Empty State */
+.trend-alerts__empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-xl) var(--spacing-md);
+  text-align: center;
+  flex: 1;
+}
+
+.trend-alerts__empty-text {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--color-success);
+  margin: 0 0 var(--spacing-xs) 0;
+}
+
+.trend-alerts__empty-subtext {
+  font-size: 0.75rem;
+  color: var(--color-muted-foreground);
+  margin: 0;
+}
+
 /* Responsive */
 @media (max-width: 640px) {
   .trend-alerts {
