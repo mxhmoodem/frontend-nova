@@ -6,18 +6,27 @@
  */
 
 /**
- * Request body for AI agent queries
+ * A single message in the conversation history.
+ * role 'user' | 'assistant' matches the backend expectation.
+ */
+export interface ConversationMessage {
+  role: 'user' | 'assistant';
+  content: string;
+}
+
+/**
+ * Request body: current query and conversation history.
+ * Backend expects: { query: string, history: list }
  */
 export interface AgentQueryRequest {
   query: string;
+  history: ConversationMessage[];
 }
 
 /**
  * Response from AI agent
  */
 export interface AgentQueryResponse {
-  response: string;
-  sources?: string[];
-  confidence?: number;
-  timestamp?: string;
+  message: string;
+  sources: string[];
 }

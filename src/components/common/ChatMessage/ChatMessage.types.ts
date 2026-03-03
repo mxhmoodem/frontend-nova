@@ -5,4 +5,6 @@ export interface ChatMessageProps {
   content: string;
   userInitals?: string;
   timestamp?: string;
+  /** Sources used by the AI to generate this response (AI messages only) */
+  sources?: string[];
 }

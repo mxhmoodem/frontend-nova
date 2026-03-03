@@ -6,7 +6,11 @@
  */
 
 // Types
-export type { AgentQueryRequest, AgentQueryResponse } from './agent.types';
+export type {
+  AgentQueryRequest,
+  AgentQueryResponse,
+  ConversationMessage,
+} from './agent.types';
 
 // API
 export { agentApi } from './agent.api';

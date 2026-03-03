@@ -23,6 +23,10 @@
   z-index: 0;
 }
 
+.dashboard-layout--no-bg::before {
+  display: none;
+}
+
 .dashboard-layout__main {
   display: flex;
   flex-direction: column;
