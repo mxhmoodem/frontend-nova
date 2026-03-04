@@ -1,0 +1,125 @@
+.overview-metric-card {
+  background: var(--color-card);
+  border: 1.5px solid rgba(0, 0, 0, 0.1);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-md);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  transition:
+    box-shadow var(--transition-base),
+    border-color var(--transition-base);
+  min-width: 0;
+}
+
+.overview-metric-card:hover {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  border-color: rgba(219, 0, 17, 0.3);
+}
+
+.overview-metric-card__label {
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-muted-foreground);
+  margin: 0;
+}
+
+.overview-metric-card__value {
+  font-size: 1.75rem;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  color: var(--color-foreground);
+  margin: 0;
+  line-height: 1.1;
+}
+
+.overview-metric-card__footer {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-top: var(--spacing-xs);
+  gap: var(--spacing-sm);
+}
+
+.overview-metric-card__meta {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.overview-metric-card__change {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  font-size: 0.78rem;
+  font-weight: 600;
+}
+
+.overview-metric-card__change--up {
+  color: #10b981;
+}
+
+.overview-metric-card__change--down {
+  color: #ef4444;
+}
+
+.overview-metric-card__change--neutral {
+  color: var(--color-muted-foreground);
+}
+
+.overview-metric-card__period {
+  font-size: 0.7rem;
+  color: var(--color-muted-foreground);
+}
+
+.overview-metric-card__sparkline-svg {
+  flex-shrink: 0;
+}
+
+/* Loading skeleton */
+.overview-metric-card--loading {
+  pointer-events: none;
+}
+
+.overview-metric-card__skeleton-label,
+.overview-metric-card__skeleton-value,
+.overview-metric-card__skeleton-bar {
+  border-radius: var(--radius-sm);
+  background: linear-gradient(
+    90deg,
+    var(--color-muted) 25%,
+    var(--color-border) 50%,
+    var(--color-muted) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+.overview-metric-card__skeleton-label {
+  height: 10px;
+  width: 60%;
+}
+
+.overview-metric-card__skeleton-value {
+  height: 32px;
+  width: 75%;
+  margin-top: 6px;
+}
+
+.overview-metric-card__skeleton-bar {
+  height: 28px;
+  width: 100%;
+  margin-top: 10px;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}

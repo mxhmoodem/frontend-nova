@@ -1,0 +1,165 @@
+.compliance-sidebar {
+  background: var(--color-card);
+  border: 1.5px solid rgba(0, 0, 0, 0.1);
+  border-radius: var(--radius-xl);
+  padding: var(--spacing-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.compliance-sidebar__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.compliance-sidebar__title {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--color-foreground);
+  letter-spacing: -0.01em;
+  margin: 0;
+}
+
+.compliance-sidebar__settings-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--color-border);
+  background: transparent;
+  color: var(--color-muted-foreground);
+  cursor: pointer;
+  transition: all var(--transition-base);
+}
+
+.compliance-sidebar__settings-btn:hover {
+  background: var(--color-muted);
+  color: var(--color-foreground);
+}
+
+/* Deadlines list */
+.compliance-sidebar__deadlines {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+}
+
+.compliance-sidebar__deadline {
+  border-radius: var(--radius-md);
+  padding: 10px 12px;
+  border-left: 3px solid transparent;
+}
+
+.compliance-sidebar__deadline--critical {
+  background: rgba(239, 68, 68, 0.06);
+  border-left-color: #ef4444;
+}
+
+.compliance-sidebar__deadline--amber {
+  background: rgba(245, 158, 11, 0.06);
+  border-left-color: #f59e0b;
+}
+
+.compliance-sidebar__deadline--info {
+  background: rgba(59, 130, 246, 0.06);
+  border-left-color: #3b82f6;
+}
+
+.compliance-sidebar__deadline-main {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--spacing-sm);
+}
+
+.compliance-sidebar__deadline-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex: 1;
+  min-width: 0;
+}
+
+.compliance-sidebar__deadline-name {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--color-foreground);
+  line-height: 1.3;
+}
+
+.compliance-sidebar__deadline-desc {
+  font-size: 0.72rem;
+  color: var(--color-muted-foreground);
+  line-height: 1.3;
+}
+
+/* Urgency badge */
+.compliance-sidebar__deadline-badge {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+.compliance-sidebar__deadline--critical .compliance-sidebar__deadline-badge {
+  color: #ef4444;
+}
+
+.compliance-sidebar__deadline--amber .compliance-sidebar__deadline-badge {
+  color: #f59e0b;
+}
+
+.compliance-sidebar__deadline--info .compliance-sidebar__deadline-badge {
+  color: #3b82f6;
+}
+
+.compliance-sidebar__deadline-days {
+  font-size: 0.72rem;
+  font-weight: 700;
+}
+
+/* Gauge */
+.compliance-gauge {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: var(--spacing-sm) 0 0;
+}
+
+.compliance-gauge__svg {
+  width: 120px;
+  height: 120px;
+}
+
+.compliance-gauge__label {
+  font-size: 0.68rem;
+  color: var(--color-muted-foreground);
+  text-align: center;
+  margin: 0;
+}
+
+/* Calendar link */
+.compliance-sidebar__calendar-link {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--color-primary);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  text-align: center;
+  padding: 4px 0;
+  transition: opacity var(--transition-base);
+  text-decoration: none;
+}
+
+.compliance-sidebar__calendar-link:hover {
+  opacity: 0.75;
+  text-decoration: underline;
+}
