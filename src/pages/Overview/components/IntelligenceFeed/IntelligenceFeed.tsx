@@ -1,6 +1,11 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Bookmark, ChevronRight } from 'lucide-react';
+import type {
+  Legislation,
+  MarketTrendListResponse,
+  TrendAlertsResponse,
+} from '../../../../services/api';
 import './IntelligenceFeed.css';
 
 type FeedCategory =
@@ -20,8 +25,34 @@ interface FeedItem {
 }
 
 interface IntelligenceFeedProps {
-  items?: FeedItem[];
+  legislationData?: Legislation[];
+  marketData?: MarketTrendListResponse;
+  alertsData?: TrendAlertsResponse;
   maxItems?: number;
+  isLoading?: boolean;
+}
+
+/** Stable fallback timestamp set at module load — avoids React Compiler impure call error */
+const FALLBACK_TS = new Date(0).getTime();
+
+/** Convert an ISO timestamp to a relative "Xh ago" / "Xd ago" string */
+function relativeTime(iso: string): string {
+  const diff = Date.now() - new Date(iso).getTime();
+  const mins = Math.floor(diff / 60_000);
+  if (mins < 60) return `${mins}m ago`;
+  const hrs = Math.floor(mins / 60);
+  if (hrs < 24) return `${hrs}h ago`;
+  const days = Math.floor(hrs / 24);
+  return `${days}d ago`;
+}
+
+/** Derive a FeedCategory from a trend alert metric name */
+function alertCategory(metric: string): FeedCategory {
+  const m = metric.toLowerCase();
+  if (m.includes('fraud') || m.includes('default')) return 'FRAUD';
+  if (m.includes('credit') || m.includes('mortgage') || m.includes('rate'))
+    return 'PAYMENTS';
+  return 'MARKET';
 }
 
 const CATEGORY_STYLES: Record<FeedCategory, string> = {
@@ -69,23 +100,82 @@ const DEFAULT_FEED: FeedItem[] = [
 ];
 
 export function IntelligenceFeed({
-  items = DEFAULT_FEED,
+  legislationData,
+  marketData,
+  alertsData,
   maxItems = 6,
+  isLoading,
 }: IntelligenceFeedProps) {
   const navigate = useNavigate();
+
+  const items = useMemo<FeedItem[]>(() => {
+    const derived: { item: FeedItem; ts: number }[] = [];
+
+    // Legislation → REGULATORY
+    if (legislationData && legislationData.length > 0) {
+      legislationData.forEach((l) => {
+        derived.push({
+          item: {
+            id: `leg-${l.id}`,
+            category: 'REGULATORY',
+            timeAgo: relativeTime(l.updated_at),
+            title: l.title,
+            summary: l.description ?? undefined,
+          },
+          ts: new Date(l.updated_at).getTime(),
+        });
+      });
+    }
+
+    // Market trends → MARKET
+    if (marketData?.data?.items && marketData.data.items.length > 0) {
+      marketData.data.items.forEach((m) => {
+        derived.push({
+          item: {
+            id: `mkt-${m.id}`,
+            category: 'MARKET',
+            timeAgo: relativeTime(m.updated_at),
+            title: m.title,
+            summary: m.description ?? undefined,
+          },
+          ts: new Date(m.updated_at).getTime(),
+        });
+      });
+    }
+
+    // Trend alerts → FRAUD / PAYMENTS / MARKET
+    if (alertsData?.alerts && alertsData.alerts.length > 0) {
+      const alertTs = alertsData.last_updated
+        ? new Date(alertsData.last_updated).getTime()
+        : FALLBACK_TS;
+      alertsData.alerts.forEach((a, idx) => {
+        const ts = alertTs - idx * 60_000;
+        derived.push({
+          item: {
+            id: `alert-${idx}`,
+            category: alertCategory(a.metric),
+            timeAgo: relativeTime(new Date(ts).toISOString()),
+            title: a.message,
+            summary: `${a.metric.replace(/_/g, ' ')} ${
+              a.direction === 'up' ? '▲' : '▼'
+            } ${a.change.toFixed(1)}%`,
+          },
+          ts,
+        });
+      });
+    }
+
+    if (derived.length === 0) return DEFAULT_FEED;
+
+    return derived.sort((a, b) => b.ts - a.ts).map((d) => d.item);
+  }, [legislationData, marketData, alertsData]);
+
   const visibleItems = items.slice(0, maxItems);
-
-  // Count by category
-  const categoryCounts = items.reduce(
-    (acc, item) => {
-      acc[item.category] = (acc[item.category] || 0) + 1;
-      return acc;
-    },
-    {} as Record<FeedCategory, number>
-  );
-
   const totalAlerts = items.length;
   const criticalAlerts = items.filter((i) => i.category === 'FRAUD').length;
+  const regulatoryCount = items.filter(
+    (i) => i.category === 'REGULATORY'
+  ).length;
 
   return (
     <div className="intelligence-feed">
@@ -103,27 +193,43 @@ export function IntelligenceFeed({
 
       <div className="intelligence-feed__stats">
         <div className="intelligence-feed__stat">
-          <span className="intelligence-feed__stat-value">{totalAlerts}</span>
+          <span className="intelligence-feed__stat-value">
+            {isLoading ? (
+              <span className="feed-sk feed-sk--num" />
+            ) : (
+              totalAlerts
+            )}
+          </span>
           <span className="intelligence-feed__stat-label">Total Alerts</span>
         </div>
         <div className="intelligence-feed__stat">
           <span className="intelligence-feed__stat-value intelligence-feed__stat-value--critical">
-            {criticalAlerts}
+            {isLoading ? (
+              <span className="feed-sk feed-sk--num" />
+            ) : (
+              criticalAlerts
+            )}
           </span>
           <span className="intelligence-feed__stat-label">Critical</span>
         </div>
         <div className="intelligence-feed__stat">
           <span className="intelligence-feed__stat-value">
-            {categoryCounts.REGULATORY || 0}
+            {isLoading ? (
+              <span className="feed-sk feed-sk--num" />
+            ) : (
+              regulatoryCount
+            )}
           </span>
           <span className="intelligence-feed__stat-label">Regulatory</span>
         </div>
       </div>
 
       <div className="intelligence-feed__list">
-        {visibleItems.map((item) => (
-          <FeedItemCard key={item.id} item={item} />
-        ))}
+        {isLoading
+          ? [0, 1, 2, 3].map((i) => <FeedItemSkeleton key={i} />)
+          : visibleItems.map((item) => (
+              <FeedItemCard key={item.id} item={item} />
+            ))}
       </div>
     </div>
   );
@@ -153,6 +259,21 @@ function FeedItemCard({ item }: { item: FeedItem }) {
       >
         <Bookmark size={14} strokeWidth={2} />
       </button>
+    </div>
+  );
+}
+
+function FeedItemSkeleton() {
+  return (
+    <div className="feed-item feed-item--skeleton">
+      <div className="feed-item__meta">
+        <span className="feed-sk feed-sk--tag" />
+        <span className="feed-sk feed-sk--time" />
+      </div>
+      <div className="feed-item__body">
+        <span className="feed-sk feed-sk--title" />
+        <span className="feed-sk feed-sk--summary" />
+      </div>
     </div>
   );
 }
