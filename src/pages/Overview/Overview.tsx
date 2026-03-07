@@ -2,14 +2,20 @@ import { useMemo } from 'react';
 import { PoundSterling, CreditCard, Home, Percent } from 'lucide-react';
 import { useAuth } from '../../hooks/useAuth';
 import { getFirstName } from '../../utils/formatters';
-import { usePaymentStats, usePaymentHistory } from '../../services/api';
+import {
+  usePaymentStats,
+  usePaymentHistory,
+  useTrendAlerts,
+  useLegislation,
+  useMarketTrends,
+} from '../../services/api';
 import type { TrendDirection } from '../../services/api';
 import {
   LiveStatusBar,
   OverviewMetricCard,
   AIDailyBriefing,
   ComplianceSidebar,
-  MarketContextChart,
+  MarketSnapshot,
   IntelligenceFeed,
   UKPaymentHeatmap,
 } from './components';
@@ -60,9 +66,16 @@ export default function Overview() {
   const { user } = useAuth();
   const userName = user?.name ? getFirstName(user.name) : 'User';
 
-  const { data: statsData, isLoading: statsLoading } = usePaymentStats();
-  const { data: historyData, isLoading: historyLoading } =
-    usePaymentHistory(12);
+  const {
+    data: statsData,
+    isLoading: statsLoading,
+    isError: statsError,
+  } = usePaymentStats();
+  const { data: historyData } = usePaymentHistory(12);
+  const { data: alertsData, isLoading: alertsLoading } = useTrendAlerts();
+  const { data: legislationData, isLoading: legislationLoading } =
+    useLegislation();
+  const { data: marketData, isLoading: marketLoading } = useMarketTrends();
 
   /** Derive sparkline data from actual history where available */
   const sparklinesByMetric = useMemo(() => {
@@ -84,14 +97,27 @@ export default function Overview() {
     return result;
   }, [historyData]);
 
+  /** Derive LiveStatusBar values from real API data */
+  const documentsIndexed =
+    (legislationData?.length ?? 0) + (marketData?.data?.items?.length ?? 0);
+  const marketsTracked = marketData?.data?.items?.length ?? 0;
+  const criticalDeadlines = alertsData?.alerts?.length ?? 0;
+  const apiStatus: 'live' | 'degraded' | 'offline' = statsError
+    ? 'offline'
+    : statsData?.last_updated
+      ? 'live'
+      : statsLoading
+        ? 'live'
+        : 'degraded';
+
   return (
     <div className="overview">
       {/* ─── 1. Live Status Bar ─── */}
       <LiveStatusBar
-        documentsIndexed={1247}
-        marketsTracked={42}
-        criticalDeadlines={2}
-        apiStatus="live"
+        documentsIndexed={documentsIndexed}
+        marketsTracked={marketsTracked}
+        criticalDeadlines={criticalDeadlines}
+        apiStatus={apiStatus}
       />
 
       {/* ─── 2. Top Section: Metrics + Heatmap ─── */}
@@ -120,7 +146,13 @@ export default function Overview() {
           </div>
 
           {/* AI Daily Briefing hero */}
-          <AIDailyBriefing userName={userName} />
+          <AIDailyBriefing
+            userName={userName}
+            legislationData={legislationData ?? undefined}
+            marketData={marketData ?? undefined}
+            alertsData={alertsData ?? undefined}
+            isLoading={legislationLoading || marketLoading || alertsLoading}
+          />
         </div>
 
         {/* UK Heatmap - spans both rows */}
@@ -129,14 +161,19 @@ export default function Overview() {
         </div>
       </div>
 
-      {/* ─── 3. Content Row: Market Context + Feed + Compliance ─── */}
+      {/* ─── 3. Content Row: Feed (left) | Market Snapshot + Compliance (right) ─── */}
       <div className="overview__content-row">
-        <MarketContextChart
-          historyData={historyData}
-          isLoading={historyLoading}
+        <IntelligenceFeed
+          legislationData={legislationData ?? undefined}
+          marketData={marketData ?? undefined}
+          alertsData={alertsData ?? undefined}
+          isLoading={legislationLoading || marketLoading || alertsLoading}
+          maxItems={5}
         />
-        <IntelligenceFeed />
-        <ComplianceSidebar complianceScore={82} jurisdiction="UK" />
+        <div className="overview__content-right">
+          <MarketSnapshot statsData={statsData} isLoading={statsLoading} />
+          <ComplianceSidebar complianceScore={82} jurisdiction="UK" />
+        </div>
       </div>
     </div>
   );

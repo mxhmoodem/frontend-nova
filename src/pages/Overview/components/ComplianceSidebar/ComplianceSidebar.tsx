@@ -177,45 +177,53 @@ export function ComplianceSidebar({
         </button>
       </div>
 
-      <div className="compliance-sidebar__deadlines">
-        {deadlines.map((deadline) => {
-          const config = URGENCY_CONFIG[deadline.urgency];
-          return (
-            <div
-              key={deadline.id}
-              className={`compliance-sidebar__deadline ${config.className}`}
-            >
-              <div className="compliance-sidebar__deadline-main">
-                <div className="compliance-sidebar__deadline-info">
-                  <span className="compliance-sidebar__deadline-name">
-                    {deadline.name}
-                  </span>
-                  <span className="compliance-sidebar__deadline-desc">
-                    {deadline.description}
-                  </span>
-                </div>
-                <div className="compliance-sidebar__deadline-badge">
-                  {config.icon}
-                  <span className="compliance-sidebar__deadline-days">
-                    {deadline.daysLeft === 1
-                      ? '1 Day'
-                      : `${deadline.daysLeft} Days`}
-                  </span>
+      <div className="compliance-sidebar__body">
+        {/* Left: deadline cards */}
+        <div className="compliance-sidebar__deadlines">
+          {deadlines.map((deadline) => {
+            const config = URGENCY_CONFIG[deadline.urgency];
+            return (
+              <div
+                key={deadline.id}
+                className={`compliance-sidebar__deadline ${config.className}`}
+              >
+                <div className="compliance-sidebar__deadline-main">
+                  <div className="compliance-sidebar__deadline-info">
+                    <span className="compliance-sidebar__deadline-name">
+                      {deadline.name}
+                    </span>
+                    <span className="compliance-sidebar__deadline-desc">
+                      {deadline.description}
+                    </span>
+                  </div>
+                  <div className="compliance-sidebar__deadline-badge">
+                    {config.icon}
+                    <span className="compliance-sidebar__deadline-days">
+                      {deadline.daysLeft === 1
+                        ? '1 Day'
+                        : `${deadline.daysLeft} Days`}
+                    </span>
+                  </div>
                 </div>
               </div>
-            </div>
-          );
-        })}
+            );
+          })}
+        </div>
+
+        {/* Right: gauge + label + calendar link */}
+        <div className="compliance-sidebar__gauge-col">
+          <ComplianceGauge
+            score={complianceScore}
+            jurisdiction={jurisdiction}
+          />
+          <button
+            className="compliance-sidebar__calendar-link"
+            onClick={() => navigate('/app/regulatory-radar')}
+          >
+            View Full Compliance Calendar
+          </button>
+        </div>
       </div>
-
-      <ComplianceGauge score={complianceScore} jurisdiction={jurisdiction} />
-
-      <button
-        className="compliance-sidebar__calendar-link"
-        onClick={() => navigate('/app/regulatory-radar')}
-      >
-        View Full Compliance Calendar
-      </button>
     </div>
   );
 }

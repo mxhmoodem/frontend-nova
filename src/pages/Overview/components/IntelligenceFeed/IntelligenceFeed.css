@@ -222,3 +222,54 @@
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
+
+/* ─── Skeleton ─────────────────────────────────────────────────────────── */
+.feed-sk {
+  display: inline-block;
+  border-radius: 4px;
+  background: linear-gradient(
+    90deg,
+    var(--color-muted) 25%,
+    var(--color-border) 50%,
+    var(--color-muted) 75%
+  );
+  background-size: 200% 100%;
+  animation: feed-shimmer 1.5s ease-in-out infinite;
+}
+.feed-sk--num {
+  width: 24px;
+  height: 18px;
+}
+.feed-sk--tag {
+  width: 68px;
+  height: 18px;
+  border-radius: 100px;
+}
+.feed-sk--time {
+  width: 44px;
+  height: 11px;
+}
+.feed-sk--title {
+  width: 92%;
+  height: 13px;
+  display: block;
+  margin-bottom: 5px;
+}
+.feed-sk--summary {
+  width: 72%;
+  height: 11px;
+  display: block;
+}
+
+.feed-item--skeleton {
+  pointer-events: none;
+}
+
+@keyframes feed-shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}

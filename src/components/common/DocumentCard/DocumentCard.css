@@ -67,7 +67,9 @@
 .document-card--grid.document-card--selected {
   border: 2px solid transparent;
   border-radius: var(--radius-lg);
-  background-image: linear-gradient(var(--color-card), var(--color-card)), linear-gradient(90deg, var(--color-primary), var(--color-secondary));
+  background-image:
+    linear-gradient(var(--color-card), var(--color-card)),
+    linear-gradient(90deg, var(--color-primary), var(--color-secondary));
   background-origin: padding-box, border-box;
   background-clip: padding-box, border-box;
   box-shadow: none;
@@ -261,7 +263,9 @@
 .document-card--list.document-card--selected {
   border: 2px solid transparent;
   border-radius: var(--radius-md);
-  background-image: linear-gradient(var(--color-card), var(--color-card)), linear-gradient(90deg, var(--color-primary), var(--color-secondary));
+  background-image:
+    linear-gradient(var(--color-card), var(--color-card)),
+    linear-gradient(90deg, var(--color-primary), var(--color-secondary));
   background-origin: padding-box, border-box;
   background-clip: padding-box, border-box;
 }

@@ -69,7 +69,9 @@
   padding: 4px 22px 4px 8px;
   cursor: pointer;
   outline: none;
-  transition: border-color 0.15s, background 0.15s;
+  transition:
+    border-color 0.15s,
+    background 0.15s;
   white-space: nowrap;
   max-width: 140px;
 }
@@ -126,7 +128,7 @@
   border: 1px solid var(--color-border) !important;
   border-radius: 6px !important;
   overflow: hidden;
-  box-shadow: var(--shadow-sm, 0 1px 3px rgba(0,0,0,.08)) !important;
+  box-shadow: var(--shadow-sm, 0 1px 3px rgba(0, 0, 0, 0.08)) !important;
 }
 
 .uk-heatmap .leaflet-control-zoom a {
