@@ -1,7 +1,3 @@
-/* ═══════════════════════════════════════════════════════════════
-   UKPaymentHeatmap — card, map, legend, top-regions
-   ═══════════════════════════════════════════════════════════════ */
-
 /* Card shell */
 .uk-heatmap {
   background: var(--color-card);
@@ -17,7 +13,7 @@
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
 }
 
-/* ── Header ─────────────────────────────────────────── */
+/*  Header  */
 .uk-heatmap__header {
   display: flex;
   align-items: flex-start;
@@ -48,7 +44,7 @@
   text-overflow: ellipsis;
 }
 
-/* ── Dropdown ───────────────────────────────────────── */
+/*  Dropdown  */
 .uk-heatmap__select-wrap {
   position: relative;
   display: flex;
@@ -93,7 +89,7 @@
   right: 8px;
 }
 
-/* ── Map ────────────────────────────────────────────── */
+/*  Map  */
 .uk-heatmap__map-wrap {
   position: relative;
   border-radius: var(--radius-md);
@@ -145,7 +141,7 @@
   background: var(--color-background) !important;
 }
 
-/* ── Legend ─────────────────────────────────────────── */
+/*  Legend  */
 .uk-heatmap__legend {
   display: flex;
   flex-direction: column;
@@ -170,7 +166,7 @@
   font-weight: 500;
 }
 
-/* ── Top Regions Dropdown ───────────────────────────── */
+/*  Top Regions Dropdown  */
 .uk-heatmap__regions {
   flex-shrink: 0;
   display: flex;
@@ -191,7 +187,7 @@
   text-overflow: ellipsis;
 }
 
-/* ── Dark mode ──────────────────────────────────────── */
+/*  Dark mode  */
 .dark .uk-heatmap__select {
   background: var(--color-card);
   color: var(--color-foreground);
