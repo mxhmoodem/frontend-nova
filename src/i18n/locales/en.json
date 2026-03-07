@@ -1,0 +1,93 @@
+{
+  "common": {
+    "loading": "Loading",
+    "error": "Error",
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "edit": "Edit",
+    "close": "Close",
+    "search": "Search",
+    "filter": "Filter",
+    "logout": "Logout",
+    "help": "Help",
+    "storybook": "Storybook",
+    "moreInformation": "More information",
+    "notifications": "Notifications",
+    "switchToLightMode": "Switch to light mode",
+    "switchToDarkMode": "Switch to dark mode",
+    "expandSidebar": "Expand sidebar",
+    "collapseSidebar": "Collapse sidebar"
+  },
+  "settings": {
+    "title": "Settings",
+    "subtitle": "Manage your application preferences and configurations",
+    "theme": {
+      "title": "Theme",
+      "appearance": "Appearance",
+      "appearanceDescription": "Choose between light and dark interface.",
+      "light": "Light",
+      "dark": "Dark"
+    },
+    "userProfile": {
+      "title": "User Profile",
+      "name": "Name",
+      "nameDescription": "Organisation account — name cannot be changed.",
+      "email": "Email",
+      "emailDescription": "Organisation account — email cannot be changed.",
+      "logout": "Logout"
+    },
+    "language": {
+      "title": "Language & Locale",
+      "language": "Language",
+      "languageDescription": "Interface language (full i18n support coming soon).",
+      "dateFormat": "Date Format",
+      "dateFormatDescription": "How dates are displayed across the application.",
+      "timeFormat": "Time Format",
+      "timeFormatDescription": "12-hour or 24-hour clock display.",
+      "languages": {
+        "en": "English",
+        "fr": "French",
+        "de": "German",
+        "es": "Spanish",
+        "zh": "Chinese (Simplified)",
+        "ja": "Japanese"
+      },
+      "dateFormats": {
+        "us": "MM/DD/YYYY (US)",
+        "eu": "DD/MM/YYYY (EU)",
+        "iso": "YYYY-MM-DD (ISO)"
+      },
+      "timeFormats": {
+        "12h": "12-hour (AM/PM)",
+        "24h": "24-hour"
+      }
+    },
+    "notifications": {
+      "title": "Notifications",
+      "channels": "Channels",
+      "categories": "Alert Categories",
+      "email": "Email Notifications",
+      "emailDescription": "Receive updates and alerts via email.",
+      "inApp": "In-App Notifications",
+      "inAppDescription": "Show notifications inside the application.",
+      "regulatoryAlerts": "Regulatory Alerts",
+      "regulatoryAlertsDescription": "New compliance requirements and regulatory changes.",
+      "marketNews": "Market News",
+      "marketNewsDescription": "Market movements, trends and analysis updates.",
+      "paymentUpdates": "Payment Updates",
+      "paymentUpdatesDescription": "Transaction statuses and payment processing alerts.",
+      "systemAnnouncements": "System Announcements",
+      "systemAnnouncementsDescription": "Maintenance windows and platform announcements."
+    }
+  },
+  "navigation": {
+    "overview": "Overview",
+    "market-pulse": "Market Pulse",
+    "regulatory-radar": "Regulatory Radar",
+    "content-hub": "Content Hub",
+    "ai-console": "AI Console",
+    "settings": "Settings",
+    "helpAndSupport": "Help & Support"
+  }
+}

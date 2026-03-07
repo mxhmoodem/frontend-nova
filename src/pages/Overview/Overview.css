@@ -1,7 +1,3 @@
-/* ─────────────────────────────────────────────
-   Overview Page Layout
-   ───────────────────────────────────────────── */
-
 .overview {
   display: flex;
   flex-direction: column;
@@ -10,10 +6,12 @@
   min-width: 0;
 }
 
-/* ─── Card Contrast Enhancements (Overview only) ─── */
-.overview :is(
+/* Card Contrast Enhancements (Overview only) */
+.overview
+  :is(
     .overview-metric-card,
     .market-context-chart,
+    .market-snapshot,
     .intelligence-feed,
     .compliance-sidebar,
     .uk-heatmap
@@ -24,9 +22,11 @@
     0 2px 4px rgba(15, 23, 42, 0.06);
 }
 
-.overview :is(
+.overview
+  :is(
     .overview-metric-card,
     .market-context-chart,
+    .market-snapshot,
     .intelligence-feed,
     .compliance-sidebar,
     .uk-heatmap
@@ -39,9 +39,12 @@
     0 4px 10px rgba(15, 23, 42, 0.08);
 }
 
-.dark .overview :is(
+.dark
+  .overview
+  :is(
     .overview-metric-card,
     .market-context-chart,
+    .market-snapshot,
     .intelligence-feed,
     .compliance-sidebar,
     .uk-heatmap
@@ -52,9 +55,12 @@
     0 2px 6px rgba(0, 0, 0, 0.35);
 }
 
-.dark .overview :is(
+.dark
+  .overview
+  :is(
     .overview-metric-card,
     .market-context-chart,
+    .market-snapshot,
     .intelligence-feed,
     .compliance-sidebar,
     .uk-heatmap
@@ -67,7 +73,7 @@
     0 4px 12px rgba(0, 0, 0, 0.4);
 }
 
-/* ─── Top Section: Stats + AI Briefing | Heatmap ─── */
+/* Top Section: Stats + AI Briefing | Heatmap */
 .overview__top-section {
   display: grid;
   grid-template-columns: 1fr 400px;
@@ -82,14 +88,14 @@
   min-width: 0;
 }
 
-/* ─── Key Metrics Grid ─── */
+/* Key Metrics Grid */
 .overview__metrics-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 1rem;
 }
 
-/* ─── Heatmap Column — stretches to full height of left column ─── */
+/* Heatmap Column — stretches to full height of left column */
 .overview__heatmap-column {
   display: flex;
   flex-direction: column;
@@ -100,17 +106,15 @@
   flex: 1;
 }
 
-/* ─── Content Row: Market Context + Feed + Compliance ─── */
+/* Content Row: Market Context + Feed + Compliance */
 .overview__content-row {
   display: grid;
-  grid-template-columns: 1fr 1fr 300px;
+  grid-template-columns: 1fr 1fr;
   gap: 1rem;
   align-items: stretch;
 }
 
-/* ─── Responsive breakpoints ─── */
-
-/* Large tablets: stack heatmap below */
+/* Responsive breakpoints */
 @media (max-width: 1200px) {
   .overview__top-section {
     grid-template-columns: 1fr;
@@ -121,15 +125,14 @@
   }
 
   .overview__content-row {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr;
   }
 
-  .overview__content-row > :last-child {
-    grid-column: 1 / -1;
+  .overview__content-right {
+    flex-direction: row;
   }
 }
 
-/* Small tablets: 2-col metrics */
 @media (max-width: 860px) {
   .overview__metrics-grid {
     grid-template-columns: repeat(2, 1fr);
@@ -138,9 +141,12 @@
   .overview__content-row {
     grid-template-columns: 1fr;
   }
+
+  .overview__content-right {
+    flex-direction: column;
+  }
 }
 
-/* Mobile: single column */
 @media (max-width: 600px) {
   .overview__metrics-grid {
     grid-template-columns: 1fr 1fr;

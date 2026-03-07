@@ -1,0 +1,93 @@
+{
+  "common": {
+    "loading": "Chargement",
+    "error": "Erreur",
+    "save": "Enregistrer",
+    "cancel": "Annuler",
+    "delete": "Supprimer",
+    "edit": "Modifier",
+    "close": "Fermer",
+    "search": "Rechercher",
+    "filter": "Filtrer",
+    "logout": "Déconnexion",
+    "help": "Aide",
+    "storybook": "Storybook",
+    "moreInformation": "Plus d'informations",
+    "notifications": "Notifications",
+    "switchToLightMode": "Passer en mode clair",
+    "switchToDarkMode": "Passer en mode sombre",
+    "expandSidebar": "Développer le menu",
+    "collapseSidebar": "Réduire le menu"
+  },
+  "settings": {
+    "title": "Paramètres",
+    "subtitle": "Gérez vos préférences et configurations d'application",
+    "theme": {
+      "title": "Thème",
+      "appearance": "Apparence",
+      "appearanceDescription": "Choisissez entre l'interface claire ou sombre.",
+      "light": "Clair",
+      "dark": "Sombre"
+    },
+    "userProfile": {
+      "title": "Profil Utilisateur",
+      "name": "Nom",
+      "nameDescription": "Compte organisation — le nom ne peut pas être modifié.",
+      "email": "Email",
+      "emailDescription": "Compte organisation — l'email ne peut pas être modifié.",
+      "logout": "Déconnexion"
+    },
+    "language": {
+      "title": "Langue et Localisation",
+      "language": "Langue",
+      "languageDescription": "Langue de l'interface (support i18n complet à venir).",
+      "dateFormat": "Format de Date",
+      "dateFormatDescription": "Comment les dates sont affichées dans l'application.",
+      "timeFormat": "Format d'Heure",
+      "timeFormatDescription": "Affichage en format 12 ou 24 heures.",
+      "languages": {
+        "en": "Anglais",
+        "fr": "Français",
+        "de": "Allemand",
+        "es": "Espagnol",
+        "zh": "Chinois (Simplifié)",
+        "ja": "Japonais"
+      },
+      "dateFormats": {
+        "us": "MM/JJ/AAAA (US)",
+        "eu": "JJ/MM/AAAA (EU)",
+        "iso": "AAAA-MM-JJ (ISO)"
+      },
+      "timeFormats": {
+        "12h": "12 heures (AM/PM)",
+        "24h": "24 heures"
+      }
+    },
+    "notifications": {
+      "title": "Notifications",
+      "channels": "Canaux",
+      "categories": "Catégories d'Alertes",
+      "email": "Notifications par Email",
+      "emailDescription": "Recevoir les mises à jour et alertes par email.",
+      "inApp": "Notifications In-App",
+      "inAppDescription": "Afficher les notifications dans l'application.",
+      "regulatoryAlerts": "Alertes Réglementaires",
+      "regulatoryAlertsDescription": "Nouvelles exigences de conformité et changements réglementaires.",
+      "marketNews": "Actualités du Marché",
+      "marketNewsDescription": "Mouvements du marché, tendances et mises à jour d'analyses.",
+      "paymentUpdates": "Mises à Jour des Paiements",
+      "paymentUpdatesDescription": "Statuts des transactions et alertes de traitement des paiements.",
+      "systemAnnouncements": "Annonces Système",
+      "systemAnnouncementsDescription": "Fenêtres de maintenance et annonces de la plateforme."
+    }
+  },
+  "navigation": {
+    "overview": "Vue d'Ensemble",
+    "market-pulse": "Pouls du Marché",
+    "regulatory-radar": "Radar Réglementaire",
+    "content-hub": "Hub de Contenu",
+    "ai-console": "Console IA",
+    "settings": "Paramètres",
+    "helpAndSupport": "Aide et Support"
+  }
+}

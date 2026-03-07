@@ -1,7 +1,3 @@
-/* ═══════════════════════════════════════════════════════════════
-   UKPaymentHeatmap — card, map, legend, top-regions
-   ═══════════════════════════════════════════════════════════════ */
-
 /* Card shell */
 .uk-heatmap {
   background: var(--color-card);
@@ -17,7 +13,7 @@
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
 }
 
-/* ── Header ─────────────────────────────────────────── */
+/*  Header  */
 .uk-heatmap__header {
   display: flex;
   align-items: flex-start;
@@ -48,7 +44,7 @@
   text-overflow: ellipsis;
 }
 
-/* ── Dropdown ───────────────────────────────────────── */
+/*  Dropdown  */
 .uk-heatmap__select-wrap {
   position: relative;
   display: flex;
@@ -69,7 +65,9 @@
   padding: 4px 22px 4px 8px;
   cursor: pointer;
   outline: none;
-  transition: border-color 0.15s, background 0.15s;
+  transition:
+    border-color 0.15s,
+    background 0.15s;
   white-space: nowrap;
   max-width: 140px;
 }
@@ -91,7 +89,7 @@
   right: 8px;
 }
 
-/* ── Map ────────────────────────────────────────────── */
+/*  Map  */
 .uk-heatmap__map-wrap {
   position: relative;
   border-radius: var(--radius-md);
@@ -126,7 +124,7 @@
   border: 1px solid var(--color-border) !important;
   border-radius: 6px !important;
   overflow: hidden;
-  box-shadow: var(--shadow-sm, 0 1px 3px rgba(0,0,0,.08)) !important;
+  box-shadow: var(--shadow-sm, 0 1px 3px rgba(0, 0, 0, 0.08)) !important;
 }
 
 .uk-heatmap .leaflet-control-zoom a {
@@ -143,7 +141,7 @@
   background: var(--color-background) !important;
 }
 
-/* ── Legend ─────────────────────────────────────────── */
+/*  Legend  */
 .uk-heatmap__legend {
   display: flex;
   flex-direction: column;
@@ -168,7 +166,7 @@
   font-weight: 500;
 }
 
-/* ── Top Regions Dropdown ───────────────────────────── */
+/*  Top Regions Dropdown  */
 .uk-heatmap__regions {
   flex-shrink: 0;
   display: flex;
@@ -189,7 +187,7 @@
   text-overflow: ellipsis;
 }
 
-/* ── Dark mode ──────────────────────────────────────── */
+/*  Dark mode  */
 .dark .uk-heatmap__select {
   background: var(--color-card);
   color: var(--color-foreground);

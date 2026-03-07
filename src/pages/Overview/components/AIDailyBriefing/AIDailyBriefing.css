@@ -16,6 +16,71 @@
   overflow: hidden;
 }
 
+/* Skeleton shimmer — white-on-dark for the gradient background */
+.ai-briefing__sk-line,
+.ai-briefing__sk-inline,
+.ai-briefing__sk-icon,
+.ai-briefing__sk-btn {
+  display: inline-block;
+  border-radius: 4px;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.08) 25%,
+    rgba(255, 255, 255, 0.18) 50%,
+    rgba(255, 255, 255, 0.08) 75%
+  );
+  background-size: 200% 100%;
+  animation: ab-shimmer 1.6s ease-in-out infinite;
+}
+
+/* Widths */
+.ai-briefing__sk-inline--sm {
+  width: 90px;
+  height: 11px;
+}
+.ai-briefing__sk-line--md {
+  width: 70%;
+  height: 12px;
+  display: block;
+}
+.ai-briefing__sk-line--label {
+  width: 56px;
+  height: 11px;
+}
+.ai-briefing__sk-line--full {
+  width: 95%;
+  height: 11px;
+  display: block;
+}
+.ai-briefing__sk-line--three-quarter {
+  width: 72%;
+  height: 11px;
+  display: block;
+}
+.ai-briefing__sk-icon {
+  width: 13px;
+  height: 13px;
+  border-radius: 3px;
+  flex-shrink: 0;
+}
+.ai-briefing__sk-btn {
+  height: 32px;
+  width: 130px;
+  border-radius: 6px;
+}
+.ai-briefing__sk-btn--sm {
+  width: 108px;
+}
+
+@keyframes ab-shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
 /* Subtle decorative glow orbs */
 .ai-briefing::before {
   content: '';

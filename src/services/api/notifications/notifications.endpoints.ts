@@ -4,6 +4,6 @@
  */
 
 export const NOTIFICATIONS_ENDPOINTS = {
-  list: '/notification',
+  list: '/notification/',
   byId: (id: string) => `/notification/${id}`,
 } as const;

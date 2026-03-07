@@ -1,4 +1,5 @@
 import { NavLink, useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import {
   ChevronLeft,
   ChevronRight,
@@ -15,6 +16,7 @@ import './Sidebar.css';
 import Tooltip from '../../common/Tooltip/Tooltip';
 
 export default function Sidebar({ isCollapsed, onToggle }: SidebarProps) {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const { logout } = useAuth();
 
@@ -40,7 +42,11 @@ export default function Sidebar({ isCollapsed, onToggle }: SidebarProps) {
         <button
           className="sidebar__toggle"
           onClick={onToggle}
-          aria-label={isCollapsed ? 'Expand sidebar' : 'Collapse sidebar'}
+          aria-label={
+            isCollapsed
+              ? t('common.expandSidebar')
+              : t('common.collapseSidebar')
+          }
         >
           {isCollapsed ? <ChevronRight size={20} /> : <ChevronLeft size={20} />}
         </button>
@@ -64,7 +70,9 @@ export default function Sidebar({ isCollapsed, onToggle }: SidebarProps) {
                   </span>
                 )}
                 {!isCollapsed && (
-                  <span className="sidebar__nav-label">{item.label}</span>
+                  <span className="sidebar__nav-label">
+                    {t(`navigation.${item.id}`)}
+                  </span>
                 )}
               </NavLink>
             );
@@ -72,7 +80,10 @@ export default function Sidebar({ isCollapsed, onToggle }: SidebarProps) {
             return (
               <li key={item.id} className="sidebar__nav-item">
                 {isCollapsed ? (
-                  <Tooltip content={item.label} position="right">
+                  <Tooltip
+                    content={t(`navigation.${item.id}`)}
+                    position="right"
+                  >
                     {navLink}
                   </Tooltip>
                 ) : (
@@ -87,13 +98,13 @@ export default function Sidebar({ isCollapsed, onToggle }: SidebarProps) {
       {/* Bottom Actions */}
       <div className="sidebar__bottom-actions">
         {isCollapsed ? (
-          <Tooltip content="Storybook" position="right">
+          <Tooltip content={t('common.storybook')} position="right">
             <NavLink
               to={ROUTES.STORYBOOK}
               className={({ isActive }) =>
                 `sidebar__help-link ${isActive ? 'sidebar__nav-link--active' : ''}`
               }
-              aria-label="Storybook"
+              aria-label={t('common.storybook')}
             >
               <span className="sidebar__nav-icon">
                 <Layout size={20} />
@@ -106,24 +117,26 @@ export default function Sidebar({ isCollapsed, onToggle }: SidebarProps) {
             className={({ isActive }) =>
               `sidebar__help-link ${isActive ? 'sidebar__nav-link--active' : ''}`
             }
-            aria-label="Storybook"
+            aria-label={t('common.storybook')}
           >
             <span className="sidebar__nav-icon">
               <Layout size={20} />
             </span>
             {!isCollapsed && (
-              <span className="sidebar__nav-label">Storybook</span>
+              <span className="sidebar__nav-label">
+                {t('common.storybook')}
+              </span>
             )}
           </NavLink>
         )}
         {isCollapsed ? (
-          <Tooltip content="Help" position="right">
+          <Tooltip content={t('common.help')} position="right">
             <NavLink
               to={ROUTES.HELP_SUPPORT}
               className={({ isActive }) =>
                 `sidebar__help-link ${isActive ? 'sidebar__nav-link--active' : ''}`
               }
-              aria-label="Help"
+              aria-label={t('common.help')}
             >
               <span className="sidebar__nav-icon">
                 <HelpCircle size={20} />
@@ -136,20 +149,22 @@ export default function Sidebar({ isCollapsed, onToggle }: SidebarProps) {
             className={({ isActive }) =>
               `sidebar__help-link ${isActive ? 'sidebar__nav-link--active' : ''}`
             }
-            aria-label="Help"
+            aria-label={t('common.help')}
           >
             <span className="sidebar__nav-icon">
               <HelpCircle size={20} />
             </span>
-            {!isCollapsed && <span className="sidebar__nav-label">Help</span>}
+            {!isCollapsed && (
+              <span className="sidebar__nav-label">{t('common.help')}</span>
+            )}
           </NavLink>
         )}
         {isCollapsed ? (
-          <Tooltip content="Logout" position="right">
+          <Tooltip content={t('common.logout')} position="right">
             <button
               className="sidebar__logout-button"
               onClick={handleLogout}
-              aria-label="Logout"
+              aria-label={t('common.logout')}
             >
               <span className="sidebar__nav-icon">
                 <LogOut size={20} />
@@ -160,12 +175,14 @@ export default function Sidebar({ isCollapsed, onToggle }: SidebarProps) {
           <button
             className="sidebar__logout-button"
             onClick={handleLogout}
-            aria-label="Logout"
+            aria-label={t('common.logout')}
           >
             <span className="sidebar__nav-icon">
               <LogOut size={20} />
             </span>
-            {!isCollapsed && <span className="sidebar__nav-label">Logout</span>}
+            {!isCollapsed && (
+              <span className="sidebar__nav-label">{t('common.logout')}</span>
+            )}
           </button>
         )}
       </div>
