@@ -1,0 +1,129 @@
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.5rem 0;
+  margin-top: 2rem;
+  border-top: 1px solid var(--border-primary);
+  gap: 1rem;
+}
+
+.pagination__info {
+  flex: 0 0 auto;
+}
+
+.pagination__text {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+}
+
+.pagination__text strong {
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.pagination__controls {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex: 1;
+  justify-content: flex-end;
+}
+
+.pagination__button {
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--text-primary);
+  background-color: var(--bg-tertiary);
+  border: 1px solid var(--border-primary);
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.pagination__button:hover:not(:disabled) {
+  background-color: var(--bg-secondary);
+  border-color: var(--border-secondary);
+}
+
+.pagination__button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.pagination__pages {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.pagination__page {
+  min-width: 2.5rem;
+  height: 2.5rem;
+  padding: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--text-primary);
+  background-color: transparent;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pagination__page:hover {
+  background-color: var(--bg-secondary);
+  border-color: var(--border-primary);
+}
+
+.pagination__page--active {
+  background-color: var(--accent-primary);
+  color: var(--text-on-accent);
+  border-color: var(--accent-primary);
+}
+
+.pagination__page--active:hover {
+  background-color: var(--accent-primary-hover, var(--accent-primary));
+  border-color: var(--accent-primary-hover, var(--accent-primary));
+}
+
+.pagination__ellipsis {
+  min-width: 2.5rem;
+  height: 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-tertiary);
+  font-size: 0.875rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .pagination {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .pagination__info {
+    text-align: center;
+  }
+
+  .pagination__controls {
+    justify-content: center;
+  }
+
+  .pagination__button {
+    padding: 0.5rem 0.75rem;
+    font-size: 0.813rem;
+  }
+
+  .pagination__page {
+    min-width: 2rem;
+    height: 2rem;
+    font-size: 0.813rem;
+  }
+}

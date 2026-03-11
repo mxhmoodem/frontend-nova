@@ -80,7 +80,9 @@ export {
 // ============================================================================
 export {
   // Types
+  type ContentType,
   type ContentDocument,
+  type ContentListResponse,
   type ContentUploadRequest,
   type ContentUploadResponse,
   // API

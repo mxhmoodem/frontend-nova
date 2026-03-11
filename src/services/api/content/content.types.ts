@@ -8,7 +8,12 @@
 import type { FileType } from '../shared';
 
 /**
- * Content document metadata
+ * Backend content type categories
+ */
+export type ContentType = 'market' | 'legislation' | 'insight';
+
+/**
+ * Content document metadata - matches backend model fields
  */
 export interface ContentDocument {
   id: string;
@@ -16,34 +21,47 @@ export interface ContentDocument {
   description: string | null;
   source: string;
   file_type: FileType;
-  file_size: number;
-  author: string;
-  category: string;
+  content_type: ContentType;
   created_at: string;
   updated_at: string;
+  file_size?: number; // File size in bytes (available after upload)
+  uploaded_by?: string;
 }
 
 /**
- * List of content documents
+ * Paginated list response from GET /content/
+ */
+export interface ContentListResponse {
+  message: string;
+  content_type: string;
+  page: number;
+  page_size: number;
+  total: number;
+  data: ContentDocument[];
+}
+
+/**
+ * @deprecated Use ContentListResponse instead
  */
 export type ContentList = ContentDocument[];
 
 /**
- * Request body for uploading content
+ * Request body for uploading content - multipart form fields
+ * Maps to: POST /content/
  */
 export interface ContentUploadRequest {
   file: File;
   title: string;
   description?: string;
-  source: string;
-  category: string;
+  content_type: ContentType;
 }
 
 /**
  * Response after successful upload
+ * Backend returns: { message, id, file_size }
  */
 export interface ContentUploadResponse {
-  id: string;
   message: string;
-  document: ContentDocument;
+  id: string;
+  file_size: number;
 }

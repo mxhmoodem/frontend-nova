@@ -14,6 +14,8 @@ export type {
   TimelinePriority,
   TimelineRegion,
 } from './ComplianceTimeline';
+export { DeleteConfirmationModal } from './DeleteConfirmationModal';
+export type { DeleteConfirmationModalProps } from './DeleteConfirmationModal';
 export { DocumentCard } from './DocumentCard';
 export type {
   DocumentCardProps,
@@ -25,6 +27,8 @@ export { DocumentGrid } from './DocumentGrid';
 export type { DocumentGridProps } from './DocumentGrid';
 export { DocumentList } from './DocumentList';
 export type { DocumentListProps } from './DocumentList';
+export { DocumentPreviewModal } from './DocumentPreviewModal/DocumentPreviewModal';
+export type { DocumentPreviewModalProps } from './DocumentPreviewModal/DocumentPreviewModal.types';
 export { InsightCard } from './InsightCard';
 export type { InsightCardProps } from './InsightCard';
 export { LookupSearch } from './LookupSearch';
@@ -41,6 +45,8 @@ export type {
 } from './MarketStatCard';
 export { Modal } from './Modal/Modal';
 export type { ModalProps, ModalSize } from './Modal/Modal.types';
+export { Pagination } from './Pagination';
+export type { PaginationProps } from './Pagination';
 export { PaymentMethodBreakdown } from './PaymentMethodBreakdown';
 export type {
   PaymentMethodBreakdownProps,
@@ -52,6 +58,8 @@ export { TrendAlerts } from './TrendAlerts';
 export type { TrendAlertsProps, TrendAlert } from './TrendAlerts';
 export { StatCard } from './StatCard';
 export type { StatCardProps, StatCardVariant } from './StatCard';
+export { default as Tooltip } from './Tooltip/Tooltip';
+export type { TooltipProps, TooltipPosition } from './Tooltip/Tooltip.model';
 export { UploadDocumentModal } from './UploadDocumentModal/UploadDocumentModal';
 export type {
   UploadDocumentModalProps,

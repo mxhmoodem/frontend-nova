@@ -46,11 +46,12 @@ const FILE_TYPE_CONFIG: Record<FileType, FileTypeConfig> = {
  * Category configurations
  */
 const CATEGORY_CONFIG: Record<DocumentCategory, CategoryConfig> = {
-  regulation: { label: 'Regulation', className: 'regulation' },
+  regulation: { label: 'Regulatory', className: 'regulation' },
   market: { label: 'Market', className: 'market' },
   strategy: { label: 'Strategy', className: 'strategy' },
   data: { label: 'Data', className: 'data' },
   compliance: { label: 'Compliance', className: 'compliance' },
+  payments: { label: 'Payments', className: 'payments' },
   research: { label: 'Research', className: 'research' },
   report: { label: 'Report', className: 'report' },
   other: { label: 'Other', className: 'other' },
@@ -299,7 +300,6 @@ export const DocumentCard: React.FC<DocumentCardProps> = ({
 
       <div className="document-card__date-info">
         <span className="document-card__date">{formatDate(createdAt)}</span>
-        {author && <span className="document-card__author">by {author}</span>}
       </div>
 
       {showActions && (

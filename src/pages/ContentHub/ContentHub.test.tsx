@@ -1,7 +1,21 @@
 import { describe, it, afterEach } from 'vitest';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import { expect } from 'vitest';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import ContentHub from './ContentHub';
+
+function renderWithQueryClient(ui: React.ReactElement) {
+  const queryClient = new QueryClient({
+    defaultOptions: {
+      queries: { retry: false },
+      mutations: { retry: false },
+    },
+  });
+
+  return render(
+    <QueryClientProvider client={queryClient}>{ui}</QueryClientProvider>
+  );
+}
 
 describe('ContentHub', () => {
   afterEach(() => {
@@ -9,17 +23,17 @@ describe('ContentHub', () => {
   });
 
   it('renders', () => {
-    render(<ContentHub />);
+    renderWithQueryClient(<ContentHub />);
     expect(screen.getByText('Content Hub')).toBeDefined();
   });
 
   it('renders the upload document button', () => {
-    render(<ContentHub />);
+    renderWithQueryClient(<ContentHub />);
     expect(screen.getByText('Upload Document')).toBeInTheDocument();
   });
 
   it('opens upload modal when button is clicked', async () => {
-    render(<ContentHub />);
+    renderWithQueryClient(<ContentHub />);
 
     const uploadButton = screen.getByText('Upload Document');
     fireEvent.click(uploadButton);
@@ -30,7 +44,7 @@ describe('ContentHub', () => {
   });
 
   it('closes upload modal when close button is clicked', async () => {
-    render(<ContentHub />);
+    renderWithQueryClient(<ContentHub />);
 
     // Open modal
     const uploadButton = screen.getByText('Upload Document');

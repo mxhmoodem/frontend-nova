@@ -14,7 +14,7 @@ export interface ModalProps {
   /** Callback when the modal should close */
   onClose: () => void;
   /** Modal title displayed in the header */
-  title: string;
+  title: ReactNode;
   /** Optional subtitle/description below the title */
   subtitle?: string;
   /** Modal content */

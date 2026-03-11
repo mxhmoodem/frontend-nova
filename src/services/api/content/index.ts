@@ -7,7 +7,9 @@
 
 // Types
 export type {
+  ContentType,
   ContentDocument,
+  ContentListResponse,
   ContentList,
   ContentUploadRequest,
   ContentUploadResponse,

@@ -195,7 +195,7 @@
 }
 
 .content-hub__filter-card-body {
-  max-height: 200px;
+  max-height: 300px;
   overflow-y: auto;
   padding: var(--spacing-sm);
 }
@@ -280,6 +280,18 @@
 .content-hub__checkbox-label {
   font-size: 0.8125rem;
   color: var(--color-foreground);
+}
+
+.content-hub__checkbox-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.1;
+}
+
+.content-hub__checkbox-extensions {
+  font-size: 0.6875rem;
+  color: #9ca3af;
+  margin-top: 0.125rem;
 }
 
 /* ==================== */
