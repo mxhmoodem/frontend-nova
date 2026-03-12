@@ -86,6 +86,11 @@ export interface DocumentData {
   category?: DocumentCategory;
 
   /**
+   * The backend's raw content_type (e.g. 'market', 'legislation', 'insight')
+   */
+  rawContentType?: string;
+
+  /**
    * Whether the document is favorited
    */
   isFavorite?: boolean;

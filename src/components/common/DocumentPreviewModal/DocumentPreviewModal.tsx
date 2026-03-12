@@ -113,7 +113,11 @@ export function DocumentPreviewModal({
       setTextContent(null);
 
       try {
-        const blob = await contentApi.download(documentId);
+        const backendContentType = document.rawContentType || 
+          (documentCategory === 'regulation' ? 'legislation' : 
+           documentCategory === 'research' ? 'insight' : 'market');
+           
+        const blob = await contentApi.download(documentId, backendContentType as 'market' | 'legislation' | 'insight');
         const fileType = documentFileType.toLowerCase();
 
         if (isMounted) {

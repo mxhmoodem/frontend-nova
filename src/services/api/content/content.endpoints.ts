@@ -4,9 +4,9 @@
  */
 
 export const CONTENT_ENDPOINTS = {
-  list: '/content/hub',
-  hubById: (id: string) => `/content/hub/${id}`,
+  list: '/content/',
+  hubById: (id: string) => `/content/item/${id}`,
   byId: (id: string) => `/content/item/${id}`,
-  download: (id: string) => `/content/hub/${id}`,
+  download: (id: string) => `/content/item/${id}/download`,
   upload: '/content/',
 } as const;

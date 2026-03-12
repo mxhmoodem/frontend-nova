@@ -27,8 +27,12 @@ export const contentApi = {
   ): Promise<ContentListResponse> => {
     // Backend expects 0-based paging (page=0 is the first page)
     const backendPage = Math.max(0, page - 1);
+    const params: Record<string, string | number> = { page: backendPage, page_size: pageSize };
+    if (search) {
+      params.search = search;
+    }
     return apiClient.get<ContentListResponse>(CONTENT_ENDPOINTS.list, {
-      params: { page: backendPage, page_size: pageSize, search },
+      params
     });
   },
 
@@ -49,10 +53,12 @@ export const contentApi = {
 
   /**
    * Download a document file from content_hub
-   * GET /content/hub/{content_id}
+   * GET /content/item/{content_id}/download
    */
-  download: async (id: string): Promise<Blob> => {
-    return apiClient.download(CONTENT_ENDPOINTS.download(id));
+  download: async (id: string, contentType: ContentType): Promise<Blob> => {
+    return apiClient.download(CONTENT_ENDPOINTS.download(id), {
+      params: { content_type: contentType }
+    });
   },
 
   /**
@@ -77,9 +83,11 @@ export const contentApi = {
 
   /**
    * Delete a document from content_hub
-   * DELETE /content/hub/{content_id}
+   * DELETE /content/item/{content_id}
    */
-  delete: async (id: string): Promise<void> => {
-    return apiClient.delete(CONTENT_ENDPOINTS.hubById(id));
+  delete: async (id: string, contentType: ContentType): Promise<void> => {
+    return apiClient.delete(CONTENT_ENDPOINTS.hubById(id), {
+      params: { content_type: contentType }
+    });
   },
 };

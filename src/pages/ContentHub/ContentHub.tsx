@@ -106,6 +106,7 @@ function toDocumentData(doc: ContentDocument): DocumentData {
     source: doc.source || undefined,
     createdAt: new Date(doc.created_at),
     category: CONTENT_TYPE_TO_CATEGORY[doc.content_type ?? ''] ?? 'other',
+    rawContentType: doc.content_type,
     isFavorite: false,
   };
 }
@@ -255,9 +256,14 @@ export default function ContentHub() {
   };
 
   const handleDownload = (document: DocumentData) => {
+    const contentType = (document.rawContentType || 
+      (document.category === 'regulation' ? 'legislation' : 
+       document.category === 'research' ? 'insight' : 'market')) as ContentType;
+
     downloadMutation.mutate({
       id: document.id,
       filename: `${document.title}.${document.fileType}`,
+      contentType
     });
   };
 
@@ -267,7 +273,11 @@ export default function ContentHub() {
   };
 
   const handleDelete = (document: DocumentData) => {
-    deleteMutation.mutate({ id: document.id });
+    const contentType = (document.rawContentType || 
+      (document.category === 'regulation' ? 'legislation' : 
+       document.category === 'research' ? 'insight' : 'market')) as ContentType;
+
+    deleteMutation.mutate({ id: document.id, contentType });
   };
 
   const handleFavoriteToggle = (document: DocumentData) => {
