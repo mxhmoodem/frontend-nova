@@ -107,9 +107,7 @@ describe('RegulatoryRadar', () => {
 
   it('renders the search input', () => {
     renderPage();
-    expect(
-      screen.getByPlaceholderText('Search legislation...')
-    ).toBeDefined();
+    expect(screen.getByPlaceholderText('Search legislation...')).toBeDefined();
   });
 
   // ── Stat cards with API data ───────────────────────────────────────────
@@ -173,9 +171,7 @@ describe('RegulatoryRadar', () => {
     await user.type(input, 'Data Protection');
 
     expect(screen.getByText('Data Protection Act 2018')).toBeDefined();
-    expect(
-      screen.queryByText('Financial Services Act 2021')
-    ).toBeNull();
+    expect(screen.queryByText('Financial Services Act 2021')).toBeNull();
   });
 
   it('shows empty state when search has no matches', async () => {
@@ -243,9 +239,7 @@ describe('RegulatoryRadar', () => {
       refetch: vi.fn(),
     });
     renderPage();
-    expect(
-      screen.getByText('No legislation documents found.')
-    ).toBeDefined();
+    expect(screen.getByText('No legislation documents found.')).toBeDefined();
   });
 
   // ── Refresh button ────────────────────────────────────────────────────

@@ -136,9 +136,7 @@ describe('Legislation API', () => {
 
       const result = await legislationApi.getById(MOCK_ITEM.id);
 
-      expect(mockGet).toHaveBeenCalledWith(
-        `/legislation/${MOCK_ITEM.id}`
-      );
+      expect(mockGet).toHaveBeenCalledWith(`/legislation/${MOCK_ITEM.id}`);
       expect(result).toEqual(MOCK_ITEM);
     });
 
@@ -167,7 +165,10 @@ describe('LegislationItem type compliance', () => {
   });
 
   it('source can be a URL or "user"', () => {
-    const scraped: LegislationItem = { ...MOCK_ITEM, source: 'https://www.legislation.gov.uk/test' };
+    const scraped: LegislationItem = {
+      ...MOCK_ITEM,
+      source: 'https://www.legislation.gov.uk/test',
+    };
     const uploaded: LegislationItem = { ...MOCK_ITEM, source: 'user' };
 
     expect(scraped.source.startsWith('https://')).toBe(true);
