@@ -57,14 +57,14 @@ export function useUploadContent() {
 }
 
 /**
- * Hook to delete a document
- * DELETE /content/item/{id}?content_type=...
+ * Hook to delete a document from content_hub
+ * DELETE /content/hub/{id}
  */
 export function useDeleteContent() {
   const queryClient = useQueryClient();
 
-  return useMutation<void, Error, { id: string; contentType: ContentType }>({
-    mutationFn: ({ id, contentType }) => contentApi.delete(id, contentType),
+  return useMutation<void, Error, { id: string }>({
+    mutationFn: ({ id }) => contentApi.delete(id),
     onSuccess: (_, { id }) => {
       queryClient.invalidateQueries({ queryKey: contentKeys.lists() });
       queryClient.removeQueries({ queryKey: contentKeys.detail(id) });
@@ -73,16 +73,12 @@ export function useDeleteContent() {
 }
 
 /**
- * Hook to download a document
- * GET /content/item/{id}/download?content_type=...
+ * Hook to download a document from content_hub
+ * GET /content/hub/{id}
  */
 export function useDownloadContent() {
-  return useMutation<
-    Blob,
-    Error,
-    { id: string; contentType: ContentType; filename: string }
-  >({
-    mutationFn: ({ id, contentType }) => contentApi.download(id, contentType),
+  return useMutation<Blob, Error, { id: string; filename: string }>({
+    mutationFn: ({ id }) => contentApi.download(id),
     onSuccess: (blob, { filename }) => {
       const url = URL.createObjectURL(blob);
       const link = document.createElement('a');

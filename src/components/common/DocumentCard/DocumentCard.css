@@ -65,8 +65,14 @@
 }
 
 .document-card--grid.document-card--selected {
-  border-color: var(--color-primary);
-  box-shadow: 0 0 0 2px var(--color-primary);
+  border: 2px solid transparent;
+  border-radius: var(--radius-lg);
+  background-image:
+    linear-gradient(var(--color-card), var(--color-card)),
+    linear-gradient(90deg, var(--color-primary), var(--color-secondary));
+  background-origin: padding-box, border-box;
+  background-clip: padding-box, border-box;
+  box-shadow: none;
 }
 
 /* Grid - File Icon Section */
@@ -263,8 +269,13 @@
 }
 
 .document-card--list.document-card--selected {
-  border-color: var(--color-primary);
-  background-color: rgba(219, 0, 17, 0.05);
+  border: 2px solid transparent;
+  border-radius: var(--radius-md);
+  background-image:
+    linear-gradient(var(--color-card), var(--color-card)),
+    linear-gradient(90deg, var(--color-primary), var(--color-secondary));
+  background-origin: padding-box, border-box;
+  background-clip: padding-box, border-box;
 }
 
 /* List - File Icon */

@@ -29,7 +29,6 @@ import Tooltip from '../Tooltip/Tooltip';
 import type { DocumentPreviewModalProps } from './DocumentPreviewModal.types';
 import { formatFileSize, formatDate } from '../../../utils/formatters';
 import { contentApi } from '../../../services/api/content/content.api';
-import type { ContentType } from '../../../services/api/content/content.types';
 import './DocumentPreviewModal.css';
 
 // Configure PDF.js worker for document preview for PDFs
@@ -114,10 +113,7 @@ export function DocumentPreviewModal({
       setTextContent(null);
 
       try {
-        const contentType: ContentType =
-          documentCategory === 'regulation' ? 'legislation' : 'market';
-
-        const blob = await contentApi.download(documentId, contentType);
+        const blob = await contentApi.download(documentId);
         const fileType = documentFileType.toLowerCase();
 
         if (isMounted) {

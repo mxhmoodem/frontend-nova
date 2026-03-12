@@ -255,13 +255,8 @@ export default function ContentHub() {
   };
 
   const handleDownload = (document: DocumentData) => {
-    const contentType = (Object.entries(CONTENT_TYPE_TO_CATEGORY).find(
-      ([, cat]) => cat === document.category
-    )?.[0] ?? 'market') as ContentType;
-
     downloadMutation.mutate({
       id: document.id,
-      contentType,
       filename: `${document.title}.${document.fileType}`,
     });
   };
@@ -272,11 +267,7 @@ export default function ContentHub() {
   };
 
   const handleDelete = (document: DocumentData) => {
-    const contentType = (Object.entries(CONTENT_TYPE_TO_CATEGORY).find(
-      ([, cat]) => cat === document.category
-    )?.[0] ?? 'market') as ContentType;
-
-    deleteMutation.mutate({ id: document.id, contentType });
+    deleteMutation.mutate({ id: document.id });
   };
 
   const handleFavoriteToggle = (document: DocumentData) => {

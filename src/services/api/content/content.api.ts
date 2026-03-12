@@ -17,8 +17,8 @@ import type {
 
 export const contentApi = {
   /**
-   * Get all content documents (market + legislation + insight)
-   * GET /content/
+   * Get all content documents from content_hub table
+   * GET /content/hub
    */
   getAll: async (
     page = 1,
@@ -48,13 +48,11 @@ export const contentApi = {
   },
 
   /**
-   * Download a document file
-   * GET /content/item/{content_id}/download?content_type=market
+   * Download a document file from content_hub
+   * GET /content/hub/{content_id}
    */
-  download: async (id: string, contentType: ContentType): Promise<Blob> => {
-    return apiClient.download(CONTENT_ENDPOINTS.download(id), {
-      params: { content_type: contentType },
-    });
+  download: async (id: string): Promise<Blob> => {
+    return apiClient.download(CONTENT_ENDPOINTS.download(id));
   },
 
   /**
@@ -78,12 +76,10 @@ export const contentApi = {
   },
 
   /**
-   * Delete a document
-   * DELETE /content/item/{content_id}?content_type=market
+   * Delete a document from content_hub
+   * DELETE /content/hub/{content_id}
    */
-  delete: async (id: string, contentType: ContentType): Promise<void> => {
-    return apiClient.delete(CONTENT_ENDPOINTS.byId(id), {
-      params: { content_type: contentType },
-    });
+  delete: async (id: string): Promise<void> => {
+    return apiClient.delete(CONTENT_ENDPOINTS.hubById(id));
   },
 };

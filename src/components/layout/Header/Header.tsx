@@ -1,4 +1,5 @@
 import './Header.css';
+import { useTranslation } from 'react-i18next';
 import { IoMdNotifications } from 'react-icons/io';
 import { IoMdMoon, IoMdSunny } from 'react-icons/io';
 import { useState } from 'react';
@@ -10,6 +11,7 @@ import { notificationsConfig } from '../../common/Notifications/Notifications.co
 import { hasUnreadNotifications } from '../../common/Notifications/Notifications.utils';
 
 export default function Header() {
+  const { t } = useTranslation();
   const { theme, toggleTheme } = useTheme();
   const { user } = useAuth();
   const [isNotificationOpen, setIsNotificationOpen] = useState(false);
@@ -31,8 +33,8 @@ export default function Header() {
           <Button
             variant="ghost"
             className="header__action"
-            aria-label="Notifications"
-            tooltip="Notifications"
+            aria-label={t('common.notifications')}
+            tooltip={t('common.notifications')}
             tooltipPosition="bottom"
             onClick={() => setIsNotificationOpen(!isNotificationOpen)}
           >
@@ -53,10 +55,14 @@ export default function Header() {
           className="header__action"
           onClick={toggleTheme}
           aria-label={
-            theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'
+            theme === 'dark'
+              ? t('common.switchToLightMode')
+              : t('common.switchToDarkMode')
           }
           tooltip={
-            theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'
+            theme === 'dark'
+              ? t('common.switchToLightMode')
+              : t('common.switchToDarkMode')
           }
           tooltipPosition="bottom"
         >
