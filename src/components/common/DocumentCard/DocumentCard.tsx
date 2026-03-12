@@ -46,7 +46,7 @@ const FILE_TYPE_CONFIG: Record<FileType, FileTypeConfig> = {
  * Category configurations
  */
 const CATEGORY_CONFIG: Record<DocumentCategory, CategoryConfig> = {
-  regulation: { label: 'Regulatory', className: 'regulation' },
+  regulation: { label: 'Regulation', className: 'regulation' },
   market: { label: 'Market', className: 'market' },
   strategy: { label: 'Strategy', className: 'strategy' },
   data: { label: 'Data', className: 'data' },

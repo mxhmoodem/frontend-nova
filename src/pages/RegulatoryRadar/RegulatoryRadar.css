@@ -176,8 +176,12 @@
 
 /* ── Spin animation ───────────────────────────── */
 @keyframes spin {
-  from { transform: rotate(0deg); }
-  to   { transform: rotate(360deg); }
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 .spin {
@@ -214,7 +218,11 @@
 }
 
 .regulatory-radar__retry-btn:hover {
-  background-color: color-mix(in srgb, var(--color-destructive, #ef4444) 10%, transparent);
+  background-color: color-mix(
+    in srgb,
+    var(--color-destructive, #ef4444) 10%,
+    transparent
+  );
 }
 
 /* ── Table ────────────────────────────────────── */

@@ -377,7 +377,9 @@
   background: transparent;
   color: var(--color-muted-foreground);
   cursor: pointer;
-  transition: color 0.15s ease, background-color 0.15s ease;
+  transition:
+    color 0.15s ease,
+    background-color 0.15s ease;
 }
 
 .document-preview__copy-btn:hover {
@@ -790,7 +792,10 @@
   min-width: 100px;
 }
 
-.document-preview__excel-table tbody tr:first-child .document-preview__excel-cell {
+.document-preview__excel-table
+  tbody
+  tr:first-child
+  .document-preview__excel-cell {
   background-color: #f6f8fa;
   font-weight: 600;
 }
