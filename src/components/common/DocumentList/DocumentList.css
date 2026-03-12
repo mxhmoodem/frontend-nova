@@ -22,15 +22,16 @@
 }
 
 .document-list__empty-icon {
-  width: 48px;
-  height: 48px;
+  width: 72px;
+  height: 72px;
   margin-bottom: var(--spacing-md);
   color: var(--color-muted-foreground);
   opacity: 0.5;
 }
 
 .document-list__empty-message {
-  font-size: 0.875rem;
+  font-size: 1.0625rem;
+  line-height: 1.35;
 }
 
 /* Loading state */

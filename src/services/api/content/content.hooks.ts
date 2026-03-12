@@ -11,30 +11,33 @@ import { contentApi } from './content.api';
 import { contentKeys } from './content.keys';
 import type {
   ContentDocument,
-  ContentList,
+  ContentListResponse,
+  ContentType,
   ContentUploadRequest,
   ContentUploadResponse,
 } from './content.types';
 
 /**
  * Hook to fetch all content documents
+ * GET /content/
  */
-export function useContent() {
-  return useQuery<ContentList>({
-    queryKey: contentKeys.lists(),
-    queryFn: contentApi.getAll,
+export function useContent(page = 1, pageSize = 20, search = '') {
+  return useQuery<ContentListResponse>({
+    queryKey: [...contentKeys.lists(), page, pageSize, search],
+    queryFn: () => contentApi.getAll(page, pageSize, search),
     staleTime: QUERY_CONFIG.staleTime,
   });
 }
 
 /**
  * Hook to fetch a specific content document by ID
+ * GET /content/item/{id}?content_type=...
  */
-export function useContentDetail(id: string) {
+export function useContentDetail(id: string, contentType: ContentType) {
   return useQuery<ContentDocument>({
-    queryKey: contentKeys.detail(id),
-    queryFn: () => contentApi.getById(id),
-    enabled: !!id,
+    queryKey: [...contentKeys.detail(id), contentType],
+    queryFn: () => contentApi.getById(id, contentType),
+    enabled: !!id && !!contentType,
     staleTime: QUERY_CONFIG.staleTime,
   });
 }
@@ -54,26 +57,32 @@ export function useUploadContent() {
 }
 
 /**
- * Hook to delete a document
+ * Hook to delete a document from content_hub
+ * DELETE /content/item/{id}
  */
 export function useDeleteContent() {
   const queryClient = useQueryClient();
 
-  return useMutation<void, Error, string>({
-    mutationFn: contentApi.delete,
-    onSuccess: (_, deletedId) => {
+  return useMutation<void, Error, { id: string; contentType: ContentType }>({
+    mutationFn: ({ id, contentType }) => contentApi.delete(id, contentType),
+    onSuccess: (_, { id }) => {
       queryClient.invalidateQueries({ queryKey: contentKeys.lists() });
-      queryClient.removeQueries({ queryKey: contentKeys.detail(deletedId) });
+      queryClient.removeQueries({ queryKey: contentKeys.detail(id) });
     },
   });
 }
 
 /**
- * Hook to download a document
+ * Hook to download a document from content_hub
+ * GET /content/item/{id}/download
  */
 export function useDownloadContent() {
-  return useMutation<Blob, Error, { id: string; filename: string }>({
-    mutationFn: ({ id }) => contentApi.download(id),
+  return useMutation<
+    Blob,
+    Error,
+    { id: string; filename: string; contentType: ContentType }
+  >({
+    mutationFn: ({ id, contentType }) => contentApi.download(id, contentType),
     onSuccess: (blob, { filename }) => {
       const url = URL.createObjectURL(blob);
       const link = document.createElement('a');

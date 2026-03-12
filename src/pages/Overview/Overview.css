@@ -114,6 +114,12 @@
   align-items: stretch;
 }
 
+.overview__content-right {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
 /* Responsive breakpoints */
 @media (max-width: 1200px) {
   .overview__top-section {

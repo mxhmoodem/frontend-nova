@@ -48,8 +48,12 @@ export const UploadDocumentModal: React.FC<UploadDocumentModalProps> = ({
   isOpen,
   onClose,
   onUpload,
+  currentUser = '',
   defaultAuthor = '',
 }) => {
+  // Use hardcoded author name (matches avatar and header usage)
+  const HARDCODED_AUTHOR = 'Jane Smith';
+  const authorName = currentUser || defaultAuthor || HARDCODED_AUTHOR;
   // File state
   const [uploadedFile, setUploadedFile] = useState<UploadedFile | null>(null);
   const [isDragActive, setIsDragActive] = useState(false);
@@ -60,7 +64,9 @@ export const UploadDocumentModal: React.FC<UploadDocumentModalProps> = ({
     title: '',
     fileType: '',
     documentType: '',
-    author: defaultAuthor,
+    author: authorName,
+    description: '',
+    source: '',
   });
 
   // Validation errors
@@ -77,14 +83,16 @@ export const UploadDocumentModal: React.FC<UploadDocumentModalProps> = ({
       title: '',
       fileType: '',
       documentType: '',
-      author: defaultAuthor,
+      author: authorName,
+      description: '',
+      source: '',
     });
     setErrors({});
     setIsDragActive(false);
     if (fileInputRef.current) {
       fileInputRef.current.value = '';
     }
-  }, [defaultAuthor]);
+  }, [authorName]);
 
   /**
    * Handle modal close with state reset
@@ -103,7 +111,7 @@ export const UploadDocumentModal: React.FC<UploadDocumentModalProps> = ({
     if (!isValidType) {
       setErrors({
         title:
-          'Invalid file type. Please upload PDF, DOCX, PPT, XLSX, or image files.',
+          'Invalid file type. Please upload PDF, DOCX, PPT, XLSX, TXT, or image files.',
       });
       return;
     }
@@ -213,9 +221,6 @@ export const UploadDocumentModal: React.FC<UploadDocumentModalProps> = ({
     if (!formData.documentType) {
       newErrors.documentType = 'Document type is required';
     }
-    if (!formData.author.trim()) {
-      newErrors.author = 'Author is required';
-    }
 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
@@ -237,10 +242,7 @@ export const UploadDocumentModal: React.FC<UploadDocumentModalProps> = ({
    * Check if form is ready for submission
    */
   const isFormValid =
-    uploadedFile &&
-    formData.title.trim() &&
-    formData.documentType &&
-    formData.author.trim();
+    uploadedFile && formData.title.trim() && formData.documentType;
 
   return (
     <Modal
@@ -431,39 +433,47 @@ export const UploadDocumentModal: React.FC<UploadDocumentModalProps> = ({
             </div>
           </div>
 
-          {/* Author Field */}
+          {/* Author Field (Read-only) */}
           <div className="upload-document__field">
-            <label
-              htmlFor="upload-author"
-              className="upload-document__label upload-document__label--required"
-            >
+            <label htmlFor="upload-author" className="upload-document__label">
               Author
             </label>
             <input
               id="upload-author"
               type="text"
-              className={`upload-document__input ${
-                errors.author ? 'upload-document__input--error' : ''
-              }`}
+              className="upload-document__input upload-document__input--readonly"
               value={formData.author}
-              onChange={(e) => handleFieldChange('author', e.target.value)}
-              placeholder="Enter author name"
+              readOnly
             />
-            {errors.author && (
-              <span className="upload-document__error">{errors.author}</span>
-            )}
+          </div>
+
+          {/* Source Field (optional) */}
+          <div className="upload-document__field">
+            <label htmlFor="upload-source" className="upload-document__label">
+              Source (optional)
+            </label>
+            <input
+              id="upload-source"
+              type="text"
+              className="upload-document__input"
+              placeholder="Enter source URL, reference, or link"
+              value={formData.source || ''}
+              onChange={(e) => handleFieldChange('source', e.target.value)}
+            />
           </div>
 
           {/* Notes Field (optional) */}
           <div className="upload-document__field">
             <label htmlFor="upload-notes" className="upload-document__label">
-              Notes (optional)
+              Description (optional)
             </label>
             <textarea
               id="upload-notes"
               className="upload-document__textarea"
               placeholder="Add any additional notes"
               rows={3}
+              value={formData.description}
+              onChange={(e) => handleFieldChange('description', e.target.value)}
             />
           </div>
         </div>

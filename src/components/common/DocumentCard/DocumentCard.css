@@ -171,12 +171,20 @@
   display: flex;
   align-items: center;
   gap: var(--spacing-xs);
+  min-width: 0;
 }
 
 .document-card__meta-row svg {
   width: 12px;
   height: 12px;
   flex-shrink: 0;
+}
+
+.document-card__meta-row span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 180px;
 }
 
 .document-card__size {
@@ -309,6 +317,12 @@
 .document-card--list .document-card__subtitle {
   font-size: 0.75rem;
   color: var(--color-muted-foreground);
+  display: block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 300px;
+  max-width: 300px;
 }
 
 /* List - Category */
@@ -328,7 +342,8 @@
 /* List - Date Info */
 .document-card--list .document-card__date-info {
   flex-shrink: 0;
-  min-width: 140px;
+  width: 180px;
+  min-width: 180px;
   display: flex;
   flex-direction: column;
   align-items: flex-end;
@@ -343,6 +358,11 @@
 
 .document-card--list .document-card__author {
   font-size: 0.6875rem;
+  display: block;
+  max-width: 180px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 /* List - Actions */

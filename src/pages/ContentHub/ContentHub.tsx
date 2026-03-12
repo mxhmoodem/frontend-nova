@@ -1,115 +1,115 @@
 import { useState, useMemo } from 'react';
 import { FiBarChart2, FiUpload } from 'react-icons/fi';
-import { Search, LayoutGrid, List, SlidersHorizontal } from 'lucide-react';
+import { Search, LayoutGrid, List } from 'lucide-react';
 import { InformationButton } from '../../components/common/InformationButton/InformationButton';
 import { InfoModal } from '../../components/features/common/InfoModal';
-import { Button, DocumentGrid, DocumentList } from '../../components/common';
+import {
+  Button,
+  DocumentGrid,
+  DocumentList,
+  DocumentPreviewModal,
+  Pagination,
+} from '../../components/common';
 import { UploadDocumentModal } from '../../components/common/UploadDocumentModal/UploadDocumentModal';
 import ChartBuilderModal from '../../components/features/chart-builder';
 import { infoModalContent } from '../../constants/infoModalContent';
+import {
+  useContent,
+  useUploadContent,
+  useDeleteContent,
+  useDownloadContent,
+} from '../../services/api';
 import type { DocumentFormData } from '../../components/common/UploadDocumentModal/UploadDocumentModal.types';
 import type { DocumentData } from '../../components/common/DocumentCard/DocumentCard.types';
+import type {
+  ContentDocument,
+  ContentType,
+} from '../../services/api/content/content.types';
 import './ContentHub.css';
 
-// Source filter options
-const SOURCE_OPTIONS = [
-  { id: 'all', label: 'All Sources' },
-  { id: 'internal', label: 'Internal' },
-  { id: 'regulatory-uk', label: 'Regulatory Bodies (UK)' },
-  { id: 'news', label: 'News Feeds' },
-  { id: 'partner', label: 'Partner Emails' },
+// Category filter options
+const CATEGORY_OPTIONS = [
+  { id: 'all', label: 'All Categories' },
+  { id: 'market', label: 'Market' },
+  { id: 'regulation', label: 'Regulatory' },
+  { id: 'compliance', label: 'Compliance' },
+  { id: 'payments', label: 'Payments' },
+  { id: 'other', label: 'Other' },
 ];
 
 // File type filter options
 const FILE_TYPE_OPTIONS = [
-  { id: 'pdf', label: 'PDF Documents' },
-  { id: 'pptx', label: 'Presentations' },
-  { id: 'xlsx', label: 'Spreadsheets' },
+  {
+    id: 'documents',
+    label: 'Documents',
+    extensions: '.pdf, .docx, .ppt, .pptx, .txt',
+  },
+  {
+    id: 'spreadsheets',
+    label: 'Spreadsheets',
+    extensions: '.xls, .xlsx, .csv',
+  },
+  {
+    id: 'images',
+    label: 'Images',
+    extensions: '.png, .jpg, .jpeg, .gif, .webp',
+  },
+  {
+    id: 'favourites',
+    label: 'Favourites',
+    extensions: '',
+  },
 ];
 
-// Mock document data
-const MOCK_DOCUMENTS: DocumentData[] = [
-  {
-    id: '1',
-    title: 'Q4 2024 Financial Report',
-    fileType: 'pdf',
-    fileSize: 2457600,
-    author: 'John Smith',
-    createdAt: new Date('2024-01-15'),
-    category: 'report',
+// LocalStorage utilities for favorites
+const FAVORITES_STORAGE_KEY = 'content-hub-favorites';
+
+const getFavouritesFromStorage = (): Set<string> => {
+  if (typeof window === 'undefined') return new Set();
+  const stored = localStorage.getItem(FAVORITES_STORAGE_KEY);
+  return stored ? new Set(JSON.parse(stored)) : new Set();
+};
+
+const saveFavouritesToStorage = (favorites: Set<string>) => {
+  if (typeof window === 'undefined') return;
+  localStorage.setItem(
+    FAVORITES_STORAGE_KEY,
+    JSON.stringify(Array.from(favorites))
+  );
+};
+
+/** Map backend content_type to UI DocumentCategory */
+const CONTENT_TYPE_TO_CATEGORY: Record<string, DocumentData['category']> = {
+  market: 'market',
+  legislation: 'regulation',
+  insight: 'research',
+};
+
+/** Map UploadDocumentModal documentType to backend ContentType */
+const DOCUMENT_TYPE_TO_CONTENT_TYPE: Record<string, string> = {
+  market: 'market',
+  regulatory: 'legislation',
+  payments: 'market',
+  compliance: 'market',
+  other: 'market',
+};
+
+/** Map a backend ContentDocument to the DocumentData shape UI components expect */
+function toDocumentData(doc: ContentDocument): DocumentData {
+  return {
+    id: doc.id,
+    title: doc.title,
+    description: doc.description || undefined,
+    fileType: doc.file_type as DocumentData['fileType'],
+    fileSize: doc.file_size || 0,
+    author: doc.uploaded_by || 'Jane Smith',
+    source: doc.source || undefined,
+    createdAt: new Date(doc.created_at),
+    category: CONTENT_TYPE_TO_CATEGORY[doc.content_type ?? ''] ?? 'other',
+    rawContentType: doc.content_type,
     isFavorite: false,
-  },
-  {
-    id: '2',
-    title: 'Market Analysis Europe',
-    fileType: 'xlsx',
-    fileSize: 1048576,
-    author: 'Jane Doe',
-    createdAt: new Date('2024-01-10'),
-    category: 'market',
-    isFavorite: true,
-  },
-  {
-    id: '3',
-    title: 'Compliance Guidelines 2024',
-    fileType: 'docx',
-    fileSize: 512000,
-    author: 'Bob Wilson',
-    createdAt: new Date('2024-01-05'),
-    category: 'compliance',
-    isFavorite: false,
-  },
-  {
-    id: '4',
-    title: 'EPC Regulatory Update',
-    fileType: 'pdf',
-    fileSize: 1843200,
-    author: 'Sarah Johnson',
-    createdAt: new Date('2024-01-18'),
-    category: 'regulation',
-    isFavorite: true,
-  },
-  {
-    id: '5',
-    title: 'API Integration Specs',
-    fileType: 'json',
-    fileSize: 102400,
-    author: 'Mike Chen',
-    createdAt: new Date('2024-01-12'),
-    category: 'data',
-    isFavorite: false,
-  },
-  {
-    id: '6',
-    title: 'Strategic Roadmap 2025',
-    fileType: 'pptx',
-    fileSize: 5242880,
-    author: 'Emily Brown',
-    createdAt: new Date('2024-01-20'),
-    category: 'strategy',
-    isFavorite: false,
-  },
-  {
-    id: '7',
-    title: 'Transaction Data Export',
-    fileType: 'csv',
-    fileSize: 3145728,
-    author: 'David Lee',
-    createdAt: new Date('2024-01-08'),
-    category: 'data',
-    isFavorite: false,
-  },
-  {
-    id: '8',
-    title: 'Research: Payment Trends',
-    fileType: 'pdf',
-    fileSize: 4194304,
-    author: 'Anna Martinez',
-    createdAt: new Date('2024-01-22'),
-    category: 'research',
-    isFavorite: true,
-  },
-];
+  };
+}
 
 type ViewMode = 'grid' | 'list';
 
@@ -117,51 +117,101 @@ export default function ContentHub() {
   const [showInfo, setShowInfo] = useState(false);
   const [showChartBuilder, setShowChartBuilder] = useState(false);
   const [showUploadModal, setShowUploadModal] = useState(false);
+  const [showPreviewModal, setShowPreviewModal] = useState(false);
+  const [selectedDocument, setSelectedDocument] = useState<DocumentData | null>(
+    null
+  );
   const [searchQuery, setSearchQuery] = useState('');
   const [viewMode, setViewMode] = useState<ViewMode>('grid');
-  const [documents, setDocuments] = useState<DocumentData[]>(MOCK_DOCUMENTS);
-  const [selectedSource, setSelectedSource] = useState('all');
+  const [selectedCategory, setSelectedCategory] = useState('all');
   const [selectedFileTypes, setSelectedFileTypes] = useState<string[]>([]);
+  const [favorites, setFavorites] = useState<Set<string>>(() =>
+    getFavouritesFromStorage()
+  );
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 20;
 
-  // Filter documents based on search query, source, and file types
+  // ── API hooks ──────────────────────────────────────────────────────────────
+  const {
+    data: contentResponse,
+    isLoading,
+    isError,
+  } = useContent(currentPage, itemsPerPage, searchQuery);
+  const uploadMutation = useUploadContent();
+  const deleteMutation = useDeleteContent();
+  const downloadMutation = useDownloadContent();
+
+  // Map backend documents to UI shape
+  const documents: DocumentData[] = useMemo(
+    () =>
+      (contentResponse?.data ?? []).map((doc) => ({
+        ...toDocumentData(doc),
+        isFavorite: favorites.has(doc.id),
+      })),
+    [contentResponse, favorites]
+  );
+
+  // Sync selectedDocument with updated documents (for favorite status changes)
+  const syncedSelectedDocument = useMemo(() => {
+    if (!selectedDocument) return null;
+    const updatedDocument = documents.find(
+      (doc) => doc.id === selectedDocument.id
+    );
+    return updatedDocument || selectedDocument;
+  }, [documents, selectedDocument]);
+
+  // Filter documents based on category and file types (search is handled by API)
   const filteredDocuments = useMemo(() => {
     let filtered = documents;
 
-    // Filter by search query
-    if (searchQuery.trim()) {
-      const query = searchQuery.toLowerCase();
-      filtered = filtered.filter(
-        (doc) =>
-          doc.title.toLowerCase().includes(query) ||
-          doc.author?.toLowerCase().includes(query) ||
-          doc.category?.toLowerCase().includes(query)
-      );
+    // Filter by category if not "all"
+    if (selectedCategory !== 'all') {
+      filtered = filtered.filter((doc) => doc.category === selectedCategory);
     }
 
     // Filter by file type if any selected
     if (selectedFileTypes.length > 0) {
       filtered = filtered.filter((doc) => {
-        // Map file types to filter categories
-        if (selectedFileTypes.includes('pdf') && doc.fileType === 'pdf')
-          return true;
-        if (
-          selectedFileTypes.includes('pptx') &&
-          (doc.fileType === 'pptx' || doc.fileType === 'ppt')
-        )
-          return true;
-        if (
-          selectedFileTypes.includes('xlsx') &&
-          (doc.fileType === 'xlsx' ||
-            doc.fileType === 'xls' ||
-            doc.fileType === 'csv')
-        )
-          return true;
-        return false;
+        const fileTypeStr = String(doc.fileType).toLowerCase();
+
+        // Check if document matches any of the selected filter categories
+        const matchesDocuments =
+          selectedFileTypes.includes('documents') &&
+          (fileTypeStr === 'pdf' ||
+            fileTypeStr === 'docx' ||
+            fileTypeStr === 'ppt' ||
+            fileTypeStr === 'pptx' ||
+            fileTypeStr === 'txt');
+
+        const matchesSpreadsheets =
+          selectedFileTypes.includes('spreadsheets') &&
+          (fileTypeStr === 'xlsx' ||
+            fileTypeStr === 'xls' ||
+            fileTypeStr === 'csv');
+
+        const matchesImages =
+          selectedFileTypes.includes('images') &&
+          (fileTypeStr === 'png' ||
+            fileTypeStr === 'jpg' ||
+            fileTypeStr === 'jpeg' ||
+            fileTypeStr === 'gif' ||
+            fileTypeStr === 'webp');
+
+        const matchesFavorites =
+          selectedFileTypes.includes('favourites') && doc.isFavorite;
+
+        // Return true if document matches ANY selected category
+        return (
+          matchesDocuments ||
+          matchesSpreadsheets ||
+          matchesImages ||
+          matchesFavorites
+        );
       });
     }
 
     return filtered;
-  }, [documents, searchQuery, selectedFileTypes]);
+  }, [documents, selectedCategory, selectedFileTypes]);
 
   const handleFileTypeToggle = (fileTypeId: string) => {
     setSelectedFileTypes((prev) =>
@@ -169,33 +219,55 @@ export default function ContentHub() {
         ? prev.filter((id) => id !== fileTypeId)
         : [...prev, fileTypeId]
     );
+    setCurrentPage(1); // Reset to first page when filters change
+  };
+
+  const handleCategoryChange = (category: string) => {
+    setSelectedCategory(category);
+    setCurrentPage(1); // Reset to first page when category changes
+  };
+
+  const handleSearchChange = (query: string) => {
+    setSearchQuery(query);
+    setCurrentPage(1); // Reset to first page when search changes
+  };
+
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page);
+    // Optionally scroll to top of content
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   const handleDocumentUpload = (file: File, formData: DocumentFormData) => {
-    // Create new document from upload
-    const newDocument: DocumentData = {
-      id: `doc-${Date.now()}`,
-      title: formData.title,
-      fileType: formData.fileType as DocumentData['fileType'],
-      fileSize: file.size,
-      author: formData.author,
-      createdAt: new Date(),
-      category: formData.documentType as DocumentData['category'],
-      isFavorite: false,
-    };
+    const contentType = (DOCUMENT_TYPE_TO_CONTENT_TYPE[formData.documentType] ??
+      'market') as 'market' | 'legislation' | 'insight';
 
-    setDocuments((prev) => [newDocument, ...prev]);
-    setShowUploadModal(false);
+    uploadMutation.mutate({
+      file,
+      title: formData.title,
+      content_type: contentType,
+      description: formData.description,
+    });
   };
 
   const handleDocumentClick = (document: DocumentData) => {
-    console.log('Document clicked:', document);
-    // TODO: Open document preview or details
+    setSelectedDocument(document);
+    setShowPreviewModal(true);
   };
 
   const handleDownload = (document: DocumentData) => {
-    console.log('Download:', document.title);
-    // TODO: Implement download
+    const contentType = (document.rawContentType ||
+      (document.category === 'regulation'
+        ? 'legislation'
+        : document.category === 'research'
+          ? 'insight'
+          : 'market')) as ContentType;
+
+    downloadMutation.mutate({
+      id: document.id,
+      filename: `${document.title}.${document.fileType}`,
+      contentType,
+    });
   };
 
   const handleShare = (document: DocumentData) => {
@@ -204,18 +276,58 @@ export default function ContentHub() {
   };
 
   const handleDelete = (document: DocumentData) => {
-    if (confirm(`Are you sure you want to delete "${document.title}"?`)) {
-      setDocuments((prev) => prev.filter((doc) => doc.id !== document.id));
-    }
+    const contentType = (document.rawContentType ||
+      (document.category === 'regulation'
+        ? 'legislation'
+        : document.category === 'research'
+          ? 'insight'
+          : 'market')) as ContentType;
+
+    deleteMutation.mutate({ id: document.id, contentType });
   };
 
   const handleFavoriteToggle = (document: DocumentData) => {
-    setDocuments((prev) =>
-      prev.map((doc) =>
-        doc.id === document.id ? { ...doc, isFavorite: !doc.isFavorite } : doc
-      )
-    );
+    setFavorites((prev) => {
+      const newFavorites = new Set(prev);
+      if (newFavorites.has(document.id)) {
+        newFavorites.delete(document.id);
+      } else {
+        newFavorites.add(document.id);
+      }
+      saveFavouritesToStorage(newFavorites);
+      return newFavorites;
+    });
   };
+
+  const handlePreviousDocument = () => {
+    if (!selectedDocument) return;
+    const currentIndex = filteredDocuments.findIndex(
+      (doc) => doc.id === selectedDocument.id
+    );
+    if (currentIndex > 0) {
+      setSelectedDocument(filteredDocuments[currentIndex - 1]);
+    }
+  };
+
+  const handleNextDocument = () => {
+    if (!selectedDocument) return;
+    const currentIndex = filteredDocuments.findIndex(
+      (doc) => doc.id === selectedDocument.id
+    );
+    if (currentIndex < filteredDocuments.length - 1) {
+      setSelectedDocument(filteredDocuments[currentIndex + 1]);
+    }
+  };
+
+  if (isError) {
+    return (
+      <div className="content-hub">
+        <p className="content-hub__error">
+          Failed to load documents. Please try again.
+        </p>
+      </div>
+    );
+  }
 
   return (
     <div className="content-hub">
@@ -233,6 +345,17 @@ export default function ContentHub() {
         isOpen={showUploadModal}
         onClose={() => setShowUploadModal(false)}
         onUpload={handleDocumentUpload}
+      />
+      <DocumentPreviewModal
+        isOpen={showPreviewModal}
+        onClose={() => setShowPreviewModal(false)}
+        document={syncedSelectedDocument}
+        allDocuments={filteredDocuments}
+        onDownload={handleDownload}
+        onDelete={handleDelete}
+        onFavoriteToggle={handleFavoriteToggle}
+        onPrevious={handlePreviousDocument}
+        onNext={handleNextDocument}
       />
       <header className="content-hub-header">
         <div className="content-hub-header__top">
@@ -271,15 +394,12 @@ export default function ContentHub() {
           <input
             type="text"
             value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
+            onChange={(e) => handleSearchChange(e.target.value)}
             placeholder="Search documents..."
             className="content-hub__search-input"
           />
         </div>
         <div className="content-hub__search-actions">
-          <button className="content-hub__filter-btn" aria-label="Filter">
-            <SlidersHorizontal size={18} />
-          </button>
           <div className="content-hub__view-toggle">
             <button
               className={`content-hub__view-btn ${viewMode === 'grid' ? 'content-hub__view-btn--active' : ''}`}
@@ -305,20 +425,20 @@ export default function ContentHub() {
       <div className="content-hub__main">
         {/* Left sidebar with filters */}
         <aside className="content-hub__sidebar">
-          {/* Sources filter card */}
+          {/* Category filter card */}
           <div className="content-hub__filter-card">
             <div className="content-hub__filter-card-header">
-              <h3 className="content-hub__filter-title">SOURCES</h3>
+              <h3 className="content-hub__filter-title">CATEGORY</h3>
             </div>
             <div className="content-hub__filter-card-body">
               <ul className="content-hub__filter-list">
-                {SOURCE_OPTIONS.map((source) => (
-                  <li key={source.id}>
+                {CATEGORY_OPTIONS.map((category) => (
+                  <li key={category.id}>
                     <button
-                      className={`content-hub__filter-item ${selectedSource === source.id ? 'content-hub__filter-item--active' : ''}`}
-                      onClick={() => setSelectedSource(source.id)}
+                      className={`content-hub__filter-item ${selectedCategory === category.id ? 'content-hub__filter-item--active' : ''}`}
+                      onClick={() => handleCategoryChange(category.id)}
                     >
-                      {source.label}
+                      {category.label}
                     </button>
                   </li>
                 ))}
@@ -342,8 +462,15 @@ export default function ContentHub() {
                         onChange={() => handleFileTypeToggle(fileType.id)}
                         className="content-hub__checkbox"
                       />
-                      <span className="content-hub__checkbox-label">
-                        {fileType.label}
+                      <span className="content-hub__checkbox-text">
+                        <span className="content-hub__checkbox-label">
+                          {fileType.label}
+                        </span>
+                        {fileType.extensions && (
+                          <span className="content-hub__checkbox-extensions">
+                            {fileType.extensions}
+                          </span>
+                        )}
                       </span>
                     </label>
                   </li>
@@ -355,7 +482,9 @@ export default function ContentHub() {
 
         {/* Document display */}
         <div className="content-hub__content">
-          {viewMode === 'grid' ? (
+          {isLoading ? (
+            <p className="content-hub__loading">Loading documents...</p>
+          ) : viewMode === 'grid' ? (
             <DocumentGrid
               documents={filteredDocuments}
               onDocumentClick={handleDocumentClick}
@@ -382,6 +511,19 @@ export default function ContentHub() {
                   ? 'No documents match your filters'
                   : 'No documents yet. Upload your first document!'
               }
+            />
+          )}
+
+          {/* Pagination */}
+          {!isLoading && contentResponse && (
+            <Pagination
+              currentPage={currentPage}
+              totalPages={Math.ceil(
+                (contentResponse.total || 0) / itemsPerPage
+              )}
+              totalItems={contentResponse.total}
+              itemsPerPage={itemsPerPage}
+              onPageChange={handlePageChange}
             />
           )}
         </div>

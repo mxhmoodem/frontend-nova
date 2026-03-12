@@ -7,6 +7,11 @@
   position: relative;
 }
 
+[data-theme='dark'] .dashboard-layout,
+.dark .dashboard-layout {
+  background-color: var(--color-background);
+}
+
 .dashboard-layout::before {
   content: '';
   position: absolute;
@@ -40,6 +45,12 @@
   padding: 1.5rem;
   position: relative;
   z-index: 10;
+  background-color: #ffffff;
+}
+
+[data-theme='dark'] .dashboard-layout__content,
+.dark .dashboard-layout__content {
+  background-color: var(--color-background);
 }
 
 @media (max-width: 768px) {

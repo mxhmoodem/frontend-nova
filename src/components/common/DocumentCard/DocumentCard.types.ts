@@ -26,6 +26,7 @@ export type DocumentCategory =
   | 'strategy'
   | 'data'
   | 'compliance'
+  | 'payments'
   | 'research'
   | 'report'
   | 'other';
@@ -45,6 +46,11 @@ export interface DocumentData {
   title: string;
 
   /**
+   * Document description (optional)
+   */
+  description?: string;
+
+  /**
    * File type (extension)
    */
   fileType: FileType;
@@ -60,6 +66,11 @@ export interface DocumentData {
   author?: string;
 
   /**
+   * Source URL, reference, or link (optional)
+   */
+  source?: string;
+
+  /**
    * Date the document was created/uploaded
    */
   createdAt: Date;
@@ -73,6 +84,11 @@ export interface DocumentData {
    * Document category for tagging
    */
   category?: DocumentCategory;
+
+  /**
+   * The backend's raw content_type (e.g. 'market', 'legislation', 'insight')
+   */
+  rawContentType?: string;
 
   /**
    * Whether the document is favorited

@@ -24,6 +24,9 @@ export const ACCEPTED_FILE_TYPES = {
   'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet': [
     '.xlsx',
   ],
+  'text/csv': ['.csv'],
+  'application/csv': ['.csv'],
+  'text/plain': ['.txt'],
   'image/png': ['.png'],
   'image/jpeg': ['.jpg', '.jpeg'],
   'image/gif': ['.gif'],
@@ -43,6 +46,9 @@ export const FILE_TYPE_LABELS: Record<string, string> = {
   'application/vnd.ms-excel': 'Excel Spreadsheet',
   'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet':
     'Excel Spreadsheet',
+  'text/csv': 'CSV File',
+  'application/csv': 'CSV File',
+  'text/plain': 'Text File',
   'image/png': 'PNG Image',
   'image/jpeg': 'JPEG Image',
   'image/gif': 'GIF Image',
@@ -88,6 +94,8 @@ export interface DocumentFormData {
   fileType: string;
   documentType: DocumentType | '';
   author: string;
+  description: string;
+  source?: string;
 }
 
 /**
@@ -100,6 +108,8 @@ export interface UploadDocumentModalProps {
   onClose: () => void;
   /** Callback when document is successfully uploaded */
   onUpload: (file: File, formData: DocumentFormData) => void;
-  /** Default author name (optional) */
+  /** Current user name (read-only author) */
+  currentUser?: string;
+  /** Default author name (optional, deprecated - use currentUser) */
   defaultAuthor?: string;
 }

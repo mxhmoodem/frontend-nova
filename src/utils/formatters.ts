@@ -21,3 +21,31 @@ export function getInitials(name: string): string {
 export function getFirstName(name: string): string {
   return name.trim().split(/\s+/)[0] || '';
 }
+
+/**
+ * Formats a file size in bytes to a human-readable string
+ * @param bytes - File size in bytes
+ * @returns Formatted file size (e.g., "1.5 MB")
+ */
+export function formatFileSize(bytes: number): string {
+  if (bytes === 0) return '0 B';
+
+  const units = ['B', 'KB', 'MB', 'GB', 'TB'];
+  const k = 1024;
+  const i = Math.floor(Math.log(bytes) / Math.log(k));
+
+  return `${parseFloat((bytes / Math.pow(k, i)).toFixed(2))} ${units[i]}`;
+}
+
+/**
+ * Formats a date to a readable string
+ * @param date - Date to format
+ * @returns Formatted date string (e.g., "Feb 25, 2026")
+ */
+export function formatDate(date: Date): string {
+  return new Intl.DateTimeFormat('en-US', {
+    month: 'short',
+    day: 'numeric',
+    year: 'numeric',
+  }).format(date);
+}
