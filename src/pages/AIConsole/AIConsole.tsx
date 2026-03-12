@@ -1,5 +1,6 @@
 ﻿import { useState, useRef, useEffect } from 'react';
 import { FiPlus } from 'react-icons/fi';
+import { Sparkles } from 'lucide-react';
 import { InformationButton } from '../../components/common/InformationButton/InformationButton';
 import { AIQuerySearch } from '../../components/common/AIQuerySearch';
 import { Button } from '../../components/common';
@@ -9,16 +10,25 @@ import { infoModalContent } from '../../constants/infoModalContent';
 import { promptCards } from './AIConsole.config';
 import { getFirstName } from '../../utils/formatters';
 import { useAuth } from '../../hooks/useAuth';
+import { useAIConsole } from '../../context/AIConsoleContext';
+import type { ChatEntry } from '../../context/AIConsoleContext';
+import { useAgentQuery } from '../../services/api/agent';
+import type { ConversationMessage } from '../../services/api/agent';
 import './AIConsole.css';
 
 export default function AIConsole() {
   const [showInfo, setShowInfo] = useState(false);
-  const [messages, setMessages] = useState<
-    { role: 'user' | 'ai'; content: string; timestamp: string }[]
-  >([]);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const { user } = useAuth();
   const userName = user?.name ? getFirstName(user.name) : 'User';
+  const userFullName = user?.name ?? 'User';
+
+  // Persistent conversation state
+  const { messages, addUserMessage, addAIMessage, clearConversation } =
+    useAIConsole();
+
+  // React Query mutation for the agent API
+  const { mutate: queryAgent, isPending } = useAgentQuery();
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -26,34 +36,36 @@ export default function AIConsole() {
 
   useEffect(() => {
     scrollToBottom();
-  }, [messages]);
+  }, [messages, isPending]);
 
   const handleAsk = (query: string) => {
-    if (!query.trim()) return;
+    if (!query.trim() || isPending) return;
 
-    const timestamp = new Date().toLocaleTimeString([], {
-      hour: '2-digit',
-      minute: '2-digit',
+    // Snapshot current history before updating state, then append new user msg
+    const historyForBackend: ConversationMessage[] = [
+      // Convert existing messages to backend format (ai → assistant)
+      ...messages.map((m: ChatEntry) => ({
+        role: (m.role === 'ai' ? 'assistant' : 'user') as 'user' | 'assistant',
+        content: m.content,
+      })),
+      { role: 'user' as const, content: query },
+    ];
+
+    // Update the UI immediately
+    addUserMessage(query);
+
+    // Call the agent API
+    queryAgent(historyForBackend, {
+      onSuccess: (res) => {
+        addAIMessage(res.message, res.sources ?? []);
+      },
+      onError: (err) => {
+        addAIMessage(
+          `Sorry, something went wrong. Please try again. (${err.message})`,
+          []
+        );
+      },
     });
-    const newUserMessage = { role: 'user' as const, content: query, timestamp };
-
-    setMessages((prev) => [...prev, newUserMessage]);
-
-    // Simulate AI response until BE is integrated
-    setTimeout(() => {
-      const aiTimestamp = new Date().toLocaleTimeString([], {
-        hour: '2-digit',
-        minute: '2-digit',
-      });
-      setMessages((prev) => [
-        ...prev,
-        {
-          role: 'ai' as const,
-          content: `I've analysed your request regarding "${query}". This is a demonstration of the AI console interface. How else can I assist you with your market research today?`,
-          timestamp: aiTimestamp,
-        },
-      ]);
-    }, 1000);
   };
 
   return (
@@ -78,14 +90,14 @@ export default function AIConsole() {
             variant="primary"
             text="New Chat"
             icon={<FiPlus size={16} />}
-            onClick={() => setMessages([])}
+            onClick={clearConversation}
             className="ai-console__new-chat-button"
           />
         </div>
         <p className="ai-console__subheading">Powered by AI</p>
       </header>
 
-      {messages.length === 0 ? (
+      {messages.length === 0 && !isPending ? (
         <div className="ai-console-landing">
           <div className="ai-landing-text">
             <h1 className="ai-landing-greeting">
@@ -113,22 +125,48 @@ export default function AIConsole() {
           </div>
         </div>
       ) : (
-        <div className="ai-console-messages">
-          {messages.map((msg, index) => (
-            <ChatMessage
-              key={index}
-              role={msg.role}
-              content={msg.content}
-              userInitals={userName}
-              timestamp={msg.timestamp}
-            />
-          ))}
-          <div ref={messagesEndRef} />
+        <div className="ai-console-scroll-area">
+          <div className="ai-console-messages">
+            {messages.map((msg: ChatEntry, index: number) => (
+              <ChatMessage
+                key={index}
+                role={msg.role}
+                content={msg.content}
+                userInitals={userFullName}
+                timestamp={msg.timestamp}
+                sources={msg.sources}
+              />
+            ))}
+
+            {/* Typing indicator while waiting for the AI */}
+            {isPending && (
+              <div className="chat-message chat-message--ai">
+                <div className="chat-message__container">
+                  <div className="chat-message__avatar chat-message__avatar--ai">
+                    <Sparkles size={20} />
+                  </div>
+                  <div className="chat-message__content">
+                    <div className="chat-message__bubble ai-console-typing">
+                      <span />
+                      <span />
+                      <span />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            <div ref={messagesEndRef} />
+          </div>
         </div>
       )}
 
       <div className="ai-search-container">
-        <AIQuerySearch onAsk={handleAsk} placeholder="Ask something.." />
+        <AIQuerySearch
+          onAsk={handleAsk}
+          placeholder="Ask something.."
+          disabled={isPending}
+        />
       </div>
     </div>
   );

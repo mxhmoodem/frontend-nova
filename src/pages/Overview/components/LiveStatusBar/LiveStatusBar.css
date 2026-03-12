@@ -1,0 +1,146 @@
+.live-status-bar {
+  background: #f8f9fa;
+  border-radius: var(--radius-md);
+  padding: 0 var(--spacing-lg);
+  height: 36px;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.dark .live-status-bar {
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.live-status-bar__inner {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+  flex-wrap: nowrap;
+  overflow: hidden;
+}
+
+.live-status-bar__group {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin-left: 10px;
+  font-size: 0.72rem;
+  font-weight: 400;
+  letter-spacing: 0.01em;
+  color: rgba(0, 0, 0, 0.6);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.live-status-bar__group strong {
+  color: rgba(0, 0, 0, 0.85);
+  font-weight: 600;
+}
+
+.live-status-bar__group svg {
+  color: rgba(0, 0, 0, 0.45);
+  flex-shrink: 0;
+}
+
+/* Urgency indicator */
+.live-status-bar__group--has-alerts {
+  color: #dc2626;
+}
+
+.live-status-bar__group--has-alerts strong {
+  color: #991b1b;
+}
+
+.live-status-bar__group--has-alerts svg {
+  color: #991b1b;
+}
+
+/* Separator */
+.live-status-bar__sep {
+  width: 1px;
+  height: 16px;
+  background: rgba(0, 0, 0, 0.1);
+  flex-shrink: 0;
+}
+
+/* Dark mode */
+.dark .live-status-bar__group {
+  color: rgba(255, 255, 255, 0.65);
+}
+
+.dark .live-status-bar__group strong {
+  color: rgba(255, 255, 255, 0.95);
+}
+
+.dark .live-status-bar__group svg {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.dark .live-status-bar__sep {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* Animated pulse dot */
+.live-status-bar__dot {
+  display: inline-block;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  animation: status-pulse 2.5s ease-in-out infinite;
+}
+
+.live-status-bar__dot--live {
+  background: #34d399;
+  box-shadow: 0 0 0 0 rgba(52, 211, 153, 0.7);
+}
+
+.live-status-bar__dot--offline {
+  background: #f87171;
+  animation: none;
+}
+
+.live-status-bar__dot--degraded {
+  background: #fbbf24;
+}
+
+@keyframes status-pulse {
+  0%,
+  100% {
+    opacity: 1;
+    box-shadow: 0 0 0 0 rgba(52, 211, 153, 0.5);
+  }
+  50% {
+    opacity: 0.85;
+    box-shadow: 0 0 0 4px rgba(52, 211, 153, 0);
+  }
+}
+
+/* Separator */
+.live-status-bar__sep {
+  width: 1px;
+  height: 14px;
+  background: rgba(255, 255, 255, 0.15);
+  flex-shrink: 0;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .live-status-bar__group:nth-child(n + 5) {
+    display: none;
+  }
+}
+
+@media (max-width: 640px) {
+  .live-status-bar {
+    padding: 0 var(--spacing-md);
+  }
+  .live-status-bar__group:nth-child(n + 3) {
+    display: none;
+  }
+  .live-status-bar__sep:nth-child(n + 3) {
+    display: none;
+  }
+}

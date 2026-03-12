@@ -9,24 +9,20 @@
 import { apiClient } from '../shared';
 import { PAYMENT_ENDPOINTS } from './payment.endpoints';
 import type {
-  PaymentStats,
-  PaymentMethodsResponse,
+  PaymentStatsResponse,
   TrendAlertsResponse,
+  RefreshResponse,
+  HistoryResponse,
+  HistoryDateRange,
 } from './payment.types';
 
 export const paymentApi = {
   /**
    * Get main dashboard statistics
+   * Returns consumer credit, credit cards, mortgages, bank rate
    */
-  getStats: async (): Promise<PaymentStats> => {
-    return apiClient.get<PaymentStats>(PAYMENT_ENDPOINTS.stats);
-  },
-
-  /**
-   * Get UK payment method market share breakdown
-   */
-  getPaymentMethods: async (): Promise<PaymentMethodsResponse> => {
-    return apiClient.get<PaymentMethodsResponse>(PAYMENT_ENDPOINTS.methods);
+  getStats: async (): Promise<PaymentStatsResponse> => {
+    return apiClient.get<PaymentStatsResponse>(PAYMENT_ENDPOINTS.stats);
   },
 
   /**
@@ -39,7 +35,35 @@ export const paymentApi = {
   /**
    * Manually trigger a data refresh from the Bank of England API
    */
-  refreshData: async (): Promise<{ message: string }> => {
-    return apiClient.post<{ message: string }>(PAYMENT_ENDPOINTS.refresh);
+  refreshData: async (): Promise<RefreshResponse> => {
+    return apiClient.post<RefreshResponse>(PAYMENT_ENDPOINTS.refresh);
+  },
+
+  /**
+   * Get historical data for payment metrics
+   * @param months - Number of months to fetch (1-24, default 24)
+   */
+  getHistory: async (months: number = 24): Promise<HistoryResponse> => {
+    return apiClient.get<HistoryResponse>(
+      `${PAYMENT_ENDPOINTS.history}?months=${months}`
+    );
+  },
+
+  /**
+   * Get historical data for payment metrics with custom date range
+   * @param dateRange - Custom date range with from/to month and year
+   */
+  getHistoryByDateRange: async (
+    dateRange: HistoryDateRange
+  ): Promise<HistoryResponse> => {
+    const params = new URLSearchParams({
+      from_month: dateRange.fromMonth.toString(),
+      from_year: dateRange.fromYear.toString(),
+      to_month: dateRange.toMonth.toString(),
+      to_year: dateRange.toYear.toString(),
+    });
+    return apiClient.get<HistoryResponse>(
+      `${PAYMENT_ENDPOINTS.history}?${params.toString()}`
+    );
   },
 };

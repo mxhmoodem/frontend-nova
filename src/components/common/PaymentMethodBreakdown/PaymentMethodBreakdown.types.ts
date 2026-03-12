@@ -1,5 +1,7 @@
 import { ReactNode } from 'react';
 
+export type TrendDirection = 'up' | 'down' | 'stable';
+
 export interface PaymentMethod {
   /**
    * Unique identifier
@@ -25,6 +27,21 @@ export interface PaymentMethod {
    * Optional icon
    */
   icon?: ReactNode;
+
+  /**
+   * Previous period percentage (for comparison)
+   */
+  previousPercentage?: number | null;
+
+  /**
+   * Percentage point change from previous period
+   */
+  change?: number | null;
+
+  /**
+   * Direction of change
+   */
+  trend?: TrendDirection | null;
 }
 
 export interface PaymentMethodBreakdownProps {
@@ -47,9 +64,14 @@ export interface PaymentMethodBreakdownProps {
   };
 
   /**
-   * Time period for the data
+   * Current data period (e.g., "June 2025")
    */
-  period?: string;
+  currentPeriod?: string;
+
+  /**
+   * Comparison period description (e.g., "vs May 2025")
+   */
+  comparisonPeriod?: string | null;
 
   /**
    * Additional CSS class names

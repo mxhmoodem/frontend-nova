@@ -7,14 +7,15 @@
 
 import { useMutation } from '@tanstack/react-query';
 import { agentApi } from './agent.api';
-import type { AgentQueryResponse } from './agent.types';
+import type { AgentQueryResponse, ConversationMessage } from './agent.types';
 
 /**
- * Hook to send queries to the AI agent
+ * Hook to send the full conversation to the AI agent.
  */
 export function useAgentQuery() {
-  return useMutation<AgentQueryResponse, Error, string>({
-    mutationFn: (query: string) => agentApi.sendQuery(query),
+  return useMutation<AgentQueryResponse, Error, ConversationMessage[]>({
+    mutationFn: (messages: ConversationMessage[]) =>
+      agentApi.sendMessages(messages),
   });
 }
 
@@ -25,8 +26,9 @@ export function useAgentQueryWithCallbacks(options?: {
   onSuccess?: (response: AgentQueryResponse) => void;
   onError?: (error: Error) => void;
 }) {
-  return useMutation<AgentQueryResponse, Error, string>({
-    mutationFn: (query: string) => agentApi.sendQuery(query),
+  return useMutation<AgentQueryResponse, Error, ConversationMessage[]>({
+    mutationFn: (messages: ConversationMessage[]) =>
+      agentApi.sendMessages(messages),
     onSuccess: options?.onSuccess,
     onError: options?.onError,
   });
