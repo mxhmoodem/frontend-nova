@@ -1,0 +1,195 @@
+/* ─── Container ───────────────────────────────────────────────────────── */
+.market-snapshot {
+  background: var(--color-card);
+  border: 1.5px solid rgba(0, 0, 0, 0.1);
+  border-radius: var(--radius-xl);
+  padding: var(--spacing-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  min-width: 0;
+}
+
+/* ─── Header ──────────────────────────────────────────────────────────── */
+.market-snapshot__header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--spacing-sm);
+}
+
+.market-snapshot__title {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--color-foreground);
+  margin: 0;
+  letter-spacing: -0.01em;
+}
+
+.market-snapshot__subtitle {
+  font-size: 0.72rem;
+  color: var(--color-muted-foreground);
+  margin: 2px 0 0;
+}
+
+/* ─── Signal badge (top-right) ────────────────────────────────────────── */
+.market-snapshot__signal-badge {
+  font-size: 0.7rem;
+  font-weight: 600;
+  padding: 3px 9px;
+  border-radius: 100px;
+  white-space: nowrap;
+  flex-shrink: 0;
+  letter-spacing: 0.01em;
+}
+
+.market-snapshot__signal-badge--positive {
+  color: #10b981;
+  background: rgba(16, 185, 129, 0.1);
+}
+
+.market-snapshot__signal-badge--negative {
+  color: #f59e0b;
+  background: rgba(245, 158, 11, 0.1);
+}
+
+.market-snapshot__signal-badge--neutral {
+  color: var(--color-muted-foreground);
+  background: var(--color-background, #f8fafc);
+  border: 1px solid var(--color-border);
+}
+
+/* ─── Metric rows ─────────────────────────────────────────────────────── */
+.market-snapshot__rows {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.market-snapshot__row {
+  display: grid;
+  grid-template-columns: 18px 1fr auto auto;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 0;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.market-snapshot__row:last-child {
+  border-bottom: none;
+}
+
+.market-snapshot__row-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-muted-foreground);
+  flex-shrink: 0;
+}
+
+.market-snapshot__row-label {
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--color-foreground);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.market-snapshot__row-value {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--color-foreground);
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+  white-space: nowrap;
+}
+
+/* ─── Change badges (MoM) ─────────────────────────────────────────────── */
+.market-snapshot__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  padding: 2px 7px;
+  border-radius: 100px;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+  min-width: 56px;
+  justify-content: center;
+}
+
+.market-snapshot__badge--up {
+  color: #10b981;
+  background: rgba(16, 185, 129, 0.1);
+}
+
+.market-snapshot__badge--down {
+  color: #ef4444;
+  background: rgba(239, 68, 68, 0.1);
+}
+
+.market-snapshot__badge--stable {
+  color: var(--color-muted-foreground);
+  background: var(--color-background, #f8fafc);
+  border: 1px solid var(--color-border);
+}
+
+/* ─── Footer ──────────────────────────────────────────────────────────── */
+.market-snapshot__footer {
+  padding-top: 2px;
+}
+
+.market-snapshot__footer-text {
+  font-size: 0.66rem;
+  color: var(--color-muted-foreground);
+}
+
+/* ─── Loading skeleton ────────────────────────────────────────────────── */
+.market-snapshot--loading {
+  pointer-events: none;
+}
+
+.market-snapshot__skeleton-title,
+.market-snapshot__skeleton-row,
+.market-snapshot__skeleton-signal {
+  border-radius: var(--radius-sm);
+  background: linear-gradient(
+    90deg,
+    var(--color-muted) 25%,
+    var(--color-border) 50%,
+    var(--color-muted) 75%
+  );
+  background-size: 200% 100%;
+  animation: ms-shimmer 1.5s infinite;
+}
+
+.market-snapshot__skeleton-title {
+  height: 14px;
+  width: 45%;
+  margin-bottom: var(--spacing-md);
+}
+
+.market-snapshot__skeleton-row {
+  height: 36px;
+  width: 100%;
+  margin-bottom: 6px;
+  border-radius: var(--radius-md);
+}
+
+.market-snapshot__skeleton-signal {
+  height: 10px;
+  width: 60%;
+  margin-top: 4px;
+}
+
+@keyframes ms-shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
