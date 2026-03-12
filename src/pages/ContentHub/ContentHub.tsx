@@ -256,14 +256,17 @@ export default function ContentHub() {
   };
 
   const handleDownload = (document: DocumentData) => {
-    const contentType = (document.rawContentType || 
-      (document.category === 'regulation' ? 'legislation' : 
-       document.category === 'research' ? 'insight' : 'market')) as ContentType;
+    const contentType = (document.rawContentType ||
+      (document.category === 'regulation'
+        ? 'legislation'
+        : document.category === 'research'
+          ? 'insight'
+          : 'market')) as ContentType;
 
     downloadMutation.mutate({
       id: document.id,
       filename: `${document.title}.${document.fileType}`,
-      contentType
+      contentType,
     });
   };
 
@@ -273,9 +276,12 @@ export default function ContentHub() {
   };
 
   const handleDelete = (document: DocumentData) => {
-    const contentType = (document.rawContentType || 
-      (document.category === 'regulation' ? 'legislation' : 
-       document.category === 'research' ? 'insight' : 'market')) as ContentType;
+    const contentType = (document.rawContentType ||
+      (document.category === 'regulation'
+        ? 'legislation'
+        : document.category === 'research'
+          ? 'insight'
+          : 'market')) as ContentType;
 
     deleteMutation.mutate({ id: document.id, contentType });
   };

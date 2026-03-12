@@ -77,7 +77,11 @@ export function useDeleteContent() {
  * GET /content/item/{id}/download
  */
 export function useDownloadContent() {
-  return useMutation<Blob, Error, { id: string; filename: string; contentType: ContentType }>({
+  return useMutation<
+    Blob,
+    Error,
+    { id: string; filename: string; contentType: ContentType }
+  >({
     mutationFn: ({ id, contentType }) => contentApi.download(id, contentType),
     onSuccess: (blob, { filename }) => {
       const url = URL.createObjectURL(blob);

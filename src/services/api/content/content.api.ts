@@ -27,12 +27,15 @@ export const contentApi = {
   ): Promise<ContentListResponse> => {
     // Backend expects 0-based paging (page=0 is the first page)
     const backendPage = Math.max(0, page - 1);
-    const params: Record<string, string | number> = { page: backendPage, page_size: pageSize };
+    const params: Record<string, string | number> = {
+      page: backendPage,
+      page_size: pageSize,
+    };
     if (search) {
       params.search = search;
     }
     return apiClient.get<ContentListResponse>(CONTENT_ENDPOINTS.list, {
-      params
+      params,
     });
   },
 
@@ -57,7 +60,7 @@ export const contentApi = {
    */
   download: async (id: string, contentType: ContentType): Promise<Blob> => {
     return apiClient.download(CONTENT_ENDPOINTS.download(id), {
-      params: { content_type: contentType }
+      params: { content_type: contentType },
     });
   },
 
@@ -87,7 +90,7 @@ export const contentApi = {
    */
   delete: async (id: string, contentType: ContentType): Promise<void> => {
     return apiClient.delete(CONTENT_ENDPOINTS.hubById(id), {
-      params: { content_type: contentType }
+      params: { content_type: contentType },
     });
   },
 };
