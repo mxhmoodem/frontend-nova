@@ -97,9 +97,12 @@ export default function Overview() {
     return result;
   }, [historyData]);
 
+  /** Extract the flat items array from the paginated response */
+  const legislationItems = legislationData?.items;
+
   /** Derive LiveStatusBar values from real API data */
   const documentsIndexed =
-    (legislationData?.length ?? 0) + (marketData?.data?.items?.length ?? 0);
+    (legislationData?.total ?? 0) + (marketData?.data?.items?.length ?? 0);
   const marketsTracked = marketData?.data?.items?.length ?? 0;
   const criticalDeadlines = alertsData?.alerts?.length ?? 0;
   const apiStatus: 'live' | 'degraded' | 'offline' = statsError
@@ -148,7 +151,7 @@ export default function Overview() {
           {/* AI Daily Briefing hero */}
           <AIDailyBriefing
             userName={userName}
-            legislationData={legislationData ?? undefined}
+            legislationData={legislationItems}
             marketData={marketData ?? undefined}
             alertsData={alertsData ?? undefined}
             isLoading={legislationLoading || marketLoading || alertsLoading}
@@ -164,7 +167,7 @@ export default function Overview() {
       {/* ─── 3. Content Row: Feed (left) | Market Snapshot + Compliance (right) ─── */}
       <div className="overview__content-row">
         <IntelligenceFeed
-          legislationData={legislationData ?? undefined}
+          legislationData={legislationItems}
           marketData={marketData ?? undefined}
           alertsData={alertsData ?? undefined}
           isLoading={legislationLoading || marketLoading || alertsLoading}

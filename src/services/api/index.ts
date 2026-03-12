@@ -112,6 +112,9 @@ export {
 // ============================================================================
 export {
   // Types
+  type LegislationItem,
+  type LegislationListResponse,
+  type LegislationListParams,
   type Legislation,
   type LegislationList,
   // API
