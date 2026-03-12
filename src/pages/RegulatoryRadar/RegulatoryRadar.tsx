@@ -1,163 +1,142 @@
-import { useState } from 'react';
+import { useState, useMemo, useCallback } from 'react';
 import {
   Search,
   SlidersHorizontal,
   CheckCircle,
   Clock,
   AlertTriangle,
+  FileText,
+  ExternalLink,
+  ChevronLeft,
+  ChevronRight,
+  RefreshCw,
+  User,
 } from 'lucide-react';
 import { InformationButton } from '../../components/common/InformationButton/InformationButton';
 import { InfoModal } from '../../components/features/common/InfoModal';
-import { StatCard, ComplianceTimeline } from '../../components/common';
-import type { TimelineEvent } from '../../components/common';
+import { StatCard } from '../../components/common';
 import { infoModalContent } from '../../constants/infoModalContent';
+import { useLegislation } from '../../services/api';
+import type { LegislationItem } from '../../services/api';
 import './RegulatoryRadar.css';
 
-// Mock data - in a real app this would come from an API
-const REGULATORY_STATS = {
-  compliantMarkets: {
-    title: 'COMPLIANT MARKETS',
-    value: 12,
-    subtitle: 'Across EU, UK, and NAM',
-  },
-  upcomingDeadlines: {
-    title: 'UPCOMING DEADLINES',
-    value: 5,
-    subtitle: 'Action required in next 90 days',
-  },
-  criticalAlerts: {
-    title: 'CRITICAL ALERTS',
-    value: 2,
-    subtitle: 'New mandates in APAC region',
-  },
+// ─── Constants ───────────────────────────────────────────────────────────────
+
+const PAGE_SIZE = 20;
+
+/** Map file_type to a human-readable label */
+const FILE_TYPE_LABELS: Record<string, string> = {
+  pdf: 'PDF',
+  docx: 'DOCX',
+  csv: 'CSV',
+  xlsx: 'XLSX',
+  pptx: 'PPTX',
 };
 
-// Mock timeline events - in a real app this would come from an API
-const TIMELINE_EVENTS: TimelineEvent[] = [
-  {
-    id: '1',
-    title: 'PSD3 Proposal Finalization',
-    description:
-      'Final text expected from European Commission regarding new authentication standards.',
-    date: new Date('2025-06-15'),
-    regions: ['EU'],
-    priority: 'high',
-    documentationUrl: 'https://example.com/psd3',
-    addedToCalendar: false,
-  },
-  {
-    id: '2',
-    title: 'UK APP Fraud Reimbursement',
-    description:
-      'Mandatory reimbursement rules for Authorized Push Payment fraud come into effect.',
-    date: new Date('2025-10-07'),
-    regions: ['UK'],
-    priority: 'critical',
-    documentationUrl: 'https://example.com/uk-fraud',
-    addedToCalendar: false,
-  },
-  {
-    id: '3',
-    title: 'APAC Data Localization Requirements',
-    description:
-      'New data residency requirements for financial institutions operating in the Asia-Pacific region.',
-    date: new Date('2025-03-20'),
-    regions: ['APAC'],
-    priority: 'medium',
-    documentationUrl: 'https://example.com/apac-data',
-    addedToCalendar: false,
-  },
-  {
-    id: '4',
-    title: 'DORA Compliance Deadline',
-    description:
-      'Digital Operational Resilience Act comes into full effect for EU financial entities.',
-    date: new Date('2025-01-17'),
-    regions: ['EU'],
-    priority: 'critical',
-    documentationUrl: 'https://example.com/dora',
-    addedToCalendar: true,
-  },
-  {
-    id: '5',
-    title: 'NAM Open Banking Phase 2',
-    description:
-      'Second phase of North American open banking framework implementation begins.',
-    date: new Date('2025-07-01'),
-    regions: ['NAM'],
-    priority: 'high',
-    documentationUrl: 'https://example.com/nam-ob',
-    addedToCalendar: false,
-  },
-  {
-    id: '6',
-    title: 'Global AML Standards Update',
-    description:
-      'Updated anti-money laundering guidelines from FATF affecting all major regions.',
-    date: new Date('2026-01-15'),
-    regions: ['EU', 'UK', 'APAC', 'NAM'],
-    priority: 'high',
-    documentationUrl: 'https://example.com/aml',
-    addedToCalendar: false,
-  },
-  {
-    id: '7',
-    title: 'EU AI Act Financial Services Provisions',
-    description:
-      'AI Act provisions specific to financial services and algorithmic trading come into force.',
-    date: new Date('2026-06-01'),
-    regions: ['EU'],
-    priority: 'medium',
-    documentationUrl: 'https://example.com/ai-act',
-    addedToCalendar: false,
-  },
-  {
-    id: '8',
-    title: 'UK Consumer Duty Review',
-    description: 'First annual review of Consumer Duty compliance by the FCA.',
-    date: new Date('2025-08-31'),
-    regions: ['UK'],
-    priority: 'high',
-    documentationUrl: 'https://example.com/consumer-duty',
-    addedToCalendar: false,
-  },
-];
+// ─── Helpers ─────────────────────────────────────────────────────────────────
+
+/** Format a title like "Data_Protection_Act_2018" → "Data Protection Act 2018" */
+function formatTitle(raw: string): string {
+  return raw.replace(/_/g, ' ');
+}
+
+/** Format an ISO date string to a readable locale string */
+function formatDate(iso: string): string {
+  return new Date(iso).toLocaleDateString('en-GB', {
+    day: 'numeric',
+    month: 'short',
+    year: 'numeric',
+  });
+}
+
+/** Check if a source string is a URL (scraped) vs "user" (uploaded) */
+function isExternalSource(source: string): boolean {
+  return source.startsWith('http://') || source.startsWith('https://');
+}
+
+// ─── Component ───────────────────────────────────────────────────────────────
 
 export default function RegulatoryRadar() {
   const [showInfo, setShowInfo] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
-  const [timelineEvents, setTimelineEvents] =
-    useState<TimelineEvent[]>(TIMELINE_EVENTS);
+  const [page, setPage] = useState(0);
 
-  // In a real app, this data would come from props or an API
-  const stats = REGULATORY_STATS;
+  // ── Legislation API integration ──────────────────────────────────────────
+  const {
+    data: legislationData,
+    isLoading: isLegislationLoading,
+    isError: isLegislationError,
+    error: legislationError,
+    refetch: refetchLegislation,
+  } = useLegislation({ skip: page * PAGE_SIZE, limit: PAGE_SIZE });
+
+  const legislationItems = useMemo(
+    () => legislationData?.items ?? [],
+    [legislationData?.items]
+  );
+  const totalItems = legislationData?.total ?? 0;
+  const hasNextPage = legislationData?.has_next ?? false;
+  const totalPages = Math.ceil(totalItems / PAGE_SIZE);
+
+  // ── Derive stats from real data ──────────────────────────────────────────
+  const stats = useMemo(() => {
+    const total = totalItems;
+    const scraped = legislationItems.filter((i) =>
+      isExternalSource(i.source)
+    ).length;
+    const uploaded = legislationItems.filter(
+      (i) => !isExternalSource(i.source)
+    ).length;
+
+    return {
+      totalLegislation: {
+        title: 'TOTAL LEGISLATION',
+        value: total,
+        subtitle: 'Records in database',
+      },
+      scrapedSources: {
+        title: 'SCRAPED SOURCES',
+        value: scraped,
+        subtitle: 'From legislation.gov.uk',
+      },
+      userUploaded: {
+        title: 'USER UPLOADED',
+        value: uploaded,
+        subtitle: 'Manually uploaded documents',
+      },
+    };
+  }, [legislationItems, totalItems]);
+
+  // ── Filter legislation by search query ───────────────────────────────────
+  const filteredLegislation = useMemo(() => {
+    if (!searchQuery.trim()) return legislationItems;
+    const q = searchQuery.toLowerCase();
+    return legislationItems.filter(
+      (item) =>
+        formatTitle(item.title).toLowerCase().includes(q) ||
+        (item.description && item.description.toLowerCase().includes(q)) ||
+        item.file_type.toLowerCase().includes(q)
+    );
+  }, [legislationItems, searchQuery]);
+
+  // ── Handlers ─────────────────────────────────────────────────────────────
 
   const handleStatCardClick = (statType: string) => {
     console.log(`Clicked on ${statType} stat card`);
-    // TODO: Navigate to detailed view or open modal
   };
 
-  const handleViewDocumentation = (event: TimelineEvent) => {
-    console.log('View documentation:', event.title);
-    if (event.documentationUrl) {
-      window.open(event.documentationUrl, '_blank', 'noopener,noreferrer');
+  const handleLegislationClick = useCallback((item: LegislationItem) => {
+    if (isExternalSource(item.source)) {
+      window.open(item.source, '_blank', 'noopener,noreferrer');
     }
+  }, []);
+
+  const handlePrevPage = () => setPage((p) => Math.max(0, p - 1));
+  const handleNextPage = () => {
+    if (hasNextPage) setPage((p) => p + 1);
   };
 
-  const handleAddToCalendar = (event: TimelineEvent) => {
-    console.log('Add to calendar:', event.title);
-    // Toggle calendar status
-    setTimelineEvents((prev) =>
-      prev.map((e) =>
-        e.id === event.id ? { ...e, addedToCalendar: !e.addedToCalendar } : e
-      )
-    );
-  };
-
-  const handleEventClick = (event: TimelineEvent) => {
-    console.log('Event clicked:', event.title);
-    // TODO: Open event details modal or navigate to details page
-  };
+  // ── Render ───────────────────────────────────────────────────────────────
 
   return (
     <div className="regulatory-radar">
@@ -192,7 +171,7 @@ export default function RegulatoryRadar() {
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="Search regulations..."
+              placeholder="Search legislation..."
               className="regulatory-radar__search-input"
             />
           </div>
@@ -205,43 +184,212 @@ export default function RegulatoryRadar() {
       {/* Stats cards grid */}
       <div className="regulatory-radar__stats-grid">
         <StatCard
-          title={stats.compliantMarkets.title}
-          value={stats.compliantMarkets.value}
-          subtitle={stats.compliantMarkets.subtitle}
+          title={stats.totalLegislation.title}
+          value={stats.totalLegislation.value}
+          subtitle={stats.totalLegislation.subtitle}
           variant="success"
           icon={<CheckCircle size={18} />}
-          onClick={() => handleStatCardClick('compliantMarkets')}
-          testId="stat-compliant-markets"
+          onClick={() => handleStatCardClick('totalLegislation')}
+          testId="stat-total-legislation"
         />
         <StatCard
-          title={stats.upcomingDeadlines.title}
-          value={stats.upcomingDeadlines.value}
-          subtitle={stats.upcomingDeadlines.subtitle}
+          title={stats.scrapedSources.title}
+          value={stats.scrapedSources.value}
+          subtitle={stats.scrapedSources.subtitle}
           variant="warning"
           icon={<Clock size={18} />}
-          onClick={() => handleStatCardClick('upcomingDeadlines')}
-          testId="stat-upcoming-deadlines"
+          onClick={() => handleStatCardClick('scrapedSources')}
+          testId="stat-scraped-sources"
         />
         <StatCard
-          title={stats.criticalAlerts.title}
-          value={stats.criticalAlerts.value}
-          subtitle={stats.criticalAlerts.subtitle}
+          title={stats.userUploaded.title}
+          value={stats.userUploaded.value}
+          subtitle={stats.userUploaded.subtitle}
           variant="danger"
           icon={<AlertTriangle size={18} />}
-          onClick={() => handleStatCardClick('criticalAlerts')}
-          testId="stat-critical-alerts"
+          onClick={() => handleStatCardClick('userUploaded')}
+          testId="stat-user-uploaded"
         />
       </div>
 
-      {/* Compliance Timeline */}
-      <section className="regulatory-radar__timeline-section">
-        <ComplianceTimeline
-          events={timelineEvents}
-          onViewDocumentation={handleViewDocumentation}
-          onAddToCalendar={handleAddToCalendar}
-          onEventClick={handleEventClick}
-          testId="compliance-timeline"
-        />
+      {/* ── Legislation Documents Section ───────────────────────────────── */}
+      <section className="regulatory-radar__legislation-section">
+        <div className="regulatory-radar__legislation-header">
+          <h3 className="regulatory-radar__legislation-title">
+            <FileText size={20} />
+            Legislation Documents
+            {!isLegislationLoading && (
+              <span className="regulatory-radar__legislation-count">
+                {totalItems}
+              </span>
+            )}
+          </h3>
+          <button
+            className="regulatory-radar__refresh-btn"
+            onClick={() => refetchLegislation()}
+            disabled={isLegislationLoading}
+            aria-label="Refresh legislation"
+          >
+            <RefreshCw
+              size={16}
+              className={isLegislationLoading ? 'spin' : ''}
+            />
+            Refresh
+          </button>
+        </div>
+
+        {/* Loading state */}
+        {isLegislationLoading && (
+          <div className="regulatory-radar__loading">
+            <RefreshCw size={24} className="spin" />
+            <p>Loading legislation data…</p>
+          </div>
+        )}
+
+        {/* Error state */}
+        {isLegislationError && (
+          <div className="regulatory-radar__error">
+            <AlertTriangle size={20} />
+            <p>
+              Failed to load legislation.{' '}
+              {legislationError instanceof Error
+                ? legislationError.message
+                : 'Unknown error'}
+            </p>
+            <button
+              className="regulatory-radar__retry-btn"
+              onClick={() => refetchLegislation()}
+            >
+              Retry
+            </button>
+          </div>
+        )}
+
+        {/* Empty state */}
+        {!isLegislationLoading &&
+          !isLegislationError &&
+          filteredLegislation.length === 0 && (
+            <div className="regulatory-radar__empty">
+              <FileText size={32} />
+              <p>
+                {searchQuery.trim()
+                  ? 'No legislation matches your search.'
+                  : 'No legislation documents found.'}
+              </p>
+            </div>
+          )}
+
+        {/* Legislation table */}
+        {!isLegislationLoading &&
+          !isLegislationError &&
+          filteredLegislation.length > 0 && (
+            <>
+              <div className="regulatory-radar__table-wrapper">
+                <table className="regulatory-radar__table">
+                  <thead>
+                    <tr>
+                      <th>Title</th>
+                      <th>Type</th>
+                      <th>Source</th>
+                      <th>Created</th>
+                      <th>Updated</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {filteredLegislation.map((item) => (
+                      <tr
+                        key={item.id}
+                        className="regulatory-radar__table-row"
+                        onClick={() => handleLegislationClick(item)}
+                        role={
+                          isExternalSource(item.source) ? 'link' : undefined
+                        }
+                        style={{
+                          cursor: isExternalSource(item.source)
+                            ? 'pointer'
+                            : 'default',
+                        }}
+                      >
+                        <td className="regulatory-radar__table-cell--title">
+                          <FileText size={16} />
+                          <div>
+                            <span className="regulatory-radar__doc-title">
+                              {formatTitle(item.title)}
+                            </span>
+                            {item.description && (
+                              <span className="regulatory-radar__doc-desc">
+                                {item.description}
+                              </span>
+                            )}
+                          </div>
+                        </td>
+                        <td>
+                          <span
+                            className={`regulatory-radar__file-badge regulatory-radar__file-badge--${item.file_type}`}
+                          >
+                            {FILE_TYPE_LABELS[item.file_type] ??
+                              item.file_type.toUpperCase()}
+                          </span>
+                        </td>
+                        <td>
+                          {isExternalSource(item.source) ? (
+                            <a
+                              href={item.source}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="regulatory-radar__source-link"
+                              onClick={(e) => e.stopPropagation()}
+                            >
+                              legislation.gov.uk
+                              <ExternalLink size={12} />
+                            </a>
+                          ) : (
+                            <span className="regulatory-radar__source-user">
+                              <User size={14} />
+                              User upload
+                            </span>
+                          )}
+                        </td>
+                        <td className="regulatory-radar__table-cell--date">
+                          {formatDate(item.created_at)}
+                        </td>
+                        <td className="regulatory-radar__table-cell--date">
+                          {formatDate(item.updated_at)}
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+
+              {/* Pagination */}
+              {totalPages > 1 && (
+                <div className="regulatory-radar__pagination">
+                  <button
+                    className="regulatory-radar__page-btn"
+                    onClick={handlePrevPage}
+                    disabled={page === 0}
+                    aria-label="Previous page"
+                  >
+                    <ChevronLeft size={16} />
+                    Previous
+                  </button>
+                  <span className="regulatory-radar__page-info">
+                    Page {page + 1} of {totalPages}
+                  </span>
+                  <button
+                    className="regulatory-radar__page-btn"
+                    onClick={handleNextPage}
+                    disabled={!hasNextPage}
+                    aria-label="Next page"
+                  >
+                    Next
+                    <ChevronRight size={16} />
+                  </button>
+                </div>
+              )}
+            </>
+          )}
       </section>
     </div>
   );

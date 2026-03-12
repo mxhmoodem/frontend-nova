@@ -6,7 +6,13 @@
  */
 
 // Types
-export type { Legislation, LegislationList } from './legislation.types';
+export type {
+  LegislationItem,
+  LegislationListResponse,
+  LegislationListParams,
+  Legislation,
+  LegislationList,
+} from './legislation.types';
 
 // API
 export { legislationApi } from './legislation.api';

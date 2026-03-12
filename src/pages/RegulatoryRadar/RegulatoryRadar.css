@@ -112,6 +112,290 @@
   margin-top: var(--spacing-lg);
 }
 
+/* ============================== */
+/* Legislation Documents Section  */
+/* ============================== */
+.regulatory-radar__legislation-section {
+  margin-bottom: var(--spacing-xl);
+}
+
+.regulatory-radar__legislation-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--spacing-md);
+}
+
+.regulatory-radar__legislation-title {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  font-size: 1.25rem;
+  margin: 0;
+}
+
+.regulatory-radar__legislation-count {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 28px;
+  height: 24px;
+  padding: 0 var(--spacing-xs);
+  font-size: 0.75rem;
+  font-weight: 600;
+  background-color: var(--color-primary, #3b82f6);
+  color: #fff;
+  border-radius: 999px;
+}
+
+.regulatory-radar__refresh-btn {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  padding: var(--spacing-xs) var(--spacing-sm);
+  font-size: 0.8125rem;
+  background: var(--color-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  color: var(--color-muted-foreground);
+  cursor: pointer;
+  transition:
+    color var(--transition-base),
+    border-color var(--transition-base);
+}
+
+.regulatory-radar__refresh-btn:hover:not(:disabled) {
+  color: var(--color-foreground);
+  border-color: var(--color-foreground);
+}
+
+.regulatory-radar__refresh-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* ── Spin animation ───────────────────────────── */
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+.spin {
+  animation: spin 1s linear infinite;
+}
+
+/* ── Loading / Error / Empty states ───────────── */
+.regulatory-radar__loading,
+.regulatory-radar__error,
+.regulatory-radar__empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-sm);
+  padding: var(--spacing-xl) 0;
+  color: var(--color-muted-foreground);
+  text-align: center;
+}
+
+.regulatory-radar__error {
+  color: var(--color-destructive, #ef4444);
+}
+
+.regulatory-radar__retry-btn {
+  padding: var(--spacing-xs) var(--spacing-md);
+  font-size: 0.8125rem;
+  background: var(--color-card);
+  border: 1px solid var(--color-destructive, #ef4444);
+  border-radius: var(--radius-md);
+  color: var(--color-destructive, #ef4444);
+  cursor: pointer;
+  transition: background-color var(--transition-base);
+}
+
+.regulatory-radar__retry-btn:hover {
+  background-color: color-mix(in srgb, var(--color-destructive, #ef4444) 10%, transparent);
+}
+
+/* ── Table ────────────────────────────────────── */
+.regulatory-radar__table-wrapper {
+  overflow-x: auto;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+}
+
+.regulatory-radar__table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.875rem;
+}
+
+.regulatory-radar__table thead {
+  background-color: var(--color-card);
+}
+
+.regulatory-radar__table th {
+  text-align: left;
+  padding: var(--spacing-sm) var(--spacing-md);
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-muted-foreground);
+  border-bottom: 1px solid var(--color-border);
+  white-space: nowrap;
+}
+
+.regulatory-radar__table td {
+  padding: var(--spacing-sm) var(--spacing-md);
+  border-bottom: 1px solid var(--color-border);
+  vertical-align: middle;
+}
+
+.regulatory-radar__table-row {
+  transition: background-color var(--transition-base);
+}
+
+.regulatory-radar__table-row:hover {
+  background-color: var(--color-card);
+}
+
+.regulatory-radar__table-row:last-child td {
+  border-bottom: none;
+}
+
+/* Title cell with icon + title + description */
+.regulatory-radar__table-cell--title {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--spacing-sm);
+}
+
+.regulatory-radar__table-cell--title svg {
+  flex-shrink: 0;
+  margin-top: 2px;
+  color: var(--color-muted-foreground);
+}
+
+.regulatory-radar__doc-title {
+  display: block;
+  font-weight: 500;
+  color: var(--color-foreground);
+}
+
+.regulatory-radar__doc-desc {
+  display: block;
+  font-size: 0.75rem;
+  color: var(--color-muted-foreground);
+  margin-top: 2px;
+  max-width: 400px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.regulatory-radar__table-cell--date {
+  white-space: nowrap;
+  color: var(--color-muted-foreground);
+}
+
+/* ── File type badge ──────────────────────────── */
+.regulatory-radar__file-badge {
+  display: inline-block;
+  padding: 2px 8px;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  border-radius: var(--radius-sm, 4px);
+  letter-spacing: 0.03em;
+}
+
+.regulatory-radar__file-badge--pdf {
+  background-color: #fee2e2;
+  color: #b91c1c;
+}
+
+.regulatory-radar__file-badge--docx {
+  background-color: #dbeafe;
+  color: #1d4ed8;
+}
+
+.regulatory-radar__file-badge--csv {
+  background-color: #d1fae5;
+  color: #047857;
+}
+
+.regulatory-radar__file-badge--xlsx {
+  background-color: #d1fae5;
+  color: #047857;
+}
+
+.regulatory-radar__file-badge--pptx {
+  background-color: #fef3c7;
+  color: #b45309;
+}
+
+/* ── Source link / label ──────────────────────── */
+.regulatory-radar__source-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: var(--color-primary, #3b82f6);
+  text-decoration: none;
+  font-size: 0.8125rem;
+}
+
+.regulatory-radar__source-link:hover {
+  text-decoration: underline;
+}
+
+.regulatory-radar__source-user {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: var(--color-muted-foreground);
+  font-size: 0.8125rem;
+}
+
+/* ── Pagination ───────────────────────────────── */
+.regulatory-radar__pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-md);
+  padding: var(--spacing-md) 0;
+}
+
+.regulatory-radar__page-btn {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: var(--spacing-xs) var(--spacing-sm);
+  font-size: 0.8125rem;
+  background: var(--color-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  color: var(--color-foreground);
+  cursor: pointer;
+  transition:
+    background-color var(--transition-base),
+    border-color var(--transition-base);
+}
+
+.regulatory-radar__page-btn:hover:not(:disabled) {
+  border-color: var(--color-foreground);
+}
+
+.regulatory-radar__page-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.regulatory-radar__page-info {
+  font-size: 0.8125rem;
+  color: var(--color-muted-foreground);
+}
+
 /* ==================== */
 /* Responsive           */
 /* ==================== */
