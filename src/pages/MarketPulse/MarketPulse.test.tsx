@@ -83,9 +83,7 @@ describe('MarketPulse', () => {
 
   it('renders the news panel with empty state', () => {
     renderWithProviders(<MarketPulse />);
-    expect(
-      screen.getByText('No market news available')
-    ).toBeInTheDocument();
+    expect(screen.getByText('No market news available')).toBeInTheDocument();
   });
 
   it('renders stats grid container', () => {
