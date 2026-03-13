@@ -59,11 +59,11 @@
 }
 
 .overview-metric-card__change--up {
-  color: #10b981;
+  color: var(--accent-green);
 }
 
 .overview-metric-card__change--down {
-  color: #ef4444;
+  color: var(--accent-red);
 }
 
 .overview-metric-card__change--neutral {

@@ -142,7 +142,7 @@
   gap: var(--spacing-sm);
   padding: var(--spacing-sm) var(--spacing-lg);
   background: var(--color-primary);
-  color: white;
+  color: #ffffff;
   border: none;
   border-radius: var(--radius-md);
   font-size: 0.875rem;

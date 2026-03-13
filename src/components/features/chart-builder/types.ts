@@ -23,6 +23,9 @@ export type FileCategory =
   | 'CRM'
   | 'Financial'
   | 'Analytics'
+  | 'Payments'
+  | 'Compliance'
+  | 'Performance'
   | 'Other';
 
 export type AggregationType = 'sum' | 'average' | 'count' | 'min' | 'max';

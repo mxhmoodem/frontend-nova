@@ -36,7 +36,7 @@
 
 /* Significant change state */
 .market-stat-card--significant {
-  border-color: #f59e0b;
+  border-color: var(--accent-yellow);
   box-shadow:
     0 0 0 1.5px rgba(245, 158, 11, 0.3),
     var(--shadow-md);
@@ -68,7 +68,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #f59e0b;
+  color: var(--accent-yellow);
   animation: pulse-alert 2s ease-in-out infinite;
 }
 
@@ -94,12 +94,12 @@
 }
 
 .market-stat-card__trend--up {
-  color: #16a34a;
+  color: var(--accent-green);
   background-color: rgba(34, 197, 94, 0.1);
 }
 
 .market-stat-card__trend--down {
-  color: #dc2626;
+  color: var(--accent-red);
   background-color: rgba(239, 68, 68, 0.1);
 }
 

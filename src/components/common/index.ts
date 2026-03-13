@@ -54,6 +54,7 @@ export type {
 } from './PaymentMethodBreakdown';
 export { SearchInput, default as SearchInputDefault } from './SearchInput';
 export type { SearchInputProps } from './SearchInput';
+export { StatCardSkeleton } from './StatCardSkeleton';
 export { TrendAlerts } from './TrendAlerts';
 export type { TrendAlertsProps, TrendAlert } from './TrendAlerts';
 export { StatCard } from './StatCard';

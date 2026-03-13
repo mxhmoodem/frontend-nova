@@ -8,8 +8,8 @@
 
 .login__info-panel {
   flex: 1;
-  background: #111827;
-  color: #f8fafb;
+  background: var(--text-primary);
+  color: var(--bg-primary);
   position: relative;
   display: flex;
   align-items: center;
@@ -74,7 +74,7 @@
 .login__brand-accent {
   width: 4px;
   height: 48px;
-  background: #db0011;
+  background: var(--accent-red);
   border-radius: 2px;
 }
 
@@ -87,7 +87,7 @@
 }
 
 .login__hero-title {
-  color: #fff;
+  color: #ffffff;
   font-size: 2.75rem;
   font-weight: 800;
   line-height: 1.2;
@@ -96,7 +96,11 @@
 }
 
 .login__hero-highlight {
-  background: linear-gradient(135deg, #db0011 0%, #ff4444 100%);
+  background: linear-gradient(
+    135deg,
+    var(--accent-red) 0%,
+    var(--accent-red-hover) 100%
+  );
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -162,7 +166,7 @@
 
 .login__auth-panel {
   flex: 1;
-  background: #f8fafb;
+  background: var(--bg-primary);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -187,8 +191,8 @@
 }
 
 .login__card {
-  background: #ffffff;
-  border: 1px solid #e5e7eb;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-default);
   border-radius: 16px;
   padding: 3rem 2.5rem;
   box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
@@ -208,8 +212,8 @@
 .login__logo-image {
   width: 96px;
   height: 96px;
-  background: #ffffff;
-  border: 2px solid #e5e7eb;
+  background: var(--bg-secondary);
+  border: 2px solid var(--border-default);
   border-radius: 20px;
   object-fit: contain;
   object-position: center;
@@ -219,14 +223,14 @@
 .login__title {
   font-size: 1.875rem;
   font-weight: 700;
-  color: #111827;
+  color: var(--text-primary);
   margin: 0 0 0.5rem 0;
   letter-spacing: -0.025em;
 }
 
 .login__subtitle {
   font-size: 0.875rem;
-  color: #64748b;
+  color: var(--text-muted);
   margin: 0;
   line-height: 1.5;
   max-width: 300px;
@@ -248,7 +252,7 @@
   font-size: 0.875rem;
   font-weight: 600;
   color: #ffffff;
-  background: #db0011;
+  background: var(--accent-red);
   border: none;
   border-radius: 10px;
   cursor: pointer;
@@ -257,7 +261,7 @@
 }
 
 .login__sso-button:hover {
-  background: #b30010;
+  background: var(--accent-red-hover);
   box-shadow: 0 6px 16px rgba(219, 0, 17, 0.3);
 }
 
@@ -273,12 +277,12 @@
 .login__footer {
   text-align: center;
   padding-top: 1.5rem;
-  border-top: 1px solid #e5e7eb;
+  border-top: 1px solid var(--border-default);
 }
 
 .login__footer-text {
   font-size: 0.75rem;
-  color: #64748b;
+  color: var(--text-muted);
   margin: 0;
   text-transform: uppercase;
   letter-spacing: 0.05em;
@@ -292,7 +296,7 @@
 
 .login__disclaimer p {
   font-size: 0.75rem;
-  color: #64748b;
+  color: var(--text-muted);
   margin: 0;
   line-height: 1.6;
 }

@@ -5,7 +5,7 @@
     #0b0b0b 0%,
     #1a0f12 35%,
     #6d0f16 70%,
-    #db0011 100%
+    var(--accent-red) 100%
   );
   border-radius: var(--radius-xl);
   padding: var(--spacing-xl) var(--spacing-xl) var(--spacing-lg);

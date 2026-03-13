@@ -3,7 +3,7 @@
   height: 100vh;
   width: 100vw;
   overflow: hidden;
-  background-color: #ffffff;
+  background-color: var(--bg-secondary);
   position: relative;
 }
 
@@ -45,7 +45,7 @@
   padding: 1.5rem;
   position: relative;
   z-index: 10;
-  background-color: #ffffff;
+  background-color: var(--bg-secondary);
 }
 
 [data-theme='dark'] .dashboard-layout__content,

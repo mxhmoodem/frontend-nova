@@ -71,12 +71,12 @@
 }
 
 .payment-method-breakdown__legend-item--up {
-  color: #16a34a;
+  color: var(--accent-green);
   background-color: rgba(34, 197, 94, 0.1);
 }
 
 .payment-method-breakdown__legend-item--down {
-  color: #dc2626;
+  color: var(--accent-red);
   background-color: rgba(239, 68, 68, 0.1);
 }
 
@@ -130,12 +130,12 @@
 }
 
 .payment-method-breakdown__trend--up {
-  color: #16a34a;
+  color: var(--accent-green);
   background-color: rgba(34, 197, 94, 0.1);
 }
 
 .payment-method-breakdown__trend--down {
-  color: #dc2626;
+  color: var(--accent-red);
   background-color: rgba(239, 68, 68, 0.1);
 }
 

@@ -55,7 +55,7 @@
   height: 24px;
   background: linear-gradient(135deg, var(--color-primary) 0%, #ff4d5a 100%);
   border-radius: var(--radius-sm);
-  color: white;
+  color: #ffffff;
 }
 
 .insight-card__source-text {

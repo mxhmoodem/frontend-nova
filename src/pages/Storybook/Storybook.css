@@ -75,16 +75,16 @@
   flex-direction: column;
   gap: 1rem;
   max-width: 900px;
-  background: #f8fafb;
-  border: 1px solid #e5e7eb;
+  background: var(--bg-primary);
+  border: 1px solid var(--border-default);
   border-radius: 12px;
   padding: 1.5rem;
   min-height: 400px;
 }
 
 [data-theme='dark'] .storybook__chat-container {
-  background: #0f1419;
-  border-color: #374151;
+  background: var(--bg-primary);
+  border-color: var(--border-default);
 }
 
 /* Modal footer for storybook demos */
@@ -145,7 +145,7 @@
 
 .storybook__modal-card-icon--upload {
   background: rgba(16, 185, 129, 0.1);
-  color: #10b981;
+  color: var(--accent-green);
 }
 
 [data-theme='dark'] .storybook__modal-card-icon {

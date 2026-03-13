@@ -4,8 +4,8 @@
  */
 
 export const CONTENT_ENDPOINTS = {
-  list: '/content/',
-  hubById: (id: string) => `/content/item/${id}`,
+  list: '/content/hub',
+  hubById: (id: string) => `/content/hub/${id}`,
   byId: (id: string) => `/content/item/${id}`,
   download: (id: string) => `/content/item/${id}/download`,
   upload: '/content/',

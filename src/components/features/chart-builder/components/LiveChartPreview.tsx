@@ -78,9 +78,30 @@ export default function LiveChartPreview({
         style={{ height: `${height}px` }}
       >
         <svg width="64" height="64" viewBox="0 0 64 64" fill="none">
-          <rect x="12" y="20" width="10" height="24" fill="#e5e7eb" rx="2" />
-          <rect x="27" y="14" width="10" height="30" fill="#e5e7eb" rx="2" />
-          <rect x="42" y="8" width="10" height="36" fill="#e5e7eb" rx="2" />
+          <rect
+            x="12"
+            y="20"
+            width="10"
+            height="24"
+            fill="var(--border-default)"
+            rx="2"
+          />
+          <rect
+            x="27"
+            y="14"
+            width="10"
+            height="30"
+            fill="var(--border-default)"
+            rx="2"
+          />
+          <rect
+            x="42"
+            y="8"
+            width="10"
+            height="36"
+            fill="var(--border-default)"
+            rx="2"
+          />
         </svg>
         <p>Configure your chart to see preview</p>
       </div>

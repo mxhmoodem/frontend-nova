@@ -144,7 +144,7 @@
   font-size: 0.75rem;
   font-weight: 600;
   background-color: var(--color-primary, #3b82f6);
-  color: #fff;
+  color: #ffffff;
   border-radius: 999px;
 }
 
@@ -210,7 +210,7 @@
   padding: var(--spacing-xs) var(--spacing-md);
   font-size: 0.8125rem;
   background: var(--color-card);
-  border: 1px solid var(--color-destructive, #ef4444);
+  border: 1px solid var(--color-destructive, var(--accent-red));
   border-radius: var(--radius-md);
   color: var(--color-destructive, #ef4444);
   cursor: pointer;
@@ -319,13 +319,13 @@
 }
 
 .regulatory-radar__file-badge--pdf {
-  background-color: #fee2e2;
-  color: #b91c1c;
+  background-color: var(--accent-red-muted);
+  color: var(--accent-red-active);
 }
 
 .regulatory-radar__file-badge--docx {
-  background-color: #dbeafe;
-  color: #1d4ed8;
+  background-color: rgba(255, 255, 255, 0.1);
+  color: var(--accent-blue);
 }
 
 .regulatory-radar__file-badge--csv {
@@ -402,6 +402,58 @@
 .regulatory-radar__page-info {
   font-size: 0.8125rem;
   color: var(--color-muted-foreground);
+}
+
+/* ==================== */
+/* Skeleton Loading     */
+/* ==================== */
+.regulatory-radar__skeleton-row {
+  border-bottom: 1px solid var(--color-border);
+  opacity: 0.8;
+}
+
+.regulatory-radar__skeleton-row:hover {
+  background-color: transparent;
+}
+
+.regulatory-radar__skeleton-cell {
+  padding: var(--spacing-md);
+  vertical-align: middle;
+}
+
+.regulatory-radar__skeleton-line {
+  height: 12px;
+  background-color: var(--color-muted);
+  border-radius: var(--radius-sm);
+  animation: skeleton-pulse 1.5s ease-in-out infinite;
+  margin-bottom: var(--spacing-sm);
+}
+
+.regulatory-radar__skeleton-line:last-child {
+  margin-bottom: 0;
+}
+
+.regulatory-radar__skeleton-line--short {
+  width: 60%;
+}
+
+.regulatory-radar__skeleton-line--medium {
+  width: 75%;
+}
+
+.regulatory-radar__skeleton-line--long {
+  width: 95%;
+  margin-top: var(--spacing-xs);
+}
+
+@keyframes skeleton-pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
 }
 
 /* ==================== */

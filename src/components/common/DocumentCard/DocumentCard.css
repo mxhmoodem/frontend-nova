@@ -2,39 +2,39 @@
 
 /* File Type Colors */
 .document-card__file-icon--pdf {
-  --file-color: #dc2626;
+  --file-color: var(--accent-red);
 }
 
 .document-card__file-icon--docx,
 .document-card__file-icon--doc {
-  --file-color: #2563eb;
+  --file-color: var(--accent-blue);
 }
 
 .document-card__file-icon--xlsx,
 .document-card__file-icon--xls,
 .document-card__file-icon--csv {
-  --file-color: #16a34a;
+  --file-color: var(--accent-green);
 }
 
 .document-card__file-icon--pptx,
 .document-card__file-icon--ppt {
-  --file-color: #ea580c;
+  --file-color: var(--accent-orange);
 }
 
 .document-card__file-icon--json {
-  --file-color: #eab308;
+  --file-color: var(--accent-yellow);
 }
 
 .document-card__file-icon--txt {
-  --file-color: #6b7280;
+  --file-color: var(--border-strong);
 }
 
 .document-card__file-icon--image {
-  --file-color: #8b5cf6;
+  --file-color: var(--accent-purple-hover);
 }
 
 .document-card__file-icon--unknown {
-  --file-color: #9ca3af;
+  --file-color: var(--border-active);
 }
 
 /* ==================== */
@@ -206,37 +206,37 @@
 
 .document-card__category--regulation {
   background-color: rgba(220, 38, 38, 0.1);
-  color: #dc2626;
+  color: var(--accent-red);
 }
 
 .document-card__category--market {
   background-color: rgba(37, 99, 235, 0.1);
-  color: #2563eb;
+  color: var(--accent-blue);
 }
 
 .document-card__category--strategy {
   background-color: rgba(139, 92, 246, 0.1);
-  color: #8b5cf6;
+  color: var(--accent-purple-hover);
 }
 
 .document-card__category--data {
   background-color: rgba(22, 163, 74, 0.1);
-  color: #16a34a;
+  color: var(--accent-green);
 }
 
 .document-card__category--compliance {
   background-color: rgba(234, 179, 8, 0.1);
-  color: #ca8a04;
+  color: var(--accent-yellow-active);
 }
 
 .document-card__category--research {
   background-color: rgba(6, 182, 212, 0.1);
-  color: #0891b2;
+  color: var(--accent-cyan);
 }
 
 .document-card__category--report {
   background-color: rgba(249, 115, 22, 0.1);
-  color: #ea580c;
+  color: var(--accent-orange);
 }
 
 .document-card__category--other {

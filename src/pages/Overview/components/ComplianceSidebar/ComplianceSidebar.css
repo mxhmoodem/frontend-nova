@@ -69,17 +69,17 @@
 
 .compliance-sidebar__deadline--critical {
   background: rgba(239, 68, 68, 0.06);
-  border-left-color: #ef4444;
+  border-left-color: var(--accent-red);
 }
 
 .compliance-sidebar__deadline--amber {
   background: rgba(245, 158, 11, 0.06);
-  border-left-color: #f59e0b;
+  border-left-color: var(--accent-yellow);
 }
 
 .compliance-sidebar__deadline--info {
   background: rgba(59, 130, 246, 0.06);
-  border-left-color: #3b82f6;
+  border-left-color: var(--accent-blue);
 }
 
 .compliance-sidebar__deadline-main {
@@ -120,15 +120,15 @@
 }
 
 .compliance-sidebar__deadline--critical .compliance-sidebar__deadline-badge {
-  color: #ef4444;
+  color: var(--accent-red);
 }
 
 .compliance-sidebar__deadline--amber .compliance-sidebar__deadline-badge {
-  color: #f59e0b;
+  color: var(--accent-yellow);
 }
 
 .compliance-sidebar__deadline--info .compliance-sidebar__deadline-badge {
-  color: #3b82f6;
+  color: var(--accent-blue);
 }
 
 .compliance-sidebar__deadline-days {

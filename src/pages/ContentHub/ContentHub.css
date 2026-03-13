@@ -290,7 +290,7 @@
 
 .content-hub__checkbox-extensions {
   font-size: 0.6875rem;
-  color: #9ca3af;
+  color: var(--border-active);
   margin-top: 0.125rem;
 }
 

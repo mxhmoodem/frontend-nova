@@ -164,7 +164,7 @@
   width: 18px;
   height: 18px;
   border-radius: 50%;
-  background: #ffffff;
+  background: var(--bg-secondary);
   transition: transform 0.2s;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
 }
@@ -279,7 +279,7 @@
 }
 
 .settings-form-message--success {
-  color: #16a34a;
+  color: var(--accent-green);
 }
 
 .settings-submit-btn {

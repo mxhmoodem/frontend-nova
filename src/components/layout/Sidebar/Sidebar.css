@@ -71,7 +71,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #fff;
+  background: var(--bg-secondary);
   border-radius: 10%;
   box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.1);
   margin-right: 0.75rem;
@@ -84,7 +84,7 @@
   height: 60px;
   object-fit: contain;
   border-radius: 50%;
-  background: #fff;
+  background: var(--bg-secondary);
 }
 
 /* Navigation */
@@ -235,14 +235,14 @@
 .sidebar__help-button:hover,
 .sidebar__help-link:hover,
 .sidebar__logout-button:hover {
-  background-color: #ededed;
-  color: #111111;
+  background-color: var(--border-subtle);
+  color: var(--text-primary);
 }
 
 .sidebar__help-button:hover .sidebar__nav-icon,
 .sidebar__help-link:hover .sidebar__nav-icon,
 .sidebar__logout-button:hover .sidebar__nav-icon {
-  color: #111111;
+  color: var(--text-primary);
 }
 
 .sidebar__help-link.sidebar__nav-link--active {

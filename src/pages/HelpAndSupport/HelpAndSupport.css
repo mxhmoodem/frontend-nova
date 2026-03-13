@@ -4,5 +4,5 @@
 
 .help-support__subheading {
   font-size: 1rem;
-  color: #666;
+  color: var(--text-secondary);
 }

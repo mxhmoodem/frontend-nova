@@ -200,13 +200,13 @@ export default function ChartBuilderModal({
               <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
                 <path
                   d="M8 1L1 14h14L8 1z"
-                  stroke="#d97706"
+                  stroke="var(--accent-orange-hover)"
                   strokeWidth="1.5"
                   fill="none"
                 />
                 <path
                   d="M8 6v3M8 11.5v.5"
-                  stroke="#d97706"
+                  stroke="var(--accent-orange-hover)"
                   strokeWidth="1.5"
                   strokeLinecap="round"
                 />
