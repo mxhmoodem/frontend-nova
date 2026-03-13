@@ -240,9 +240,40 @@ export default function RegulatoryRadar() {
 
         {/* Loading state */}
         {isLegislationLoading && (
-          <div className="regulatory-radar__loading">
-            <RefreshCw size={24} className="spin" />
-            <p>Loading legislation data…</p>
+          <div className="regulatory-radar__table-wrapper">
+            <table className="regulatory-radar__table">
+              <thead>
+                <tr>
+                  <th>Title</th>
+                  <th>Type</th>
+                  <th>Source</th>
+                  <th>Created</th>
+                  <th>Updated</th>
+                </tr>
+              </thead>
+              <tbody>
+                {[...Array(5)].map((_, i) => (
+                  <tr key={i} className="regulatory-radar__skeleton-row">
+                    <td className="regulatory-radar__skeleton-cell">
+                      <div className="regulatory-radar__skeleton-line regulatory-radar__skeleton-line--short" />
+                      <div className="regulatory-radar__skeleton-line regulatory-radar__skeleton-line--long" />
+                    </td>
+                    <td className="regulatory-radar__skeleton-cell">
+                      <div className="regulatory-radar__skeleton-line regulatory-radar__skeleton-line--short" />
+                    </td>
+                    <td className="regulatory-radar__skeleton-cell">
+                      <div className="regulatory-radar__skeleton-line regulatory-radar__skeleton-line--medium" />
+                    </td>
+                    <td className="regulatory-radar__skeleton-cell">
+                      <div className="regulatory-radar__skeleton-line regulatory-radar__skeleton-line--short" />
+                    </td>
+                    <td className="regulatory-radar__skeleton-cell">
+                      <div className="regulatory-radar__skeleton-line regulatory-radar__skeleton-line--short" />
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
           </div>
         )}
 

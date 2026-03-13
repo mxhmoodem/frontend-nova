@@ -41,12 +41,12 @@
 }
 
 .market-context-chart__change--up {
-  color: #10b981;
+  color: var(--accent-green);
   background: rgba(16, 185, 129, 0.1);
 }
 
 .market-context-chart__change--down {
-  color: #ef4444;
+  color: var(--accent-red);
   background: rgba(239, 68, 68, 0.1);
 }
 

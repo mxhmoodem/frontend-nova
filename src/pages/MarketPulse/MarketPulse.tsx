@@ -5,12 +5,11 @@ import {
   Home,
   Percent,
   RefreshCw,
-  Loader2,
   AlertCircle,
 } from 'lucide-react';
 import { InformationButton } from '../../components/common/InformationButton/InformationButton';
 import { InfoModal } from '../../components/features/common/InfoModal';
-import { MarketStatCard, Button } from '../../components/common';
+import { MarketStatCard, Button, StatCardSkeleton } from '../../components/common';
 import { infoModalContent } from '../../constants/infoModalContent';
 import {
   usePaymentStats,
@@ -289,12 +288,41 @@ export default function MarketPulse() {
     return (
       <div className="market-pulse">
         <div className="market-pulse__header">
-          <h2 className="market-pulse__heading">Market Pulse</h2>
-          <p className="market-pulse__subheading">Loading payment data...</p>
+          <h2 className="market-pulse__heading">
+            Market Pulse
+            <InformationButton
+              tooltip="Learn about this page"
+              ariaLabel="Information about Market Pulse"
+              onClick={() => setShowInfo(true)}
+            />
+          </h2>
+          <div className="market-pulse__header-actions">
+            <p className="market-pulse__subheading">
+              UK payment trends from Bank of England data
+            </p>
+          </div>
         </div>
-        <div className="market-pulse__loading">
-          <Loader2 size={48} className="spinning" />
+
+        {/* Skeleton cards for stats */}
+        <div className="market-pulse__stats-grid">
+          {STAT_CONFIG.map((stat) => (
+            <StatCardSkeleton key={stat.key} />
+          ))}
         </div>
+
+        {/* Skeleton for chart section */}
+        <section className="market-pulse__charts-section">
+          <div className="market-pulse__content-grid">
+            <div className="market-pulse__chart-panel">
+              <div style={{ height: '400px', background: 'var(--color-card)', borderRadius: 'var(--radius-xl)', border: '1px solid var(--color-border)', padding: 'var(--spacing-lg)' }}>
+                <div style={{ width: '100%', height: '100%', background: 'var(--color-muted)', borderRadius: 'var(--radius-md)', animation: 'skeleton-pulse 1.5s ease-in-out infinite', opacity: 0.5 }} />
+              </div>
+            </div>
+            <aside className="market-pulse__news-sidebar">
+              <div style={{ height: '400px', background: 'var(--color-card)', borderRadius: 'var(--radius-xl)', border: '1px solid var(--color-border)', padding: 'var(--spacing-lg)', animation: 'skeleton-pulse 1.5s ease-in-out infinite', opacity: 0.5 }} />
+            </aside>
+          </div>
+        </section>
       </div>
     );
   }

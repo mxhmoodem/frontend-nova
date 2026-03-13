@@ -195,7 +195,7 @@
 }
 
 .market-pulse__error-icon {
-  color: #dc2626;
+  color: var(--accent-red);
   margin-bottom: var(--spacing-md);
 }
 
@@ -281,5 +281,15 @@
 
   .market-pulse__heading {
     font-size: 1.5rem;
+  }
+}
+
+@keyframes skeleton-pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
   }
 }

@@ -128,10 +128,10 @@ export default function StepSelectSource({
         {error && (
           <div className="error-message">
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-              <circle cx="8" cy="8" r="7" stroke="#dc2626" strokeWidth="1.5" />
+              <circle cx="8" cy="8" r="7" stroke="var(--accent-red)" strokeWidth="1.5" />
               <path
                 d="M8 4V8M8 11V11.5"
-                stroke="#dc2626"
+                stroke="var(--accent-red)"
                 strokeWidth="1.5"
                 strokeLinecap="round"
               />
@@ -153,10 +153,10 @@ export default function StepSelectSource({
                 viewBox="0 0 20 20"
                 fill="none"
               >
-                <circle cx="9" cy="9" r="6" stroke="#9ca3af" strokeWidth="2" />
+                <circle cx="9" cy="9" r="6" stroke="var(--text-muted)" strokeWidth="2" />
                 <path
                   d="M14 14L18 18"
-                  stroke="#9ca3af"
+                  stroke="var(--text-muted)"
                   strokeWidth="2"
                   strokeLinecap="round"
                 />

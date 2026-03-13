@@ -482,11 +482,10 @@ export default function ContentHub() {
 
         {/* Document display */}
         <div className="content-hub__content">
-          {isLoading ? (
-            <p className="content-hub__loading">Loading documents...</p>
-          ) : viewMode === 'grid' ? (
+          {viewMode === 'grid' ? (
             <DocumentGrid
               documents={filteredDocuments}
+              loading={isLoading}
               onDocumentClick={handleDocumentClick}
               onDownload={handleDownload}
               onShare={handleShare}
@@ -501,6 +500,7 @@ export default function ContentHub() {
           ) : (
             <DocumentList
               documents={filteredDocuments}
+              loading={isLoading}
               onDocumentClick={handleDocumentClick}
               onDownload={handleDownload}
               onShare={handleShare}

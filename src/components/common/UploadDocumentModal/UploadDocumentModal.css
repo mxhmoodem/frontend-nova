@@ -79,7 +79,7 @@
 .upload-document__file-icon-text {
   font-size: 1rem;
   font-weight: 600;
-  color: #4b5563;
+  color: var(--border-strong);
 }
 
 .upload-document__dropzone-text {
@@ -333,11 +333,11 @@
 }
 
 .dark .upload-document__file-icon--front {
-  background: linear-gradient(135deg, #3b82f6 0%, #60a5fa 100%);
+  background: linear-gradient(135deg, var(--accent-blue) 0%, #60a5fa 100%);
 }
 
 .dark .upload-document__file-icon--back-right {
-  background: linear-gradient(135deg, #16a34a 0%, #4ade80 100%);
+  background: linear-gradient(135deg, var(--accent-green) 0%, #4ade80 100%);
 }
 
 .dark .upload-document__file-icon-text {

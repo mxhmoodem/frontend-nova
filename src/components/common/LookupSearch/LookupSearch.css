@@ -14,8 +14,8 @@
   left: 0;
   right: 0;
   margin-top: 0.5rem;
-  background: var(--color-surface, #ffffff);
-  border: 1px solid var(--color-border, #e5e7eb);
+  background: var(--color-surface, var(--bg-card));
+  border: 1px solid var(--color-border, var(--border-default));
   border-radius: 0.5rem;
   box-shadow:
     0 4px 6px -1px rgba(0, 0, 0, 0.1),
@@ -30,7 +30,7 @@
   padding: 0.75rem 1rem;
   cursor: pointer;
   transition: background-color 0.15s ease;
-  border-bottom: 1px solid var(--color-border-light, #f3f4f6);
+  border-bottom: 1px solid var(--color-border-light, var(--border-subtle));
 }
 
 .lookup-search__result:last-child {
@@ -82,7 +82,7 @@
 }
 
 .lookup-search__results::-webkit-scrollbar-track {
-  background: var(--color-surface, #ffffff);
+  background: var(--color-surface, var(--bg-card));
   border-radius: 0 0.5rem 0.5rem 0;
 }
 

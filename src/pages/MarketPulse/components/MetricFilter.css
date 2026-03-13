@@ -94,7 +94,7 @@
 .metric-filter__checkbox--checked {
   background-color: var(--color-primary);
   border-color: var(--color-primary);
-  color: white;
+  color: #ffffff;
 }
 
 .metric-filter__label {

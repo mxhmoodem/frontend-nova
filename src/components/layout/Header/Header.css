@@ -4,8 +4,8 @@
   justify-content: space-between;
   height: 64px;
   padding: 0 2rem;
-  background-color: var(--color-header-bg, #ffffff);
-  border-bottom: 1px solid var(--color-border, #e5e7eb);
+  background-color: var(--color-header-bg, var(--bg-card));
+  border-bottom: 1px solid var(--color-border, var(--border-default));
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
 }
 
@@ -88,8 +88,8 @@
   right: 16px;
   width: 10px;
   height: 10px;
-  background-color: #ef4444;
-  border: 2px solid var(--color-header-bg, #ffffff);
+  background-color: var(--accent-red);
+  border: 2px solid var(--color-header-bg, var(--bg-secondary));
   border-radius: 50%;
   display: inline-block;
   animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;

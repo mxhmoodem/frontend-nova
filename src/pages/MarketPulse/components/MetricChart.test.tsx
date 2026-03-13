@@ -126,7 +126,7 @@ describe('MetricChart', () => {
         <MetricChart
           metricKey="bank_rate"
           history={percentHistory}
-          color="#F59E0B"
+          color="var(--accent-yellow)"
         />
       );
 
@@ -147,7 +147,7 @@ describe('MetricChart', () => {
         <MetricChart
           metricKey="mortgage_approvals"
           history={thousandsHistory}
-          color="#10B981"
+          color="var(--accent-green)"
         />
       );
 

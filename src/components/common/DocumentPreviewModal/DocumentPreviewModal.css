@@ -88,7 +88,7 @@
 
 .document-preview__modal-title-btn--save:hover {
   background-color: var(--color-success);
-  color: white;
+  color: #ffffff;
 }
 
 .document-preview__modal-title-btn--cancel {
@@ -98,7 +98,7 @@
 
 .document-preview__modal-title-btn--cancel:hover {
   background-color: var(--color-danger);
-  color: white;
+  color: #ffffff;
 }
 
 .document-preview {
@@ -251,7 +251,7 @@
   min-height: 600px;
   border: none;
   border-radius: var(--radius-md);
-  background-color: white;
+  background-color: #ffffff;
 }
 
 /* Text file content preview */
@@ -287,20 +287,20 @@
   justify-content: center;
   font-size: 1.25rem;
   font-weight: 700;
-  color: white;
+  color: #ffffff;
   box-shadow: var(--shadow-md);
 }
 
 .document-preview__file-icon--pdf {
-  background: linear-gradient(135deg, #ef4444, #dc2626);
+  background: linear-gradient(135deg, var(--accent-red), var(--accent-red));
 }
 
 .document-preview__file-icon--spreadsheet {
-  background: linear-gradient(135deg, #10b981, #059669);
+  background: linear-gradient(135deg, var(--accent-green), var(--accent-green));
 }
 
 .document-preview__file-icon--presentation {
-  background: linear-gradient(135deg, #f97316, #ea580c);
+  background: linear-gradient(135deg, #f97316, var(--accent-orange));
 }
 
 .document-preview__message {
@@ -662,7 +662,7 @@
 
 .document-preview__edit-btn--save:hover {
   background-color: var(--color-success);
-  color: white;
+  color: #ffffff;
 }
 
 .document-preview__edit-btn--cancel {
@@ -672,7 +672,7 @@
 
 .document-preview__edit-btn--cancel:hover {
   background-color: var(--color-danger);
-  color: white;
+  color: #ffffff;
 }
 
 /* PDF Preview Styles */
@@ -695,7 +695,7 @@
 .document-preview__pdf-nav-btn {
   padding: var(--spacing-xs) var(--spacing-sm);
   background-color: var(--color-primary);
-  color: white;
+  color: #ffffff;
   border: none;
   border-radius: var(--radius-sm);
   cursor: pointer;
@@ -728,9 +728,9 @@
   max-width: 800px;
   margin: 0 auto;
   padding: var(--spacing-xl);
-  background-color: white;
+  background-color: #ffffff;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  color: #000;
+  color: var(--text-primary);
   font-family: 'Calibri', 'Arial', sans-serif;
   line-height: 1.6;
 }
@@ -779,7 +779,7 @@
 
 .document-preview__excel-table {
   border-collapse: collapse;
-  background-color: white;
+  background-color: #ffffff;
   font-size: 0.875rem;
   font-family: 'Calibri', 'Arial', sans-serif;
 }
@@ -788,7 +788,7 @@
   border: 1px solid #d0d7de;
   padding: 6px 12px;
   white-space: nowrap;
-  color: #000;
+  color: var(--text-primary);
   min-width: 100px;
 }
 
@@ -796,10 +796,10 @@
   tbody
   tr:first-child
   .document-preview__excel-cell {
-  background-color: #f6f8fa;
+  background-color: var(--bg-tertiary);
   font-weight: 600;
 }
 
 .document-preview__excel-table tbody tr:hover .document-preview__excel-cell {
-  background-color: #f6f8fa;
+  background-color: var(--bg-tertiary);
 }

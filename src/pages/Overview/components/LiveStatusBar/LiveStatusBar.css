@@ -1,5 +1,5 @@
 .live-status-bar {
-  background: #f8f9fa;
+  background: var(--bg-tertiary);
   border-radius: var(--radius-md);
   padding: 0 var(--spacing-lg);
   height: 36px;
@@ -46,15 +46,15 @@
 
 /* Urgency indicator */
 .live-status-bar__group--has-alerts {
-  color: #dc2626;
+  color: var(--accent-red);
 }
 
 .live-status-bar__group--has-alerts strong {
-  color: #991b1b;
+  color: var(--accent-red-active);
 }
 
 .live-status-bar__group--has-alerts svg {
-  color: #991b1b;
+  color: var(--accent-red-active);
 }
 
 /* Separator */
@@ -98,7 +98,7 @@
 }
 
 .live-status-bar__dot--offline {
-  background: #f87171;
+  background: var(--accent-red-hover);
   animation: none;
 }
 

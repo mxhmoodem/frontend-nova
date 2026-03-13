@@ -1,12 +1,6 @@
 import { NavLink, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import {
-  ChevronLeft,
-  ChevronRight,
-  HelpCircle,
-  LogOut,
-  Layout,
-} from 'lucide-react';
+import { ChevronLeft, ChevronRight, LogOut } from 'lucide-react';
 import { useAuth } from '../../../hooks/useAuth';
 import { ROUTES } from '../../../constants/routes';
 import { navigationItems } from '../../../constants/navigation';
@@ -97,68 +91,6 @@ export default function Sidebar({ isCollapsed, onToggle }: SidebarProps) {
 
       {/* Bottom Actions */}
       <div className="sidebar__bottom-actions">
-        {isCollapsed ? (
-          <Tooltip content={t('common.storybook')} position="right">
-            <NavLink
-              to={ROUTES.STORYBOOK}
-              className={({ isActive }) =>
-                `sidebar__help-link ${isActive ? 'sidebar__nav-link--active' : ''}`
-              }
-              aria-label={t('common.storybook')}
-            >
-              <span className="sidebar__nav-icon">
-                <Layout size={20} />
-              </span>
-            </NavLink>
-          </Tooltip>
-        ) : (
-          <NavLink
-            to={ROUTES.STORYBOOK}
-            className={({ isActive }) =>
-              `sidebar__help-link ${isActive ? 'sidebar__nav-link--active' : ''}`
-            }
-            aria-label={t('common.storybook')}
-          >
-            <span className="sidebar__nav-icon">
-              <Layout size={20} />
-            </span>
-            {!isCollapsed && (
-              <span className="sidebar__nav-label">
-                {t('common.storybook')}
-              </span>
-            )}
-          </NavLink>
-        )}
-        {isCollapsed ? (
-          <Tooltip content={t('common.help')} position="right">
-            <NavLink
-              to={ROUTES.HELP_SUPPORT}
-              className={({ isActive }) =>
-                `sidebar__help-link ${isActive ? 'sidebar__nav-link--active' : ''}`
-              }
-              aria-label={t('common.help')}
-            >
-              <span className="sidebar__nav-icon">
-                <HelpCircle size={20} />
-              </span>
-            </NavLink>
-          </Tooltip>
-        ) : (
-          <NavLink
-            to={ROUTES.HELP_SUPPORT}
-            className={({ isActive }) =>
-              `sidebar__help-link ${isActive ? 'sidebar__nav-link--active' : ''}`
-            }
-            aria-label={t('common.help')}
-          >
-            <span className="sidebar__nav-icon">
-              <HelpCircle size={20} />
-            </span>
-            {!isCollapsed && (
-              <span className="sidebar__nav-label">{t('common.help')}</span>
-            )}
-          </NavLink>
-        )}
         {isCollapsed ? (
           <Tooltip content={t('common.logout')} position="right">
             <button

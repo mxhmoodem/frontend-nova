@@ -59,12 +59,12 @@ export default function FileUpload({
                 width="24"
                 height="32"
                 rx="2"
-                stroke="#dc2626"
+                stroke="var(--accent-red)"
                 strokeWidth="2"
               />
               <path
                 d="M24 18V30M24 18L20 22M24 18L28 22"
-                stroke="#dc2626"
+                stroke="var(--accent-red)"
                 strokeWidth="2"
                 strokeLinecap="round"
                 strokeLinejoin="round"
