@@ -22,6 +22,7 @@ export function useMarketTrends() {
     queryKey: marketKeys.lists(),
     queryFn: marketApi.getAll,
     staleTime: QUERY_CONFIG.staleTime,
+    refetchInterval: QUERY_CONFIG.refetchIntervals.infrequent,
   });
 }
 

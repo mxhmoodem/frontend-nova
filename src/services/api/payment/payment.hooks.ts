@@ -26,6 +26,7 @@ export function usePaymentStats() {
     queryKey: paymentKeys.stats(),
     queryFn: paymentApi.getStats,
     staleTime: QUERY_CONFIG.staleTime,
+    refetchInterval: QUERY_CONFIG.refetchIntervals.infrequent,
   });
 }
 
@@ -86,6 +87,7 @@ export function usePaymentHistory(months: number = 12) {
     queryKey: paymentKeys.history(months),
     queryFn: () => paymentApi.getHistory(months),
     staleTime: QUERY_CONFIG.staleTime,
+    refetchInterval: QUERY_CONFIG.refetchIntervals.infrequent,
   });
 }
 
