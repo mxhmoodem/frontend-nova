@@ -33,7 +33,13 @@ class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
               fill="none"
               style={{ margin: '0 auto 1rem' }}
             >
-              <circle cx="24" cy="24" r="20" stroke="var(--accent-red)" strokeWidth="2" />
+              <circle
+                cx="24"
+                cy="24"
+                r="20"
+                stroke="var(--accent-red)"
+                strokeWidth="2"
+              />
               <path
                 d="M24 14V26M24 32V33"
                 stroke="var(--accent-red)"

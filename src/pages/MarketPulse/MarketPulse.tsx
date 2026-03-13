@@ -9,7 +9,11 @@ import {
 } from 'lucide-react';
 import { InformationButton } from '../../components/common/InformationButton/InformationButton';
 import { InfoModal } from '../../components/features/common/InfoModal';
-import { MarketStatCard, Button, StatCardSkeleton } from '../../components/common';
+import {
+  MarketStatCard,
+  Button,
+  StatCardSkeleton,
+} from '../../components/common';
 import { infoModalContent } from '../../constants/infoModalContent';
 import {
   usePaymentStats,
@@ -314,12 +318,39 @@ export default function MarketPulse() {
         <section className="market-pulse__charts-section">
           <div className="market-pulse__content-grid">
             <div className="market-pulse__chart-panel">
-              <div style={{ height: '400px', background: 'var(--color-card)', borderRadius: 'var(--radius-xl)', border: '1px solid var(--color-border)', padding: 'var(--spacing-lg)' }}>
-                <div style={{ width: '100%', height: '100%', background: 'var(--color-muted)', borderRadius: 'var(--radius-md)', animation: 'skeleton-pulse 1.5s ease-in-out infinite', opacity: 0.5 }} />
+              <div
+                style={{
+                  height: '400px',
+                  background: 'var(--color-card)',
+                  borderRadius: 'var(--radius-xl)',
+                  border: '1px solid var(--color-border)',
+                  padding: 'var(--spacing-lg)',
+                }}
+              >
+                <div
+                  style={{
+                    width: '100%',
+                    height: '100%',
+                    background: 'var(--color-muted)',
+                    borderRadius: 'var(--radius-md)',
+                    animation: 'skeleton-pulse 1.5s ease-in-out infinite',
+                    opacity: 0.5,
+                  }}
+                />
               </div>
             </div>
             <aside className="market-pulse__news-sidebar">
-              <div style={{ height: '400px', background: 'var(--color-card)', borderRadius: 'var(--radius-xl)', border: '1px solid var(--color-border)', padding: 'var(--spacing-lg)', animation: 'skeleton-pulse 1.5s ease-in-out infinite', opacity: 0.5 }} />
+              <div
+                style={{
+                  height: '400px',
+                  background: 'var(--color-card)',
+                  borderRadius: 'var(--radius-xl)',
+                  border: '1px solid var(--color-border)',
+                  padding: 'var(--spacing-lg)',
+                  animation: 'skeleton-pulse 1.5s ease-in-out infinite',
+                  opacity: 0.5,
+                }}
+              />
             </aside>
           </div>
         </section>

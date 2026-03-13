@@ -41,8 +41,8 @@ describe('Sidebar', () => {
 
       const links = screen.getAllByRole('link');
 
-      // Expect navigationItems.length + 2 for the help and storybook links at bottom
-      expect(links).toHaveLength(navigationItems.length + 2);
+      // Expect navigationItems.length for the main nav links
+      expect(links).toHaveLength(navigationItems.length);
     });
 
     it('each rendered link corresponds to a config entry with correct label and path', () => {
@@ -172,8 +172,8 @@ describe('Sidebar', () => {
 
       // Should render all links regardless of icon presence
       const links = screen.getAllByRole('link');
-      // Expect navigationItems.length + 2 for the help and storybook links at bottom
-      expect(links).toHaveLength(navigationItems.length + 2);
+      // Expect navigationItems.length for the main nav links
+      expect(links).toHaveLength(navigationItems.length);
     });
   });
 

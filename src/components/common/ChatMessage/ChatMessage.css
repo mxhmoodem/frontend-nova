@@ -235,7 +235,8 @@
   line-height: 1.5;
   min-width: 1.1rem;
   text-align: center;
-}.chat-message__sources-count {
+}
+.chat-message__sources-count {
   background: var(--border-default);
   color: varborderdefaulthitealack;
   font-size: 0.7rem;

@@ -108,7 +108,6 @@
   font-size: 1.25rem;
 }
 
-
 /* AI Query Search specific overrides */
 .ai-query-search .search-input__container {
   border: 1.5px solid var(--input-border);

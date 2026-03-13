@@ -20,7 +20,14 @@ export default function FileCard({
     >
       <div className="file-card-icon">
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-          <rect x="4" y="2" width="16" height="20" rx="2" fill="var(--accent-red)" />
+          <rect
+            x="4"
+            y="2"
+            width="16"
+            height="20"
+            rx="2"
+            fill="var(--accent-red)"
+          />
           <rect x="7" y="6" width="10" height="2" fill="white" />
           <rect x="7" y="10" width="10" height="2" fill="white" />
           <rect x="7" y="14" width="6" height="2" fill="white" />

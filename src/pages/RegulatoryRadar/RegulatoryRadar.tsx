@@ -240,7 +240,12 @@ export default function RegulatoryRadar() {
 
         {/* Loading state */}
         {isLegislationLoading && (
-          <div className="regulatory-radar__table-wrapper">
+          <div
+            className="regulatory-radar__table-wrapper"
+            aria-busy="true"
+            aria-label="Loading legislation data…"
+          >
+            <span className="sr-only">Loading legislation data…</span>
             <table className="regulatory-radar__table">
               <thead>
                 <tr>
