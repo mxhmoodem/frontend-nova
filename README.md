@@ -6,6 +6,12 @@ Frontend Nova is a React + TypeScript single-page application for market intelli
 
 ## Project Preview
 
+Dashboard Overview:
+<img width="2493" height="1455" alt="image" src="https://github.com/user-attachments/assets/df7c3cce-94b2-4848-8763-732e0e9607a8" />
+
+AI Agent Console:
+<img width="2487" height="1455" alt="image" src="https://github.com/user-attachments/assets/dbd92ec1-5eed-4a30-a13c-0b1e26ce227c" />
+
 ## Tech Stack
 
 - React 19
